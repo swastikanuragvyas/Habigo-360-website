@@ -1102,14 +1102,16 @@ function Contact() {
 
             <div className="mt-12 space-y-6">
               {[
-                { i: MessageCircle, l: "WhatsApp", v: "+91 98765 43210", href: "https://wa.me/919876543210" },
-                { i: MailIcon, l: "Email", v: "hello@habigo360.com", href: "mailto:hello@habigo360.com" },
-                { i: Phone, l: "Phone", v: "+91 98765 43210", href: "tel:+919876543210" },
-                { i: MapPin, l: "Studio", v: "New Delhi · India" },
+                { i: MessageCircle, l: "WhatsApp", v: "+91 89638 58888", href: "https://wa.me/918963858888" },
+                { i: MailIcon, l: "Email", v: "habigo360@gmail.com", href: "mailto:habigo360@gmail.com" },
+                { i: Phone, l: "Phone", v: "+91 89638 58888", href: "tel:+918963858888" },
+                { i: MapPin, l: "Studio", v: "Jaipur · India", href: "https://maps.app.goo.gl/DWkbqDGGVGtJXyiF9" },
               ].map((x) => (
                 <a
                   key={x.l}
                   href={x.href ?? "#"}
+                  target={x.href?.startsWith("http") ? "_blank" : undefined}
+                  rel={x.href?.startsWith("http") ? "noreferrer" : undefined}
                   className="flex items-center gap-5 group"
                 >
                   <div className="size-12 rounded-full bg-ivory/5 border border-ivory/10 grid place-items-center group-hover:bg-accent group-hover:border-accent transition-colors">
@@ -1257,9 +1259,13 @@ function Footer() {
         <div className="lg:col-span-2">
           <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Contact</div>
           <ul className="space-y-3 text-sm text-ivory/75">
-            <li>hello@habigo360.com</li>
-            <li>+91 98765 43210</li>
-            <li>New Delhi · India</li>
+            <li>habigo360@gmail.com</li>
+            <li>+91 89638 58888</li>
+            <li>
+              <a href="https://maps.app.goo.gl/DWkbqDGGVGtJXyiF9" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+                Jaipur · India
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -1280,7 +1286,7 @@ function Footer() {
 function StickyCTA() {
   return (
     <a
-      href="https://wa.me/919876543210"
+      href="https://wa.me/918963858888"
       target="_blank"
       rel="noreferrer"
       className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-accent text-emerald-deep px-5 py-3 rounded-full shadow-2xl shadow-emerald-deep/30 font-semibold text-[11px] uppercase tracking-[0.2em] hover:bg-ivory transition-colors"
