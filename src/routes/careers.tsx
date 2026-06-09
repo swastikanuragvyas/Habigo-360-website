@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -7,6 +7,7 @@ import {
   Clock3,
   Mail,
   MapPin,
+  Menu,
   Send,
   Sparkles,
   Target,
@@ -87,8 +88,46 @@ const perks = [
   { icon: Users, title: "Small senior team", text: "Work closely with founders, designers, marketers and operators." },
 ];
 
+const navItems = [
+  { id: "home", label: "Home", href: "/" },
+  { id: "about", label: "About", href: "/about" },
+  { id: "services", label: "Services", href: "/services" },
+  { id: "careers", label: "Careers", href: "/careers" },
+  { id: "results", label: "Results", href: "/#results" },
+  { id: "clients", label: "Clients", href: "/#clients" },
+  { id: "team", label: "Team", href: "/#team" },
+  { id: "contact", label: "Contact", href: "/#contact" },
+];
+
+const serviceLinks = [
+  "Social Media Marketing",
+  "Performance Marketing",
+  "Photography & Videography",
+  "Influencer Marketing",
+  "Branding & Identity",
+  "Email Marketing",
+  "WhatsApp Marketing",
+  "Website Development",
+  "CRM Services",
+  "OTA Listings & Management",
+  "Event Curation",
+  "Brand Films",
+];
+
 function CareersPage() {
   const [selectedRole, setSelectedRole] = useState<(typeof openings)[number] | null>(null);
+  const [navOpen, setNavOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openDropdown = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+
+  const closeDropdown = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 200);
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -98,24 +137,108 @@ function CareersPage() {
             <span className="font-display text-2xl font-medium text-ivory tracking-tight">HabiGo</span>
             <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
           </a>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="/#services" className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors">
-              Services
-            </a>
-            <a href="/#team" className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors">
-              Team
-            </a>
-            <a href="/#contact" className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors">
-              Contact
-            </a>
+          <nav className="hidden lg:flex items-center gap-9">
+            {navItems.map((item) => {
+              if (item.id === "services") {
+                return (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    onMouseEnter={openDropdown}
+                    onMouseLeave={closeDropdown}
+                  >
+                    <a
+                      href={item.href}
+                      className={`text-[12px] uppercase tracking-[0.18em] transition-colors py-4 inline-block ${
+                        dropdownOpen ? "text-accent" : "text-ivory/70 hover:text-accent"
+                      }`}
+                    >
+                      {item.label}
+                      <svg
+                        className={`inline-block ml-1.5 w-3 h-3 transition-transform duration-200 ${
+                          dropdownOpen ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </a>
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-emerald-deep/95 backdrop-blur-xl border border-ivory/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-300 ${
+                        dropdownOpen
+                          ? "opacity-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 translate-y-3 pointer-events-none"
+                      }`}
+                    >
+                      <div className="py-3">
+                        {serviceLinks.map((service) => (
+                          <a
+                            key={service}
+                            href={`/services/${service.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="block px-6 py-2.5 text-sm text-ivory/70 hover:text-accent hover:bg-white/5 transition-colors"
+                          >
+                            {service}
+                          </a>
+                        ))}
+                        <div className="border-t border-ivory/10 mt-2 pt-2">
+                          <a href="/services" className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors">
+                            View All Services →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </nav>
           <a
             href="mailto:careers@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
-            className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold hover:bg-ivory transition-colors"
+            className="hidden lg:inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold hover:bg-ivory transition-colors"
           >
             Apply Now <ArrowUpRight className="!size-3.5" />
           </a>
+          <button
+            onClick={() => setNavOpen(!navOpen)}
+            className="lg:hidden text-ivory p-2"
+            aria-label="Menu"
+          >
+            {navOpen ? <X /> : <Menu />}
+          </button>
         </div>
+        {navOpen && (
+          <div className="lg:hidden bg-[color:var(--emerald-deep)] border-t border-white/10 px-6 py-6 space-y-4">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                onClick={() => setNavOpen(false)}
+                className="block text-ivory text-lg font-display"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="mailto:careers@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
+              onClick={() => setNavOpen(false)}
+              className="inline-flex mt-4 items-center gap-2 px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold"
+            >
+              Apply Now <ArrowUpRight className="!size-4" />
+            </a>
+          </div>
+        )}
       </header>
 
       <section className="relative min-h-[82vh] overflow-hidden bg-emerald-deep text-ivory">
