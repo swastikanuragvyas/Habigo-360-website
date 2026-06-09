@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
   component: HabiGoHome,
 });
 
-const NAV = [
+export const NAV = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
@@ -69,7 +69,7 @@ const NAV = [
   { id: "contact", label: "Contact" },
 ];
 
-function useReveal() {
+export function useReveal() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -147,7 +147,7 @@ function HabiGoHome() {
   );
 }
 
-function Nav({
+export function Nav({
   scrolled,
   navOpen,
   setNavOpen,
@@ -156,6 +156,17 @@ function Nav({
   navOpen: boolean;
   setNavOpen: (v: boolean) => void;
 }) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openDropdown = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setDropdownOpen(true);
+  };
+  const closeDropdown = () => {
+    dropdownTimeout.current = setTimeout(() => setDropdownOpen(false), 200);
+  };
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
@@ -165,23 +176,70 @@ function Nav({
       }`}
     >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-        <a href="#home" className="flex items-baseline gap-1.5">
+        <a href="/" className="flex items-baseline gap-1.5">
           <span className="font-display text-2xl font-medium text-ivory tracking-tight">HabiGo</span>
           <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
         </a>
         <nav className="hidden lg:flex items-center gap-9">
-          {NAV.map((n) => (
-            <a
-              key={n.id}
-              href={`#${n.id}`}
-              className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
-            >
-              {n.label}
-            </a>
-          ))}
+          {NAV.map((n) => {
+            if (n.id === 'services') {
+              return (
+                <div
+                  key={n.id}
+                  className="relative"
+                  onMouseEnter={openDropdown}
+                  onMouseLeave={closeDropdown}
+                >
+                  <a
+                    href="/services"
+                    className={`text-[12px] uppercase tracking-[0.18em] transition-colors py-4 inline-block ${
+                      dropdownOpen ? "text-accent" : "text-ivory/70 hover:text-accent"
+                    }`}
+                  >
+                    {n.label}
+                    <svg className={`inline-block ml-1.5 w-3 h-3 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  </a>
+                  <div
+                    className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-emerald-deep/95 backdrop-blur-xl border border-ivory/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-300 ${
+                      dropdownOpen
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 translate-y-3 pointer-events-none"
+                    }`}
+                  >
+                    <div className="py-3">
+                      {SERVICES.map((s) => (
+                        <a
+                          key={s.t}
+                          href={`/services/${s.t.toLowerCase().replace(/\s+/g, '-').replace(/-&-/g, '-')}`}
+                          className="flex items-center gap-3 px-6 py-2.5 text-sm text-ivory/70 hover:text-accent hover:bg-white/5 transition-colors"
+                        >
+                          <s.i className="!size-4 text-accent/60" />
+                          {s.t}
+                        </a>
+                      ))}
+                      <div className="border-t border-ivory/10 mt-2 pt-2">
+                        <a href="/services" className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors">
+                          View All Services →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a
+                key={n.id}
+                href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : `/#${n.id}`}
+                className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
+              >
+                {n.label}
+              </a>
+            );
+          })}
         </nav>
         <a
-          href="#contact"
+          href="/#contact"
           className="hidden lg:inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold hover:bg-ivory transition-colors"
         >
           Book a Call
@@ -200,7 +258,7 @@ function Nav({
           {NAV.map((n) => (
             <a
               key={n.id}
-              href={`#${n.id}`}
+              href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`}
               onClick={() => setNavOpen(false)}
               className="block text-ivory text-lg font-display"
             >
@@ -208,7 +266,7 @@ function Nav({
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setNavOpen(false)}
             className="inline-flex mt-4 items-center gap-2 px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold"
           >
@@ -408,7 +466,7 @@ function About() {
   );
 }
 
-function Founders() {
+export function Founders() {
   const f = [
     {
       img: founder1,
@@ -511,7 +569,7 @@ function Founders() {
   );
 }
 
-const SERVICES = [
+export const SERVICES = [
   { i: Megaphone, t: "Social Media Marketing", d: "Always-on content systems built for retention and reach." },
   { i: TrendingUp, t: "Performance Marketing", d: "Paid media engineered for ROAS, not vanity metrics." },
   { i: Camera, t: "Photography & Videography", d: "Cinematic capture for hospitality, lifestyle and brand films." },
@@ -523,6 +581,7 @@ const SERVICES = [
   { i: Database, t: "CRM Services", d: "Set up, segment and automate so growth stops being manual." },
   { i: Hotel, t: "OTA Listings & Management", d: "Hospitality distribution done with discipline." },
   { i: Calendar, t: "Event Curation", d: "Brand experiences that move audiences and the algorithm." },
+  { i: Play, t: "Brand Films", d: "High-end visual storytelling that commands attention and emotion." },
 ];
 
 function Services() {
@@ -535,7 +594,7 @@ function Services() {
               <span className="w-10 h-px bg-emerald-deep/40" /> Capabilities
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
-              Eleven disciplines.<br />
+              Twelve disciplines.<br />
               <em className="italic text-emerald-deep">One growth engine.</em>
             </h2>
           </div>
@@ -547,8 +606,9 @@ function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
           {SERVICES.map((s, idx) => (
-            <article
+            <a
               key={s.t}
+              href={`/services/${s.t.toLowerCase().replace(/\s+/g, '-').replace(/-&-/g, '-')}`}
               className="group relative bg-background p-8 lg:p-10 hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 cursor-pointer min-h-[260px] flex flex-col justify-between"
             >
               <div className="flex items-start justify-between">
@@ -564,26 +624,9 @@ function Services() {
                 </p>
               </div>
               <ArrowUpRight className="absolute top-8 right-8 !size-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all text-accent" />
-            </article>
+            </a>
           ))}
-          {/* CTA cell to complete the grid */}
-          <a
-            href="#contact"
-            className="group relative bg-emerald-deep p-8 lg:p-10 hover:bg-emerald-soft transition-colors duration-500 cursor-pointer min-h-[260px] flex flex-col justify-between"
-          >
-            <div className="flex items-start justify-between">
-              <ArrowUpRight className="!size-7 text-accent" />
-              <span className="text-[10px] font-mono text-ivory/40">12</span>
-            </div>
-            <div className="mt-12">
-              <h3 className="font-display text-2xl lg:text-3xl leading-tight text-ivory mb-3">
-                Need something custom?
-              </h3>
-              <p className="text-sm text-ivory/70 leading-relaxed">
-                Let's talk about what your brand actually needs.
-              </p>
-            </div>
-          </a>
+          {/* Grid completely filled with 12 services */}
         </div>
       </div>
     </section>
@@ -1082,7 +1125,7 @@ function Testimonials() {
   );
 }
 
-function Contact() {
+export function Contact() {
   return (
     <section id="contact" className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15),_transparent_55%)]" />
@@ -1204,7 +1247,7 @@ function Field({
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="bg-emerald-deep text-ivory border-t border-ivory/10">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-16 grid lg:grid-cols-12 gap-10">
@@ -1237,7 +1280,7 @@ function Footer() {
           <ul className="space-y-3 text-sm">
             {NAV.map((n) => (
               <li key={n.id}>
-                <a href={`#${n.id}`} className="text-ivory/75 hover:text-accent">
+                <a href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`} className="text-ivory/75 hover:text-accent">
                   {n.label}
                 </a>
               </li>
@@ -1283,7 +1326,7 @@ function Footer() {
   );
 }
 
-function StickyCTA() {
+export function StickyCTA() {
   return (
     <a
       href="https://wa.me/918963858888"
