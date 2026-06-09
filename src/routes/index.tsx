@@ -62,7 +62,7 @@ export const NAV = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
-  { id: "work", label: "Work" },
+  { id: "work", label: "Careers" },
   { id: "results", label: "Results" },
   { id: "clients", label: "Clients" },
   { id: "team", label: "Team" },
