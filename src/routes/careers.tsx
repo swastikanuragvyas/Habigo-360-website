@@ -44,7 +44,7 @@ const openings = [
     title: "Social Media Strategist",
     team: "Content",
     type: "Full time",
-    location: "Indore / Hybrid",
+    location: "Jaipur",
     summary:
       "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
     questions: [
@@ -57,7 +57,7 @@ const openings = [
     title: "Performance Marketing Executive",
     team: "Growth",
     type: "Full time",
-    location: "Indore / Hybrid",
+    location: "Jaipur",
     summary:
       "Manage paid campaigns, read numbers clearly and improve funnels with practical experiments.",
     questions: [
@@ -70,7 +70,7 @@ const openings = [
     title: "Video Editor and Motion Designer",
     team: "Creative",
     type: "Full time",
-    location: "Indore",
+    location: "Jaipur",
     summary:
       "Build reels, brand films and campaign edits that feel premium and move fast.",
     questions: [
@@ -297,6 +297,8 @@ function ApplicationDialog({
   role: (typeof openings)[number];
   onClose: () => void;
 }) {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <div
       className="fixed inset-0 z-[70] bg-emerald-deep/78 backdrop-blur-sm px-4 py-6 md:px-6 md:py-10 overflow-y-auto"
@@ -325,59 +327,81 @@ function ApplicationDialog({
             </button>
           </div>
 
-          <form
-            className="grid gap-8 px-6 py-7 lg:px-8 lg:py-9"
-            onSubmit={(event) => {
-              event.preventDefault();
-              onClose();
-            }}
-          >
-            <div className="grid md:grid-cols-2 gap-4">
-              <Field label="Full name" name="name" required />
-              <Field label="Email address" name="email" type="email" required />
-              <Field label="Phone number" name="phone" type="tel" required />
-              <Field label="City" name="city" required />
-              <Field label="Portfolio / LinkedIn link" name="portfolio" type="url" required />
-              <Field label="Notice period" name="notice" required />
-            </div>
-
-            <div className="space-y-5">
+          {submitted ? (
+            <div className="px-6 py-10 lg:px-8 lg:py-12">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
-                  Role Questions
+                  Demo Submitted
                 </div>
-                <p className="mt-2 text-sm text-foreground/60">
-                  These questions change based on the role selected.
+                <h3 className="mt-4 font-display text-3xl lg:text-4xl">Application preview received.</h3>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/62">
+                  This is a demo confirmation. Once you approve the questions, we can connect this
+                  form to email, Google Sheets, a CRM or your backend.
                 </p>
               </div>
-              {role.questions.map((question, index) => (
-                <label key={question} className="block">
-                  <span className="text-sm font-medium text-foreground">
-                    {index + 1}. {question} <span className="text-emerald-deep">*</span>
-                  </span>
-                  <textarea
-                    name={`question_${index + 1}`}
-                    required
-                    rows={4}
-                    className="mt-3 w-full resize-y rounded-sm border border-emerald-deep/15 bg-ivory-warm px-4 py-3 text-sm outline-none transition-colors focus:border-emerald-deep"
-                  />
-                </label>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-emerald-deep/10 pt-6">
-              <p className="max-w-md text-xs leading-relaxed text-foreground/55">
-                Demo form only. We can connect this to email, Google Sheets, a CRM or a backend once
-                the final questions are approved.
-              </p>
               <button
-                type="submit"
-                className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-6 py-3 text-sm font-semibold text-ivory hover:bg-emerald-soft transition-colors"
+                type="button"
+                onClick={onClose}
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-deep px-6 py-3 text-sm font-semibold text-ivory hover:bg-emerald-soft transition-colors"
               >
-                Submit Application <Send className="!size-4" />
+                Close <X className="!size-4" />
               </button>
             </div>
-          </form>
+          ) : (
+            <form
+              className="grid gap-8 px-6 py-7 lg:px-8 lg:py-9"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(true);
+              }}
+            >
+              <div className="grid md:grid-cols-2 gap-4">
+                <Field label="Full name" name="name" required />
+                <Field label="Email address" name="email" type="email" required />
+                <Field label="Phone number" name="phone" type="tel" required />
+                <Field label="City" name="city" required />
+                <Field label="Portfolio / LinkedIn link" name="portfolio" type="url" required />
+                <Field label="Notice period" name="notice" required />
+              </div>
+
+              <div className="space-y-5">
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
+                    Role Questions
+                  </div>
+                  <p className="mt-2 text-sm text-foreground/60">
+                    These questions change based on the role selected.
+                  </p>
+                </div>
+                {role.questions.map((question, index) => (
+                  <label key={question} className="block">
+                    <span className="text-sm font-medium text-foreground">
+                      {index + 1}. {question} <span className="text-emerald-deep">*</span>
+                    </span>
+                    <textarea
+                      name={`question_${index + 1}`}
+                      required
+                      rows={4}
+                      className="mt-3 w-full resize-y rounded-sm border border-emerald-deep/15 bg-ivory-warm px-4 py-3 text-sm outline-none transition-colors focus:border-emerald-deep"
+                    />
+                  </label>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-emerald-deep/10 pt-6">
+                <p className="max-w-md text-xs leading-relaxed text-foreground/55">
+                  Demo form only. We can connect this to email, Google Sheets, a CRM or a backend once
+                  the final questions are approved.
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-6 py-3 text-sm font-semibold text-ivory hover:bg-emerald-soft transition-colors"
+                >
+                  Submit Application <Send className="!size-4" />
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>

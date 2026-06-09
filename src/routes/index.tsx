@@ -181,7 +181,6 @@ export function Nav({
           <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
         </a>
         <nav className="hidden lg:flex items-center gap-9">
-<<<<<<< Updated upstream
           {NAV.map((n) => {
             if (n.id === 'services') {
               return (
@@ -231,24 +230,13 @@ export function Nav({
             return (
               <a
                 key={n.id}
-                href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : `/#${n.id}`}
+                href={n.href ?? (n.id === 'home' ? '/' : n.id === 'about' ? '/about' : `/#${n.id}`)}
                 className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
               >
                 {n.label}
               </a>
             );
           })}
-=======
-          {NAV.map((n) => (
-            <a
-              key={n.id}
-              href={n.href ?? `#${n.id}`}
-              className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
-            >
-              {n.label}
-            </a>
-          ))}
->>>>>>> Stashed changes
         </nav>
         <a
           href="/#contact"
@@ -270,11 +258,7 @@ export function Nav({
           {NAV.map((n) => (
             <a
               key={n.id}
-<<<<<<< Updated upstream
-              href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`}
-=======
-              href={n.href ?? `#${n.id}`}
->>>>>>> Stashed changes
+              href={n.href ?? (n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`)}
               onClick={() => setNavOpen(false)}
               className="block text-ivory text-lg font-display"
             >

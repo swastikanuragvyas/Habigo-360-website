@@ -9,30 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-<<<<<<< Updated upstream
 import { Route as ServicesRouteImport } from './routes/services'
-import { Route as AboutRouteImport } from './routes/about'
-=======
 import { Route as CareersRouteImport } from './routes/careers'
->>>>>>> Stashed changes
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
-<<<<<<< Updated upstream
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-=======
 const CareersRoute = CareersRouteImport.update({
   id: '/careers',
   path: '/careers',
->>>>>>> Stashed changes
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -53,8 +49,8 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-<<<<<<< Updated upstream
   '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
   '/services': typeof ServicesRouteWithChildren
   '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
@@ -62,62 +58,49 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services': typeof ServicesIndexRoute
-=======
-  '/careers': typeof CareersRoute
-}
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/careers': typeof CareersRoute
->>>>>>> Stashed changes
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-<<<<<<< Updated upstream
   '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
   '/services': typeof ServicesRouteWithChildren
   '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/services' | '/services/$slug' | '/services/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/services'
+    | '/services/$slug'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/services/$slug' | '/services'
+  to: '/' | '/about' | '/careers' | '/services/$slug' | '/services'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/careers'
     | '/services'
     | '/services/$slug'
     | '/services/'
-=======
-  '/careers': typeof CareersRoute
-}
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/careers'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/careers'
-  id: '__root__' | '/' | '/careers'
->>>>>>> Stashed changes
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-<<<<<<< Updated upstream
   AboutRoute: typeof AboutRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
-=======
   CareersRoute: typeof CareersRoute
->>>>>>> Stashed changes
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-<<<<<<< Updated upstream
     '/services': {
       id: '/services'
       path: '/services'
@@ -125,18 +108,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-=======
     '/careers': {
       id: '/careers'
       path: '/careers'
       fullPath: '/careers'
       preLoaderRoute: typeof CareersRouteImport
->>>>>>> Stashed changes
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -179,12 +162,9 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-<<<<<<< Updated upstream
   AboutRoute: AboutRoute,
-  ServicesRoute: ServicesRouteWithChildren,
-=======
   CareersRoute: CareersRoute,
->>>>>>> Stashed changes
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
