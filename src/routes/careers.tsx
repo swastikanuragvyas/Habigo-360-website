@@ -362,6 +362,13 @@ function ApplicationDialog({
                 <Field label="City" name="city" required />
                 <Field label="Portfolio / LinkedIn link" name="portfolio" type="url" required />
                 <Field label="Notice period" name="notice" required />
+                <Field
+                  label="CV"
+                  name="resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  required
+                />
               </div>
 
               <div className="space-y-5">
@@ -412,11 +419,13 @@ function Field({
   label,
   name,
   type = "text",
+  accept,
   required = false,
 }: {
   label: string;
   name: string;
   type?: string;
+  accept?: string;
   required?: boolean;
 }) {
   return (
@@ -427,8 +436,9 @@ function Field({
       <input
         name={name}
         type={type}
+        accept={accept}
         required={required}
-        className="mt-3 h-12 w-full rounded-sm border border-emerald-deep/15 bg-ivory-warm px-4 text-sm outline-none transition-colors focus:border-emerald-deep"
+        className="mt-3 h-12 w-full rounded-sm border border-emerald-deep/15 bg-ivory-warm px-4 text-sm outline-none transition-colors focus:border-emerald-deep file:mr-4 file:h-full file:border-0 file:bg-transparent file:text-sm file:font-semibold file:text-emerald-deep"
       />
     </label>
   );
