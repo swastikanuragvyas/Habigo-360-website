@@ -280,18 +280,18 @@ function Hero() {
           </div>
         </div>
 
-        <div className="reveal reveal-delay-3 mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-ivory/10 border border-ivory/10 rounded-2xl overflow-hidden">
+        <div className="reveal reveal-delay-3 mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/15 border border-white/15 rounded-2xl overflow-hidden">
           {[
             { v: 50, s: "+", l: "Brands Served" },
             { v: 100, s: "+", l: "Projects Delivered" },
             { v: 12, s: "M+", l: "Content Impressions" },
             { v: 9, s: "+", l: "Industries Mastered" },
           ].map((m) => (
-            <div key={m.l} className="bg-[color:var(--emerald-deep)] p-6 lg:p-8 backdrop-blur">
-              <div className="font-display text-4xl lg:text-5xl text-accent">
+            <div key={m.l} className="bg-ivory-warm p-6 lg:p-8">
+              <div className="font-display text-4xl lg:text-5xl text-emerald-deep">
                 <Counter to={m.v} suffix={m.s} />
               </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-ivory/60">
+              <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-foreground/60 font-semibold">
                 {m.l}
               </div>
             </div>
@@ -316,15 +316,17 @@ function TrustBar() {
   return (
     <div className="bg-emerald-deep text-ivory border-y border-ivory/10">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-5 flex items-center gap-8 overflow-hidden">
-        <span className="shrink-0 text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+        <span className="shrink-0 text-[10px] uppercase tracking-[0.3em] text-ivory/50 relative z-10 bg-emerald-deep pr-4">
           Industries
         </span>
-        <div className="flex gap-10 animate-marquee whitespace-nowrap">
-          {[...tags, ...tags, ...tags].map((t, i) => (
-            <span key={i} className="text-sm font-display italic text-ivory/80">
-              {t}
-            </span>
-          ))}
+        <div className="overflow-hidden flex-1">
+          <div className="flex gap-10 animate-marquee whitespace-nowrap">
+            {[...tags, ...tags, ...tags].map((t, i) => (
+              <span key={i} className="text-sm font-display italic text-ivory/80">
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -424,48 +426,85 @@ function Founders() {
     },
   ];
   return (
-    <section className="bg-emerald-deep text-ivory py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-              <span className="w-10 h-px bg-ivory/30" /> Founders
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light max-w-3xl">
-              The minds behind the work.
-            </h2>
-          </div>
-          <p className="max-w-sm text-ivory/60 text-sm">
-            Two operators with one belief — that brand and growth aren't separate disciplines.
+    <section className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
+      {/* Background glow accents */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,_rgba(212,175,55,0.07),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,_rgba(212,175,55,0.05),_transparent_50%)]" />
+
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
+        {/* Section header */}
+        <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-24">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
+            <span className="w-10 h-px bg-ivory/30" />
+            The People
+            <span className="w-10 h-px bg-ivory/30" />
+          </span>
+          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
+            Built by operators, <em className="italic text-accent">not observers.</em>
+          </h2>
+          <p className="mt-6 text-ivory/50 text-[15px] max-w-lg mx-auto leading-relaxed">
+            Two people who believe that brand and growth are the same discipline — and that great agencies prove it every quarter.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
-          {f.map((p) => (
-            <article key={p.name} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-emerald-soft">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  className="size-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep via-emerald-deep/30 to-transparent opacity-90" />
-                <div className="absolute inset-x-0 bottom-0 p-8">
-                  <div className="font-display text-3xl lg:text-4xl">{p.name}</div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-accent mt-2">
-                    {p.role}
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-emerald-deep/95 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <p className="text-sm text-ivory/80 leading-relaxed mb-6">{p.bio}</p>
-                  <div className="font-display text-2xl italic text-accent leading-snug">
-                    "{p.quote}"
-                  </div>
+        {/* Founders grid — same row, equal weight */}
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-14 max-w-6xl mx-auto">
+          {f.map((p, idx) => (
+            <article key={p.name} className="group text-center">
+              {/* Image with bottom fade */}
+              <div className="relative mb-8">
+                <div
+                  className="relative aspect-[3/4] overflow-hidden rounded-sm"
+                  style={{
+                    maskImage:
+                      "linear-gradient(to bottom, black 65%, transparent 100%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black 65%, transparent 100%)",
+                  }}
+                >
+                  <img
+                    src={p.img}
+                    alt={p.name}
+                    className="size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
                 </div>
               </div>
+
+              {/* Name & Role */}
+              <div className="mb-5">
+                <div className="font-display text-3xl lg:text-4xl tracking-tight">
+                  {p.name}
+                </div>
+                <div className="text-[11px] uppercase tracking-[0.25em] text-accent mt-2 font-semibold">
+                  {p.role}
+                </div>
+              </div>
+
+              {/* Gold divider */}
+              <div className="w-10 h-px bg-accent/60 mx-auto mb-5" />
+
+              {/* Bio */}
+              <p className="text-sm text-ivory/50 leading-relaxed max-w-xs mx-auto mb-6">
+                {p.bio}
+              </p>
+
+              {/* Quote */}
+              <blockquote className="relative max-w-sm mx-auto">
+                <span className="font-display text-5xl text-accent/15 leading-none select-none absolute -top-5 -left-2">"</span>
+                <p className="font-display text-lg italic text-ivory/75 leading-snug pl-4">
+                  {p.quote}
+                </p>
+              </blockquote>
             </article>
           ))}
+        </div>
+
+        {/* Bottom agency tagline */}
+        <div className="mt-20 lg:mt-28 pt-10 border-t border-ivory/10 text-center">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-ivory/35">
+            Strategy · Creativity · Distribution · Growth — One team, one outcome.
+          </p>
         </div>
       </div>
     </section>
@@ -527,6 +566,24 @@ function Services() {
               <ArrowUpRight className="absolute top-8 right-8 !size-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all text-accent" />
             </article>
           ))}
+          {/* CTA cell to complete the grid */}
+          <a
+            href="#contact"
+            className="group relative bg-emerald-deep p-8 lg:p-10 hover:bg-emerald-soft transition-colors duration-500 cursor-pointer min-h-[260px] flex flex-col justify-between"
+          >
+            <div className="flex items-start justify-between">
+              <ArrowUpRight className="!size-7 text-accent" />
+              <span className="text-[10px] font-mono text-ivory/40">12</span>
+            </div>
+            <div className="mt-12">
+              <h3 className="font-display text-2xl lg:text-3xl leading-tight text-ivory mb-3">
+                Need something custom?
+              </h3>
+              <p className="text-sm text-ivory/70 leading-relaxed">
+                Let's talk about what your brand actually needs.
+              </p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -689,19 +746,19 @@ function ResultsDashboard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-ivory/10 border border-ivory/10 rounded-sm overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/15 border border-white/15 rounded-sm overflow-hidden">
           {[
             { v: 45, s: "L+", l: "Revenue Generated", sub: "Lakhs INR" },
             { v: 7, s: "x", l: "ROAS Peak", sub: "On scaled accounts" },
             { v: 703, s: "K", l: "Revenue in 15 days", sub: "Single campaign" },
             { v: 38, s: "%", l: "Avg CVR Lift", sub: "Pre vs post takeover" },
           ].map((m) => (
-            <div key={m.l} className="bg-emerald-deep p-8">
-              <div className="font-display text-5xl lg:text-6xl text-accent">
+            <div key={m.l} className="bg-ivory-warm p-8">
+              <div className="font-display text-5xl lg:text-6xl text-emerald-deep">
                 <Counter to={m.v} suffix={m.s} />
               </div>
-              <div className="mt-4 text-sm text-ivory">{m.l}</div>
-              <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mt-1">
+              <div className="mt-4 text-sm text-foreground">{m.l}</div>
+              <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/45 mt-1">
                 {m.sub}
               </div>
             </div>
