@@ -1221,7 +1221,7 @@ function Footer() {
             {[Instagram, Linkedin, Twitter].map((I, i) => (
               <a
                 key={i}
-                href="#"
+                href="https://www.instagram.com/habigo360?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 className="size-10 rounded-full border border-ivory/15 grid place-items-center hover:bg-accent hover:border-accent hover:text-emerald-deep transition-colors"
               >
                 <I className="!size-4" />
