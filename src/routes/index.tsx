@@ -23,11 +23,21 @@ import {
   Database,
   Hotel,
   Send,
+  Sun,
+  Moon,
 } from "lucide-react";
+
+import ImmersiveHero from "@/components/ImmersiveHero";
+import LivingPortfolio from "@/components/LivingPortfolio";
+import { ScrollProgress, SocialProofTicker, DarkModeToggle } from "@/components/AmbientStorytelling";
+import { useStaggerReveal, staggerItemStyle } from "@/hooks/useStaggerReveal";
+import { useMutation } from "@tanstack/react-query";
+import { submitContact } from "@/lib/api/contact.server";
 
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
+
 import founder1 from "@/assets/founder-1.jpg";
 import founder2 from "@/assets/founder-2.jpg";
 import work1 from "@/assets/work-1.jpg";
@@ -127,12 +137,15 @@ function HabiGoHome() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
-      <Hero />
+      <ImmersiveHero />
+      <ScrollProgress />
+      <DarkModeToggle />
+      <SocialProofTicker />
       <TrustBar />
       <About />
       <Founders />
       <Services />
-      <Work />
+      <LivingPortfolio />
       <SocialShowcase />
       <ResultsDashboard />
       <Gallery />
@@ -279,87 +292,7 @@ export function Nav({
   );
 }
 
-function Hero() {
-  const slides = [hero1, hero3, hero2];
-  return (
-    <section
-      id="home"
-      className="relative min-h-screen overflow-hidden bg-[color:var(--emerald-deep)] text-ivory"
-    >
-      {/* Background slides */}
-      <div className="absolute inset-0">
-        {slides.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt=""
-            className="hero-slide absolute inset-0 size-full object-cover"
-            style={{ animationDelay: `${i * 6}s` }}
-          />
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-deep/85 via-emerald-deep/70 to-emerald-deep/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.18),_transparent_55%)]" />
-      </div>
-
-      <div className="relative max-w-[1500px] mx-auto px-6 lg:px-10 pt-40 lg:pt-48 pb-24 min-h-screen flex flex-col justify-between">
-        <div className="grid lg:grid-cols-12 gap-12 items-end">
-          <div className="lg:col-span-9">
-            <div className="reveal flex items-center gap-3 mb-8">
-              <span className="size-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-[11px] uppercase tracking-[0.3em] text-ivory/70">
-                Creative Growth Agency · Est. Hospitality DNA
-              </span>
-            </div>
-            <h1 className="reveal reveal-delay-1 font-display text-[clamp(2.75rem,7.5vw,7.5rem)] leading-[0.95] font-light text-balance">
-              Helping great brands become{" "}
-              <em className="text-accent not-italic font-normal italic">seen,</em>{" "}
-              <em className="text-accent not-italic font-normal italic">remembered</em> &{" "}
-              <em className="text-accent not-italic font-normal italic">trusted.</em>
-            </h1>
-          </div>
-          <div className="lg:col-span-3 reveal reveal-delay-2 space-y-6">
-            <p className="text-ivory/75 text-base leading-relaxed text-pretty">
-              Marketing. Content. Branding. Technology. Business strategy. We turn visibility into
-              measurable growth.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#work"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-ivory text-emerald-deep text-xs uppercase tracking-[0.18em] font-semibold hover:bg-accent transition-colors"
-              >
-                <Play className="!size-3.5 fill-emerald-deep" /> View Our Work
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-ivory/30 text-ivory text-xs uppercase tracking-[0.18em] font-semibold hover:bg-ivory/10 transition-colors"
-              >
-                Book a Discovery Call
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="reveal reveal-delay-3 mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/15 border border-white/15 rounded-2xl overflow-hidden">
-          {[
-            { v: 50, s: "+", l: "Brands Served" },
-            { v: 100, s: "+", l: "Projects Delivered" },
-            { v: 12, s: "M+", l: "Content Impressions" },
-            { v: 9, s: "+", l: "Industries Mastered" },
-          ].map((m) => (
-            <div key={m.l} className="bg-ivory-warm p-6 lg:p-8">
-              <div className="font-display text-4xl lg:text-5xl text-emerald-deep">
-                <Counter to={m.v} suffix={m.s} />
-              </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-foreground/60 font-semibold">
-                {m.l}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+// Hero replaced by ImmersiveHero component
 
 function TrustBar() {
   const tags = [
@@ -586,6 +519,7 @@ export const SERVICES = [
 ];
 
 function Services() {
+  const { shown, containerRef } = useStaggerReveal({ staggerMs: 80 });
   return (
     <section id="services" className="bg-background py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
@@ -605,12 +539,14 @@ function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+        <div ref={containerRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
           {SERVICES.map((s, idx) => (
             <a
               key={s.t}
               href={`/services/${s.t.toLowerCase().replace(/\s+/g, '-').replace(/-&-/g, '-')}`}
               className="group relative bg-background p-8 lg:p-10 hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 cursor-pointer min-h-[260px] flex flex-col justify-between"
+              style={staggerItemStyle(shown, idx, 80)}
             >
               <div className="flex items-start justify-between">
                 <s.i className="!size-7 text-emerald-deep group-hover:text-accent transition-colors" />
@@ -631,82 +567,6 @@ function Services() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Work() {
-  const items = [
-    { img: work1, tag: "Hospitality / Branding", title: "Maison Lumière", meta: "+312% direct bookings" },
-    { img: work2, tag: "F&B / Content", title: "Olive & Ember", meta: "8.4M organic reach" },
-    { img: work3, tag: "Fashion / Campaign", title: "Atelier Noir", meta: "5.2x ROAS · 90 days" },
-    { img: work4, tag: "Resort / Film", title: "Verde Sanctuary", meta: "Brand film + drone series" },
-    { img: work5, tag: "Identity System", title: "Ivory & Co.", meta: "Full visual rebuild" },
-  ];
-  return (
-    <section id="work" className="bg-emerald-deep text-ivory py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-              <span className="w-10 h-px bg-ivory/30" /> Selected Work
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-              Case studies, <em className="italic text-accent">not portfolios.</em>
-            </h2>
-          </div>
-          <a
-            href="#contact"
-            className="text-[11px] uppercase tracking-[0.22em] text-accent border-b border-accent pb-1"
-          >
-            Request full case studies →
-          </a>
-        </div>
-
-        <div className="grid grid-cols-12 gap-6">
-          <FeaturedTile {...items[0]} className="col-span-12 md:col-span-8 aspect-[16/10]" />
-          <FeaturedTile {...items[1]} className="col-span-12 md:col-span-4 aspect-[4/5] md:mt-16" />
-          <FeaturedTile {...items[2]} className="col-span-12 md:col-span-5 aspect-[4/5]" />
-          <FeaturedTile {...items[3]} className="col-span-12 md:col-span-7 aspect-[16/10] md:mt-20" />
-          <FeaturedTile {...items[4]} className="col-span-12 aspect-[21/9]" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedTile({
-  img,
-  tag,
-  title,
-  meta,
-  className = "",
-}: {
-  img: string;
-  tag: string;
-  title: string;
-  meta: string;
-  className?: string;
-}) {
-  return (
-    <article className={`group relative overflow-hidden rounded-sm bg-emerald-soft ${className}`}>
-      <img
-        src={img}
-        alt={title}
-        className="absolute inset-0 size-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep via-emerald-deep/20 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8 flex items-end justify-between gap-6">
-        <div>
-          <div className="text-[10px] uppercase tracking-[0.25em] text-accent mb-2">{tag}</div>
-          <h3 className="font-display text-2xl lg:text-4xl text-ivory">{title}</h3>
-          <div className="text-sm text-ivory/70 mt-2">{meta}</div>
-        </div>
-        <div className="hidden md:flex shrink-0 size-12 rounded-full border border-ivory/40 items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
-          <ArrowUpRight className="!size-5 text-ivory group-hover:text-emerald-deep" />
-        </div>
-      </div>
-    </article>
   );
 }
 
@@ -915,6 +775,7 @@ function Gallery() {
 }
 
 function Process() {
+  const { shown, containerRef } = useStaggerReveal({ staggerMs: 100 });
   const steps = [
     ["01", "Research & Discovery", "Deep dive into category, customer and competitive whitespace."],
     ["02", "Audience Profiling", "Behavioral segments built from data, not demographics."],
@@ -937,7 +798,7 @@ function Process() {
         </div>
         <div className="relative">
           <div className="absolute left-0 right-0 top-12 h-px bg-ivory/15 hidden lg:block" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
+          <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
             {steps.map(([n, t, d]) => (
               <div key={n} className="relative">
                 <div className="hidden lg:block absolute -top-1.5 size-4 rounded-full bg-accent ring-4 ring-emerald-deep" />
@@ -983,6 +844,7 @@ function ImpactCounters() {
 }
 
 function Team() {
+  const { shown, containerRef } = useStaggerReveal({ staggerMs: 80 });
   const team = [
     { 
       n: "Strategy", 
@@ -1047,6 +909,7 @@ function Team() {
             </h2>
           </div>
         </div>
+<<<<<<< Updated upstream
         
         <div className="flex flex-col gap-24">
           {team.map((t, i) => (
@@ -1056,6 +919,19 @@ function Team() {
                 <div className="flex items-center gap-6">
                   <div className="font-mono text-sm text-emerald-deep/40">0{i + 1}</div>
                   <h3 className="font-display text-3xl md:text-4xl text-emerald-deep">{t.n}</h3>
+=======
+        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-5 gap-px bg-border border border-border rounded-sm overflow-hidden">
+          {team.map((t, i) => (
+            <div
+              key={t.n}
+              style={staggerItemStyle(shown, i, 80)} className="bg-background p-8 group hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 min-h-[280px] flex flex-col justify-between"
+            >
+              <Users className="!size-6 text-emerald-deep group-hover:text-accent transition-colors" />
+              <div>
+                <div className="font-display text-2xl leading-tight">{t.n}</div>
+                <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50 group-hover:text-ivory/60 mt-3">
+                  {t.c} Specialists · 7+ yrs avg
+>>>>>>> Stashed changes
                 </div>
                 <div className="md:text-right">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
@@ -1136,6 +1012,7 @@ function Clients() {
 }
 
 function Testimonials() {
+  const { shown, containerRef } = useStaggerReveal({ staggerMs: 100 });
   const t = [
     {
       q: "HabiGo didn't just market our resort — they rebuilt how we present ourselves. Direct bookings up 312% in two quarters.",
@@ -1164,11 +1041,11 @@ function Testimonials() {
             In their <em className="italic text-emerald-deep">words.</em>
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div ref={containerRef} className="grid md:grid-cols-3 gap-6">
           {t.map((x, i) => (
             <article
               key={i}
-              className="group bg-card border border-border rounded-sm p-8 lg:p-10 flex flex-col justify-between min-h-[380px] hover:bg-emerald-deep hover:text-ivory transition-colors duration-500"
+              style={staggerItemStyle(shown, i, 100)} className="group bg-card border border-border rounded-sm p-8 lg:p-10 flex flex-col justify-between min-h-[380px] hover:bg-emerald-deep hover:text-ivory transition-colors duration-500"
             >
               <div>
                 <div className="font-display text-6xl leading-none text-accent">"</div>
@@ -1191,6 +1068,25 @@ function Testimonials() {
 }
 
 export function Contact() {
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', industry: '', service: '', brief: '' });
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const mutation = useMutation({
+    mutationFn: submitContact,
+    onSuccess: (result) => {
+      if (result.success) {
+        setFormStatus('success');
+        setForm({ name: '', company: '', email: '', phone: '', industry: '', service: '', brief: '' });
+        setTimeout(() => setFormStatus('idle'), 5000);
+      } else {
+        setFormStatus('error');
+      }
+    },
+    onError: () => setFormStatus('error'),
+  });
+
+  const updateField = (field: string, value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
+
   return (
     <section id="contact" className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15),_transparent_55%)]" />
@@ -1237,22 +1133,36 @@ export function Contact() {
           </div>
 
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const target = e.target as HTMLFormElement;
+              const fd = new FormData(target);
+              const data = {
+                name: fd.get('name') as string || '',
+                company: fd.get('company') as string || '',
+                email: fd.get('email') as string || '',
+                phone: fd.get('phone') as string || '',
+                industry: fd.get('industry') as string || '',
+                service: fd.get('service') as string || '',
+                brief: fd.get('brief') as string || '',
+              };
+              mutation.mutate({ data });
+            }}
             className="lg:col-span-7 bg-ivory text-foreground p-8 lg:p-12 rounded-sm space-y-6"
           >
             <div className="grid md:grid-cols-2 gap-6">
-              <Field label="Full Name" placeholder="Alex Rivera" />
-              <Field label="Company" placeholder="Brand or studio" />
-              <Field label="Email" type="email" placeholder="you@brand.com" />
-              <Field label="Phone" placeholder="+91 ..." />
+              <Field label="Full Name" placeholder="Alex Rivera" name="name" />
+              <Field label="Company" placeholder="Brand or studio" name="company" />
+              <Field label="Email" type="email" placeholder="you@brand.com" name="email" />
+              <Field label="Phone" placeholder="+91 ..." name="phone" />
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <Field label="Industry" placeholder="Hospitality, F&B, Fashion..." />
+              <Field label="Industry" placeholder="Hospitality, F&B, Fashion..." name="industry" />
               <div>
                 <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                   Services Required
                 </label>
-                <select className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors">
+                <select name="service" className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors">
                   <option>Full-stack growth partnership</option>
                   <option>Branding & identity</option>
                   <option>Performance marketing</option>
@@ -1267,11 +1177,24 @@ export function Contact() {
                 Project Brief
               </label>
               <textarea
+                name="brief"
                 rows={4}
                 placeholder="A few lines about your goals, timeline and budget range..."
                 className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors resize-none"
               />
             </div>
+            {formStatus === 'success' && (
+              <div className="flex items-center gap-3 px-5 py-3 rounded-lg bg-emerald-soft/20 text-emerald-soft text-sm">
+                <svg className="!size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                Thank you! We'll be in touch within one working day.
+              </div>
+            )}
+            {formStatus === 'error' && (
+              <div className="flex items-center gap-3 px-5 py-3 rounded-lg bg-red-500/10 text-red-600 text-sm">
+                <svg className="!size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Something went wrong. Please email us directly at habigo360@gmail.com
+              </div>
+            )}
             <button
               type="submit"
               className="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-emerald-deep text-ivory px-8 py-4 rounded-full text-xs uppercase tracking-[0.22em] font-semibold hover:bg-accent hover:text-emerald-deep transition-colors"
@@ -1293,10 +1216,12 @@ function Field({
   label,
   placeholder,
   type = "text",
+  name,
 }: {
   label: string;
   placeholder?: string;
   type?: string;
+  name?: string;
 }) {
   return (
     <div>
@@ -1306,6 +1231,7 @@ function Field({
       <input
         type={type}
         placeholder={placeholder}
+        name={name}
         className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors"
       />
     </div>

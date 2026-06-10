@@ -70,6 +70,9 @@
   --border: oklch(0.86 0.015 85);
   --input: oklch(0.86 0.015 85);
   --ring: var(--emerald-deep);
+
+  /* Cursor trail colour */
+  --cursor-trail: oklch(0.78 0.11 80 / 0.5);
 }
 
 .dark {
@@ -90,6 +93,7 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: var(--gold);
+  --cursor-trail: oklch(0.78 0.11 80 / 0.7);
 }
 
 @layer base {
@@ -154,3 +158,160 @@
 .hero-slide {
   animation: hero-fade 18s infinite;
 }
+
+/* ─── Immersive Hero: Typewriter cursor blink ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typewriter-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  color: var(--gold);
+  font-weight: 100;
+}
+
+/* ─── Floating Particles ─── */
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+  25% { transform: translate(60px, -40px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translate(120px, 10px) rotate(180deg); opacity: 0.4; }
+  75% { transform: translate(40px, 50px) rotate(270deg); opacity: 0.7; }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+  33% { transform: translate(-50px, 30px) rotate(120deg); opacity: 0.7; }
+  66% { transform: translate(30px, -60px) rotate(240deg); opacity: 0.3; }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  20% { transform: translate(-80px, -20px) scale(1.2); opacity: 0.6; }
+  40% { transform: translate(-40px, 40px) scale(0.9); opacity: 0.3; }
+  60% { transform: translate(30px, -30px) scale(1.1); opacity: 0.5; }
+  80% { transform: translate(60px, 10px) scale(0.8); opacity: 0.7; }
+}
+
+/* ─── Custom Cursor Trail ─── */
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cursor-trail);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: width 0.15s, height 0.15s, background 0.15s;
+}
+.custom-cursor.trail {
+  width: 4px;
+  height: 4px;
+  opacity: 0.5;
+}
+
+/* ─── Social Proof Ticker ─── */
+@keyframes slideInRight {
+  from { transform: translateX(120%); opacity: 0; }
+  10% { transform: translateX(0); opacity: 1; }
+  85% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-20%); opacity: 0; }
+}
+.social-proof-item {
+  animation: slideInRight 5s ease-in-out forwards;
+}
+.social-proof-item:nth-child(2) { animation-delay: 5s; }
+.social-proof-item:nth-child(3) { animation-delay: 10s; }
+.social-proof-item:nth-child(4) { animation-delay: 15s; }
+.social-proof-item:nth-child(5) { animation-delay: 20s; }
+.social-proof-item:nth-child(6) { animation-delay: 25s; }
+
+/* ─── Scroll Progress ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--emerald-deep), var(--gold), var(--emerald-deep));
+  background-size: 200% 100%;
+  z-index: 100;
+  transition: width 0.2s ease-out;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Dark mode transition ─── */
+html.dark-transition *,
+html.dark-transition *::before,
+html.dark-transition *::after {
+  transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease !important;
+}
+
+/* ─── Portfolio lightbox ─── */
+.lightbox-backdrop {
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.lightbox-content {
+  animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ─── Morph CTA ─── */
+.morph-cta {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.morph-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.morph-cta:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.morph-cta:hover {
+  color: var(--color-emerald-deep);
+  border-color: var(--color-accent);
+}
+.morph-cta .default-text { display: inline; }
+.morph-cta .hover-text { display: none; }
+.morph-cta:hover .default-text { display: none; }
+.morph-cta:hover .hover-text { display: inline; }
+
+/* ─── Snap scroll for portfolio carousel ─── */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* ─── Progress dot active ─── */
+.progress-dot-active {
+  background: var(--gold) !important;
+  box-shadow: 0 0 10px var(--gold);
+  transform: scale(1.3);
+}
+</original>
+
+// ─── FULL REPLACEMENT ABOVE ───
