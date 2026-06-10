@@ -909,8 +909,6 @@ function Team() {
             </h2>
           </div>
         </div>
-<<<<<<< Updated upstream
-        
         <div className="flex flex-col gap-24">
           {team.map((t, i) => (
             <div key={t.n}>
@@ -919,19 +917,6 @@ function Team() {
                 <div className="flex items-center gap-6">
                   <div className="font-mono text-sm text-emerald-deep/40">0{i + 1}</div>
                   <h3 className="font-display text-3xl md:text-4xl text-emerald-deep">{t.n}</h3>
-=======
-        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-5 gap-px bg-border border border-border rounded-sm overflow-hidden">
-          {team.map((t, i) => (
-            <div
-              key={t.n}
-              style={staggerItemStyle(shown, i, 80)} className="bg-background p-8 group hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 min-h-[280px] flex flex-col justify-between"
-            >
-              <Users className="!size-6 text-emerald-deep group-hover:text-accent transition-colors" />
-              <div>
-                <div className="font-display text-2xl leading-tight">{t.n}</div>
-                <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50 group-hover:text-ivory/60 mt-3">
-                  {t.c} Specialists · 7+ yrs avg
->>>>>>> Stashed changes
                 </div>
                 <div className="md:text-right">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
