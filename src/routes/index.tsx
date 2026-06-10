@@ -36,7 +36,8 @@ import work3 from "@/assets/work-3.jpg";
 import work4 from "@/assets/work-4.jpg";
 import work5 from "@/assets/work-5.jpg";
 import about from "@/assets/about.jpg";
-
+import arpitImg from "@/assets/arpit.jpg";
+import dipanshuImg from "@/assets/dipanshu.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -983,16 +984,60 @@ function ImpactCounters() {
 
 function Team() {
   const team = [
-    { n: "Strategy", c: 5, e: "Brand & business strategy" },
-    { n: "Brand Management", c: 4, e: "Client & account leadership" },
-    { n: "Design", c: 6, e: "Identity, motion & UI" },
-    { n: "Video Production", c: 5, e: "Direction, capture & edit" },
-    { n: "Performance Marketing", c: 4, e: "Paid, CRM & analytics" },
+    { 
+      n: "Strategy", 
+      c: 5, 
+      e: "Brand & business strategy",
+      members: [
+        { name: "Strategy Specialist 1" },
+        { name: "Strategy Specialist 2" },
+        { name: "Strategy Specialist 3" },
+      ]
+    },
+    { 
+      n: "Brand Management", 
+      c: 4, 
+      e: "Client & account leadership",
+      members: [
+        { name: "Brand Specialist 1" },
+        { name: "Brand Specialist 2" },
+      ]
+    },
+    { 
+      n: "Design", 
+      c: 6, 
+      e: "Identity, motion & UI",
+      members: [
+        { name: "Design Specialist 1" },
+        { name: "Design Specialist 2" },
+        { name: "Design Specialist 3" },
+        { name: "Design Specialist 4" },
+      ]
+    },
+    { 
+      n: "Video Production", 
+      c: 5, 
+      e: "Direction, capture & edit",
+      members: [
+        { name: "Arpit", photo: arpitImg },
+        { name: "Dipanshu", photo: dipanshuImg },
+        { name: "Video Specialist 3" },
+      ]
+    },
+    { 
+      n: "Performance Marketing", 
+      c: 4, 
+      e: "Paid, CRM & analytics",
+      members: [
+        { name: "Marketing Specialist 1" },
+        { name: "Marketing Specialist 2" },
+      ]
+    },
   ];
   return (
     <section id="team" className="bg-background py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-12 gap-12 mb-16 items-end">
+        <div className="grid lg:grid-cols-12 gap-12 mb-20 items-end">
           <div className="lg:col-span-7">
             <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> The Team
@@ -1002,24 +1047,44 @@ function Team() {
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-border border border-border rounded-sm overflow-hidden">
+        
+        <div className="flex flex-col gap-24">
           {team.map((t, i) => (
-            <div
-              key={t.n}
-              className="bg-background p-8 group hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 min-h-[280px] flex flex-col justify-between"
-            >
-              <Users className="!size-6 text-emerald-deep group-hover:text-accent transition-colors" />
-              <div>
-                <div className="font-display text-2xl leading-tight">{t.n}</div>
-                <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50 group-hover:text-ivory/60 mt-3">
-                  {t.c} Specialists · 7+ yrs avg
+            <div key={t.n}>
+              {/* Category Header */}
+              <div className="border-b border-border pb-6 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div className="flex items-center gap-6">
+                  <div className="font-mono text-sm text-emerald-deep/40">0{i + 1}</div>
+                  <h3 className="font-display text-3xl md:text-4xl text-emerald-deep">{t.n}</h3>
                 </div>
-                <div className="text-sm text-foreground/60 group-hover:text-ivory/70 mt-3">
-                  {t.e}
+                <div className="md:text-right">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
+                    {t.c} Specialists · 7+ yrs avg
+                  </div>
+                  <div className="text-sm text-foreground/60 mt-1">{t.e}</div>
                 </div>
-                <div className="text-[10px] mt-6 font-mono text-emerald-deep/40 group-hover:text-accent">
-                  0{i + 1} / 05
-                </div>
+              </div>
+
+              {/* Members Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
+                {t.members.map((m: any, idx) => (
+                  <div key={idx} className="flex flex-col gap-4 group">
+                    <div className="aspect-[4/5] bg-secondary rounded-sm overflow-hidden relative group-hover:opacity-90 transition-opacity">
+                      {m.photo ? (
+                        <img src={m.photo} alt={m.name} className="size-full object-cover" loading="lazy" />
+                      ) : (
+                        <div className="size-full flex flex-col items-center justify-center text-foreground/20 bg-emerald-soft/10">
+                          <Camera className="size-8 opacity-20 mb-2" />
+                          <span className="text-[9px] uppercase tracking-[0.2em] opacity-40">Photo pending</span>
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-display text-xl leading-tight text-foreground">{m.name}</div>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-deep/60 mt-1">{t.n}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
