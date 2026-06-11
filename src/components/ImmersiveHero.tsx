@@ -250,27 +250,6 @@ export default function ImmersiveHero() {
             </h1>
           </div>
 
-          <div className="lg:col-span-3 reveal reveal-delay-2 space-y-6">
-            <p className="text-ivory/75 text-base leading-relaxed text-pretty">
-              Marketing. Content. Branding. Technology. Business strategy. We turn visibility into
-              measurable growth.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <MorphCTA
-                href="#work"
-                label="View Our Work"
-                hoverLabel="Explore Case Studies"
-                icon={Play}
-                variant="primary"
-              />
-              <MorphCTA
-                href="#contact"
-                label="Book a Call"
-                hoverLabel="Free Discovery Call"
-                variant="outline"
-              />
-            </div>
-          </div>
         </div>
 
         {/* Stats strip */}

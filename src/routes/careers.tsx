@@ -18,6 +18,7 @@ import {
 import about from "@/assets/about.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import work2 from "@/assets/work-2.jpg";
+import logoImg from "@/assets/logo.png";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({
@@ -133,9 +134,8 @@ function CareersPage() {
     <main className="min-h-screen bg-background text-foreground">
       <header className="fixed top-0 inset-x-0 z-50 bg-[color:var(--emerald-deep)]/92 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-          <a href="/" className="flex items-baseline gap-1.5">
-            <span className="font-display text-2xl font-medium text-ivory tracking-tight">HabiGo</span>
-            <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
+          <a href="/" className="flex items-center">
+            <img src={logoImg} alt="HabiGo 360" className="h-32 w-auto" />
           </a>
           <nav className="hidden lg:flex items-center gap-9">
             {navItems.map((item) => {
@@ -205,7 +205,7 @@ function CareersPage() {
             })}
           </nav>
           <a
-            href="mailto:careers@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
+            href="mailto:admin@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
             className="hidden lg:inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold hover:bg-ivory transition-colors"
           >
             Apply Now <ArrowUpRight className="!size-3.5" />
@@ -231,7 +231,7 @@ function CareersPage() {
               </a>
             ))}
             <a
-              href="mailto:careers@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
+              href="mailto:admin@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
               onClick={() => setNavOpen(false)}
               className="inline-flex mt-4 items-center gap-2 px-5 py-3 rounded-full bg-accent text-emerald-deep font-semibold"
             >
@@ -390,10 +390,10 @@ function CareersPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="mailto:careers@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
+                href="mailto:admin@habigo360.com?subject=Career%20Application%20-%20HabiGo%20360"
                 className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-6 py-3 text-sm font-semibold text-ivory hover:bg-emerald-soft transition-colors"
               >
-                <Mail className="!size-4" /> careers@habigo360.com
+                <Mail className="!size-4" /> admin@habigo360.com
               </a>
               <a
                 href="/#contact"

@@ -52,7 +52,7 @@ new_submit = '''{formStatus === 'success' && (
             {formStatus === 'error' && (
               <div className=\"flex items-center gap-3 px-5 py-3 rounded-lg bg-red-500/10 text-red-600 text-sm\">
                 <svg className=\"!size-5 shrink-0\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z\" /></svg>
-                Something went wrong. Please email us directly at habigo360@gmail.com
+                Something went wrong. Please email us directly at admin@habigo360.com
               </div>
             )}
             <button

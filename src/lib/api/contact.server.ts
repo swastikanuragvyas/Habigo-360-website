@@ -19,8 +19,8 @@ export type ContactInput = z.infer<typeof contactSchema>;
 async function deliverNotification(data: ContactInput) {
   // Example: send email via Resend
   // const { error } = await resend.emails.send({
-  //   from: "HabiGo 360 <contact@habigo360.com>",
-  //   to: "habigo360@gmail.com",
+  //   from: "HabiGo 360 <admin@habigo360.com>",
+  //   to: "admin@habigo360.com",
   //   subject: `New inquiry from ${data.name}`,
   //   text: `Name: ${data.name}\nCompany: ${data.company}\nEmail: ${data.email}\nPhone: ${data.phone}\nIndustry: ${data.industry}\nService: ${data.service}\nBrief: ${data.brief}`,
   // });

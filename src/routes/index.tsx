@@ -48,6 +48,7 @@ import work5 from "@/assets/work-5.jpg";
 import about from "@/assets/about.jpg";
 import arpitImg from "@/assets/arpit.jpg";
 import dipanshuImg from "@/assets/dipanshu.jpg";
+import logoImg from "@/assets/logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -71,13 +72,11 @@ export const Route = createFileRoute("/")({
 
 export const NAV = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About" },
+  { id: "about", label: "About us" },
   { id: "services", label: "Services" },
+  { id: "work", label: "Our Work" },
   { id: "careers", label: "Careers", href: "/careers" },
-  { id: "results", label: "Results" },
-  { id: "clients", label: "Clients" },
-  { id: "team", label: "Team" },
-  { id: "contact", label: "Contact" },
+  { id: "contact", label: "Contact us" },
 ];
 
 export function useReveal() {
@@ -139,7 +138,6 @@ function HabiGoHome() {
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
       <ImmersiveHero />
       <ScrollProgress />
-      <DarkModeToggle />
       <SocialProofTicker />
       <TrustBar />
       <About />
@@ -151,7 +149,6 @@ function HabiGoHome() {
       <Gallery />
       <Process />
       <ImpactCounters />
-      <Team />
       <Clients />
       <Testimonials />
       <Contact />
@@ -190,9 +187,8 @@ export function Nav({
       }`}
     >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-        <a href="/" className="flex items-baseline gap-1.5">
-          <span className="font-display text-2xl font-medium text-ivory tracking-tight">HabiGo</span>
-          <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
+        <a href="/" className="flex items-center">
+          <img src={logoImg} alt="HabiGo 360" className="h-32 w-auto" />
         </a>
         <nav className="hidden lg:flex items-center gap-9">
           {NAV.map((n) => {
@@ -1092,13 +1088,15 @@ export function Contact() {
             <div className="mt-12 space-y-6">
               {[
                 { i: MessageCircle, l: "WhatsApp", v: "+91 89638 58888", href: "https://wa.me/918963858888" },
-                { i: MailIcon, l: "Email", v: "habigo360@gmail.com", href: "mailto:habigo360@gmail.com" },
+                { i: MailIcon, l: "Email", v: "admin@habigo360.com", href: "mailto:admin@habigo360.com" },
                 { i: Phone, l: "Phone", v: "+91 89638 58888", href: "tel:+918963858888" },
-                { i: MapPin, l: "Studio", v: "Jaipur · India", href: "https://maps.app.goo.gl/DWkbqDGGVGtJXyiF9" },
-              ].map((x) => (
-                <a
+                { i: MapPin, l: "Studio", v: "Jaipur", href: undefined },
+              ].map((x) => {
+                const Tag = x.href ? "a" : "div";
+                return (
+                <Tag
                   key={x.l}
-                  href={x.href ?? "#"}
+                  href={x.href ?? undefined}
                   target={x.href?.startsWith("http") ? "_blank" : undefined}
                   rel={x.href?.startsWith("http") ? "noreferrer" : undefined}
                   className="flex items-center gap-5 group"
@@ -1112,8 +1110,9 @@ export function Contact() {
                     </div>
                     <div className="text-base">{x.v}</div>
                   </div>
-                </a>
-              ))}
+                </Tag>
+                );
+              })}
             </div>
           </div>
 
@@ -1177,7 +1176,7 @@ export function Contact() {
             {formStatus === 'error' && (
               <div className="flex items-center gap-3 px-5 py-3 rounded-lg bg-red-500/10 text-red-600 text-sm">
                 <svg className="!size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Something went wrong. Please email us directly at habigo360@gmail.com
+                Something went wrong. Please email us directly at admin@habigo360.com
               </div>
             )}
             <button
@@ -1228,11 +1227,8 @@ export function Footer() {
     <footer className="bg-emerald-deep text-ivory border-t border-ivory/10">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-16 grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5">
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-display text-3xl font-medium">HabiGo</span>
-            <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">
-              360
-            </span>
+          <div className="flex items-center">
+            <img src={logoImg} alt="HabiGo 360" className="h-36 w-auto" />
           </div>
           <p className="mt-6 text-ivory/55 text-sm max-w-sm leading-relaxed">
             A creative growth agency for ambitious brands. Marketing, content, branding, technology
@@ -1278,12 +1274,10 @@ export function Footer() {
         <div className="lg:col-span-2">
           <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Contact</div>
           <ul className="space-y-3 text-sm text-ivory/75">
-            <li>habigo360@gmail.com</li>
+            <li>admin@habigo360.com</li>
             <li>+91 89638 58888</li>
             <li>
-              <a href="https://maps.app.goo.gl/DWkbqDGGVGtJXyiF9" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-                Jaipur · India
-              </a>
+              Jaipur
             </li>
           </ul>
         </div>
