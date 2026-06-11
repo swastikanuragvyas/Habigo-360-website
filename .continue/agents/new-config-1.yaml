@@ -1,0 +1,10 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: FreeLLMAPI
+    provider: openai
+    model: auto
+    apiBase: http://localhost:3001/v1
+    apiKey: freellmapi-3da8ebb957fd017dec502bd1cbc4e60155ae5dae6e8c635c

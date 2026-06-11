@@ -46,12 +46,17 @@ const openings = [
     team: "Content",
     type: "Full time",
     location: "Jaipur",
+<<<<<<< Updated upstream
     summary: "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
     questions: [
       "Which social media campaigns or pages have you managed before?",
       "How do you turn a brand brief into a monthly content calendar?",
       "Share one trend you would adapt for a premium hospitality or lifestyle brand.",
     ],
+=======
+    summary:
+      "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
+>>>>>>> Stashed changes
   },
   {
     title: "Performance Marketing Executive",
@@ -60,23 +65,23 @@ const openings = [
     location: "Jaipur",
     summary:
       "Manage paid campaigns, read numbers clearly and improve funnels with practical experiments.",
-    questions: [
-      "Which ad platforms have you worked with most?",
-      "Describe one campaign where you improved ROAS, CPL or conversions.",
-      "How do you decide when to scale, pause or change a campaign?",
-    ],
   },
   {
     title: "Video Editor and Motion Designer",
     team: "Creative",
     type: "Full time",
     location: "Jaipur",
+<<<<<<< Updated upstream
     summary: "Build reels, brand films and campaign edits that feel premium and move fast.",
     questions: [
       "Which editing and motion tools do you use confidently?",
       "Share links to reels, films or motion work that best represent your style.",
       "How do you approach pacing, music and typography for short-form videos?",
     ],
+=======
+    summary:
+      "Build reels, brand films and campaign edits that feel premium and move fast.",
+>>>>>>> Stashed changes
   },
 ];
 
@@ -516,29 +521,7 @@ function ApplicationDialog({
                 />
               </div>
 
-              <div className="space-y-5">
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
-                    Role Questions
-                  </div>
-                  <p className="mt-2 text-sm text-foreground/60">
-                    These questions change based on the role selected.
-                  </p>
-                </div>
-                {role.questions.map((question, index) => (
-                  <label key={question} className="block">
-                    <span className="text-sm font-medium text-foreground">
-                      {index + 1}. {question} <span className="text-emerald-deep">*</span>
-                    </span>
-                    <textarea
-                      name={`question_${index + 1}`}
-                      required
-                      rows={4}
-                      className="mt-3 w-full resize-y rounded-sm border border-emerald-deep/15 bg-ivory-warm px-4 py-3 text-sm outline-none transition-colors focus:border-emerald-deep"
-                    />
-                  </label>
-                ))}
-              </div>
+
 
               <div className="flex flex-wrap items-center justify-between gap-4 border-t border-emerald-deep/10 pt-6">
                 <p className="max-w-md text-xs leading-relaxed text-foreground/55">
