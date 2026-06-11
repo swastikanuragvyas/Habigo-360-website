@@ -25,6 +25,8 @@ import {
   Send,
   Sun,
   Moon,
+  Plus,
+  Minus,
 } from "lucide-react";
 
 import ImmersiveHero from "@/components/ImmersiveHero";
@@ -138,23 +140,131 @@ function HabiGoHome() {
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
       <ImmersiveHero />
       <ScrollProgress />
-      <SocialProofTicker />
-      <TrustBar />
+      <DarkModeToggle />
       <About />
-      <Founders />
       <Services />
-      <LivingPortfolio />
-      <SocialShowcase />
-      <ResultsDashboard />
-      <Gallery />
-      <Process />
       <ImpactCounters />
       <Clients />
+      <WhyChooseUs />
       <Testimonials />
+      <FAQs />
       <Contact />
       <Footer />
       <StickyCTA />
     </div>
+  );
+}
+
+function WhyChooseUs() {
+  const reasons = [
+    {
+      num: "01",
+      title: "Data-Driven Strategy",
+      desc: "Every creative decision is backed by analytics. We don't guess what works; we measure it.",
+    },
+    {
+      num: "02",
+      title: "In-House Specialists",
+      desc: "No outsourced generalists. You get direct access to our team of dedicated experts across all disciplines.",
+    },
+    {
+      num: "03",
+      title: "Transparent Reporting",
+      desc: "Real-time dashboards and weekly check-ins. You'll always know exactly where your budget is going and the return it generates.",
+    },
+    {
+      num: "04",
+      title: "Scalable Growth",
+      desc: "We build systems designed to scale with your ambition, ensuring sustainable long-term success.",
+    },
+  ];
+
+  return (
+    <section id="why-choose-us" className="bg-background py-28 lg:py-40 border-t border-border">
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
+        <div className="mb-16 max-w-3xl">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="w-10 h-px bg-emerald-deep/40" /> Why Choose Us
+          </span>
+          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
+            An agency built for <em className="italic text-emerald-deep">outcomes.</em>
+          </h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
+          {reasons.map((r, idx) => (
+            <div key={idx} className="bg-background p-10 lg:p-14 hover:bg-secondary/40 transition-colors">
+              <div className="font-mono text-sm text-accent mb-6">{r.num}</div>
+              <h3 className="font-display text-3xl mb-4">{r.title}</h3>
+              <p className="text-foreground/70 leading-relaxed max-w-md">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQs() {
+  const [open, setOpen] = useState<number | null>(0);
+  const faqs = [
+    {
+      q: "What is your typical project timeline?",
+      a: "Our typical onboarding and strategy phase takes 2-3 weeks, followed by immediate execution. Depending on the scope, a full brand overhaul can take 6-8 weeks, while performance marketing and content systems are deployed as ongoing monthly engagements.",
+    },
+    {
+      q: "Do you work with startups or only established brands?",
+      a: "We work with ambitious brands at all stages. Whether you're a funded startup needing a scalable growth system or an established enterprise looking to refresh your market presence, our strategies are tailored to your current scale.",
+    },
+    {
+      q: "How do you measure success and report ROI?",
+      a: "We establish clear KPIs (Key Performance Indicators) during discovery. For performance marketing, this means strict ROAS and CAC tracking. For brand and content, we measure reach, engagement rate, and brand sentiment, delivering comprehensive reports every month.",
+    },
+    {
+      q: "Can we hire you for just one service, like Social Media?",
+      a: "Absolutely. While our biggest successes come from our full-stack growth partnerships, we frequently engage with clients for specific disciplines like performance marketing, video production, or branding to fill internal gaps.",
+    },
+  ];
+
+  return (
+    <section id="faqs" className="bg-secondary/30 py-28 lg:py-40">
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-16">
+        <div className="lg:col-span-5">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="w-10 h-px bg-emerald-deep/40" /> FAQs
+          </span>
+          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
+            Common <em className="italic text-emerald-deep">questions.</em>
+          </h2>
+          <p className="mt-6 text-foreground/70 max-w-md">
+            Everything you need to know about how we work, what we charge, and what you can expect from a partnership with HabiGo 360.
+          </p>
+        </div>
+        <div className="lg:col-span-7 space-y-4">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="border border-border bg-background rounded-sm overflow-hidden">
+              <button
+                onClick={() => setOpen(open === idx ? null : idx)}
+                className="w-full flex items-center justify-between p-6 lg:p-8 text-left hover:bg-secondary/20 transition-colors"
+              >
+                <span className="font-display text-xl lg:text-2xl">{faq.q}</span>
+                <span className="text-emerald-deep shrink-0 ml-4">
+                  {open === idx ? <Minus className="!size-5" /> : <Plus className="!size-5" />}
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  open === idx ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="p-6 lg:p-8 pt-0 text-foreground/70 leading-relaxed">
+                  {faq.a}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -953,14 +1063,24 @@ function Team() {
 
 function Clients() {
   const logos = [
-    "Maison Lumière", "Olive & Ember", "Atelier Noir", "Verde Sanctuary",
-    "Ivory & Co.", "Aurora Rooms", "Mistral", "House of Saffron",
-    "Lush Stay", "North Cove", "Velvet Hour", "The Calico Co.",
+    { name: "Maison Lumière" },
+    { name: "Olive & Ember" },
+    { name: "Atelier Noir" },
+    { name: "Verde Sanctuary" },
+    { name: "Ivory & Co." },
+    { name: "Aurora Rooms" },
+    { name: "Mistral" },
+    { name: "House of Saffron" },
+    { name: "Lush Stay" },
+    { name: "North Cove" },
+    { name: "Velvet Hour" },
+    { name: "The Calico Co." },
   ];
+
   return (
-    <section id="clients" className="bg-emerald-deep text-ivory py-24 lg:py-32 border-t border-ivory/5">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+    <section id="clients" className="bg-emerald-deep text-ivory py-24 lg:py-32 border-t border-ivory/5 overflow-hidden">
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 mb-14">
+        <div className="text-center max-w-3xl mx-auto">
           <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">Clients</span>
           <h2 className="mt-6 font-display text-[clamp(1.75rem,3.5vw,3.5rem)] leading-[1.05] font-light">
             Trusted by brands we're proud to call <em className="italic text-accent">friends.</em>
@@ -970,21 +1090,31 @@ function Clients() {
           </p>
         </div>
       </div>
-      <div className="overflow-hidden border-y border-ivory/10 py-10">
-        <div className="flex gap-16 animate-marquee whitespace-nowrap">
-          {[...logos, ...logos].map((l, i) => (
-            <span key={i} className="font-display italic text-3xl text-ivory/40 hover:text-accent transition-colors">
-              {l}
-            </span>
+      
+      {/* Infinite slider row 1 */}
+      <div className="relative flex overflow-x-hidden border-y border-ivory/10">
+        <div className="py-10 flex gap-8 animate-marquee whitespace-nowrap min-w-full">
+          {[...logos, ...logos, ...logos].map((l, i) => (
+            <div key={i} className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0">
+               <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
+                 <Globe className="!size-4 text-accent" />
+               </div>
+               <span className="font-display text-xl text-ivory">{l.name}</span>
+            </div>
           ))}
         </div>
       </div>
-      <div className="overflow-hidden py-6">
-        <div className="flex gap-16 animate-marquee-slow whitespace-nowrap" style={{ animationDirection: "reverse" }}>
-          {[...logos.slice().reverse(), ...logos.slice().reverse()].map((l, i) => (
-            <span key={i} className="font-display italic text-2xl text-ivory/25">
-              {l}
-            </span>
+      
+      {/* Infinite slider row 2 - Reverse */}
+      <div className="relative flex overflow-x-hidden border-b border-ivory/10">
+        <div className="py-10 flex gap-8 animate-marquee-slow whitespace-nowrap min-w-full" style={{ animationDirection: "reverse" }}>
+          {[...logos.slice().reverse(), ...logos.slice().reverse(), ...logos.slice().reverse()].map((l, i) => (
+            <div key={i} className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0">
+               <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
+                 <Globe className="!size-4 text-accent" />
+               </div>
+               <span className="font-display text-xl text-ivory">{l.name}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -1146,13 +1276,14 @@ export function Contact() {
                 <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                   Services Required
                 </label>
-                <select name="service" className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors">
-                  <option>Full-stack growth partnership</option>
-                  <option>Branding & identity</option>
-                  <option>Performance marketing</option>
-                  <option>Content & production</option>
-                  <option>Website development</option>
-                  <option>Other / not sure yet</option>
+                <select name="service" required className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors">
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="Full-stack growth partnership">Full-stack growth partnership</option>
+                  <option value="Branding & identity">Branding & identity</option>
+                  <option value="Performance marketing">Performance marketing</option>
+                  <option value="Content & production">Content & production</option>
+                  <option value="Website development">Website development</option>
+                  <option value="Other / not sure yet">Other / not sure yet</option>
                 </select>
               </div>
             </div>
@@ -1201,11 +1332,13 @@ function Field({
   placeholder,
   type = "text",
   name,
+  required = true,
 }: {
   label: string;
   placeholder?: string;
   type?: string;
   name?: string;
+  required?: boolean;
 }) {
   return (
     <div>
@@ -1216,6 +1349,7 @@ function Field({
         type={type}
         placeholder={placeholder}
         name={name}
+        required={required}
         className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors"
       />
     </div>
