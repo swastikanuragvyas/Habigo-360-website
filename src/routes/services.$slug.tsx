@@ -10,9 +10,7 @@ export const Route = createFileRoute("/services/$slug")({
     return {
       meta: [
         {
-          title: service
-            ? `${service.title} — HabiGo 360`
-            : "Service Not Found — HabiGo 360",
+          title: service ? `${service.title} — HabiGo 360` : "Service Not Found — HabiGo 360",
         },
         {
           name: "description",
@@ -86,11 +84,7 @@ function ServiceDetailPage() {
 }
 
 /* ─── Hero ─── */
-function ServiceHero({
-  service,
-}: {
-  service: (typeof SERVICE_PAGES)[string];
-}) {
+function ServiceHero({ service }: { service: (typeof SERVICE_PAGES)[string] }) {
   const hero = useReveal();
   return (
     <section className="relative bg-[color:var(--emerald-deep)] text-ivory overflow-hidden">
@@ -261,9 +255,7 @@ function Approach({ approach, title }: { approach: string; title: string }) {
                   <div className="hidden md:block shrink-0 pt-1">
                     <div className="w-8 h-px bg-accent/40 mt-3" />
                   </div>
-                  <p className="text-ivory/75 text-base lg:text-[17px] leading-relaxed">
-                    {p}
-                  </p>
+                  <p className="text-ivory/75 text-base lg:text-[17px] leading-relaxed">{p}</p>
                 </div>
               ))}
             </div>
@@ -316,12 +308,11 @@ function ServiceCTA({ title }: { title: string }) {
         className={`max-w-[1500px] mx-auto px-6 lg:px-10 text-center transition-all duration-1000 ${reveal.shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
         <h2 className="font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-          Ready to transform your{" "}
-          <em className="italic">{title.toLowerCase()}?</em>
+          Ready to transform your <em className="italic">{title.toLowerCase()}?</em>
         </h2>
         <p className="mt-6 text-emerald-deep/70 text-[15px] max-w-lg mx-auto leading-relaxed">
-          Tell us about your brand. We'll respond within one working day with a
-          perspective — not a pitch deck.
+          Tell us about your brand. We'll respond within one working day with a perspective — not a
+          pitch deck.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
           <a

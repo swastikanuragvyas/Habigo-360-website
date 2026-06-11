@@ -31,8 +31,7 @@ export const Route = createFileRoute("/careers")({
       { property: "og:title", content: "Careers at HabiGo 360" },
       {
         property: "og:description",
-        content:
-          "Open roles, hiring process and culture at HabiGo 360, a creative growth agency.",
+        content: "Open roles, hiring process and culture at HabiGo 360, a creative growth agency.",
       },
     ],
     links: [{ rel: "canonical", href: "/careers" }],
@@ -46,8 +45,7 @@ const openings = [
     team: "Content",
     type: "Full time",
     location: "Jaipur",
-    summary:
-      "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
+    summary: "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
     questions: [
       "Which social media campaigns or pages have you managed before?",
       "How do you turn a brand brief into a monthly content calendar?",
@@ -72,8 +70,7 @@ const openings = [
     team: "Creative",
     type: "Full time",
     location: "Jaipur",
-    summary:
-      "Build reels, brand films and campaign edits that feel premium and move fast.",
+    summary: "Build reels, brand films and campaign edits that feel premium and move fast.",
     questions: [
       "Which editing and motion tools do you use confidently?",
       "Share links to reels, films or motion work that best represent your style.",
@@ -83,9 +80,21 @@ const openings = [
 ];
 
 const perks = [
-  { icon: Sparkles, title: "Creative ownership", text: "Own ideas from first brief to final launch." },
-  { icon: Target, title: "Outcome led work", text: "Every project connects creative taste with measurable growth." },
-  { icon: Users, title: "Small senior team", text: "Work closely with founders, designers, marketers and operators." },
+  {
+    icon: Sparkles,
+    title: "Creative ownership",
+    text: "Own ideas from first brief to final launch.",
+  },
+  {
+    icon: Target,
+    title: "Outcome led work",
+    text: "Every project connects creative taste with measurable growth.",
+  },
+  {
+    icon: Users,
+    title: "Small senior team",
+    text: "Work closely with founders, designers, marketers and operators.",
+  },
 ];
 
 const navItems = [
@@ -134,8 +143,12 @@ function CareersPage() {
       <header className="fixed top-0 inset-x-0 z-50 bg-[color:var(--emerald-deep)]/92 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           <a href="/" className="flex items-baseline gap-1.5">
-            <span className="font-display text-2xl font-medium text-ivory tracking-tight">HabiGo</span>
-            <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">360</span>
+            <span className="font-display text-2xl font-medium text-ivory tracking-tight">
+              HabiGo
+            </span>
+            <span className="text-[10px] font-medium tracking-[0.25em] text-accent uppercase">
+              360
+            </span>
           </a>
           <nav className="hidden lg:flex items-center gap-9">
             {navItems.map((item) => {
@@ -162,7 +175,12 @@ function CareersPage() {
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
                       </svg>
                     </a>
                     <div
@@ -183,7 +201,10 @@ function CareersPage() {
                           </a>
                         ))}
                         <div className="border-t border-ivory/10 mt-2 pt-2">
-                          <a href="/services" className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors">
+                          <a
+                            href="/services"
+                            className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
+                          >
                             View All Services →
                           </a>
                         </div>
@@ -245,7 +266,10 @@ function CareersPage() {
         <img src={hero2} alt="" className="absolute inset-0 size-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-deep/85 via-emerald-deep/70 to-emerald-deep" />
         <div className="relative max-w-[1500px] mx-auto px-6 lg:px-10 pt-36 lg:pt-44 pb-20 min-h-[82vh] flex flex-col justify-end">
-          <a href="/" className="mb-10 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-ivory/65 hover:text-accent transition-colors">
+          <a
+            href="/"
+            className="mb-10 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-ivory/65 hover:text-accent transition-colors"
+          >
             <ArrowLeft className="!size-4" /> Back Home
           </a>
           <div className="max-w-5xl">
@@ -344,19 +368,21 @@ function CareersPage() {
               Simple, respectful and focused on real work.
             </h2>
             <div className="mt-10 space-y-6">
-              {["Intro call", "Portfolio or task review", "Final conversation", "Offer"].map((step, index) => (
-                <div key={step} className="flex gap-5">
-                  <div className="mt-1 flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-emerald-deep">
-                    {index + 1}
+              {["Intro call", "Portfolio or task review", "Final conversation", "Offer"].map(
+                (step, index) => (
+                  <div key={step} className="flex gap-5">
+                    <div className="mt-1 flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-emerald-deep">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h3 className="font-display text-2xl">{step}</h3>
+                      <p className="mt-2 text-sm text-ivory/62 leading-relaxed">
+                        We keep each stage clear, useful and quick so you know where things stand.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display text-2xl">{step}</h3>
-                    <p className="mt-2 text-sm text-ivory/62 leading-relaxed">
-                      We keep each stage clear, useful and quick so you know where things stand.
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-emerald-soft">
@@ -385,8 +411,8 @@ function CareersPage() {
               Send us your profile.
             </h2>
             <p className="mt-5 text-foreground/65 leading-relaxed max-w-2xl">
-              Share your resume, portfolio, Instagram, LinkedIn or any work that shows how you think.
-              Mention the role you are applying for and what kind of work excites you.
+              Share your resume, portfolio, Instagram, LinkedIn or any work that shows how you
+              think. Mention the role you are applying for and what kind of work excites you.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -456,7 +482,9 @@ function ApplicationDialog({
                 <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
                   Demo Submitted
                 </div>
-                <h3 className="mt-4 font-display text-3xl lg:text-4xl">Application preview received.</h3>
+                <h3 className="mt-4 font-display text-3xl lg:text-4xl">
+                  Application preview received.
+                </h3>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/62">
                   This is a demo confirmation. Once you approve the questions, we can connect this
                   form to email, Google Sheets, a CRM or your backend.
@@ -520,8 +548,8 @@ function ApplicationDialog({
 
               <div className="flex flex-wrap items-center justify-between gap-4 border-t border-emerald-deep/10 pt-6">
                 <p className="max-w-md text-xs leading-relaxed text-foreground/55">
-                  Demo form only. We can connect this to email, Google Sheets, a CRM or a backend once
-                  the final questions are approved.
+                  Demo form only. We can connect this to email, Google Sheets, a CRM or a backend
+                  once the final questions are approved.
                 </p>
                 <button
                   type="submit"

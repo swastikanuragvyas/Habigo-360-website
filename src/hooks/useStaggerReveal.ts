@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 
-
 interface StaggerRevealOptions {
   /** IntersectionObserver threshold (0-1) */
   threshold?: number;

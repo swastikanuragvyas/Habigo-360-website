@@ -97,9 +97,7 @@ export function SocialProofTicker() {
           <div
             key={idx}
             className={`absolute inset-0 flex items-center gap-3 bg-emerald-deep/90 backdrop-blur-xl border border-ivory/10 rounded-lg px-4 py-3 shadow-2xl transition-all duration-500 ${
-              idx === activeIdx
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2"
+              idx === activeIdx ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
             }`}
           >
             <div className="shrink-0 size-8 rounded-full bg-accent/20 flex items-center justify-center">
@@ -109,9 +107,7 @@ export function SocialProofTicker() {
               <div className="text-[13px] text-ivory truncate font-medium">
                 <span className="text-accent">{item.name}</span> {item.action}
               </div>
-              <div className="text-[10px] text-ivory/50 uppercase tracking-wider">
-                {item.time}
-              </div>
+              <div className="text-[10px] text-ivory/50 uppercase tracking-wider">{item.time}</div>
             </div>
           </div>
         ))}
@@ -134,13 +130,7 @@ export function ScrollProgress() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <div
-      className="scroll-progress"
-      style={{ width: `${progress}%` }}
-      aria-hidden="true"
-    />
-  );
+  return <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />;
 }
 
 /* ─── Dark Mode Toggle with Spring-like Animation ─── */

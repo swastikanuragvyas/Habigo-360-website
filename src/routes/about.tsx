@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Nav, Footer, Contact, Founders, StickyCTA } from "./index";
+import { Nav, Footer, Founders, StickyCTA } from "./index";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -21,12 +21,11 @@ function AboutPage() {
   return (
     <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-accent selection:text-emerald-deep">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
-      
+
       <main>
         <Hero />
         <VisionMission />
         <Founders />
-        <Contact />
       </main>
 
       <Footer />
@@ -44,7 +43,8 @@ function Hero() {
           We build <em className="italic text-accent">enduring</em> brands.
         </h1>
         <p className="mt-8 text-ivory/70 max-w-2xl mx-auto text-lg leading-relaxed">
-          HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through marketing, content, branding, technology, and business strategy.
+          HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through
+          marketing, content, branding, technology, and business strategy.
         </p>
       </div>
     </section>
@@ -61,10 +61,14 @@ function VisionMission() {
               <span className="w-10 h-px bg-emerald-deep/40" /> Our Vision
             </span>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight text-balance">
-              To be the benchmark for <em className="italic text-emerald-deep">creative excellence</em>.
+              To be the benchmark for{" "}
+              <em className="italic text-emerald-deep">creative excellence</em>.
             </h2>
             <p className="mt-8 text-foreground/70 leading-relaxed text-[15px]">
-              We see a future where brands don't just compete on price or utility, but on meaning. Our vision is to elevate the standard of brand communication, making every interaction an opportunity to build trust and inspire loyalty. We want to be the partner that the world's most ambitious companies turn to when they are ready to leave a legacy.
+              We see a future where brands don't just compete on price or utility, but on meaning.
+              Our vision is to elevate the standard of brand communication, making every interaction
+              an opportunity to build trust and inspire loyalty. We want to be the partner that the
+              world's most ambitious companies turn to when they are ready to leave a legacy.
             </p>
           </div>
           <div>
@@ -75,7 +79,10 @@ function VisionMission() {
               To engineer <em className="italic text-emerald-deep">growth</em> through craft.
             </h2>
             <p className="mt-8 text-foreground/70 leading-relaxed text-[15px]">
-              Our mission is to bridge the gap between stunning creative and measurable business results. We exist to help our partners navigate the noise of modern markets with clarity, precision, and soul. By integrating strategy, design, and performance, we build growth engines that are as effective as they are beautiful.
+              Our mission is to bridge the gap between stunning creative and measurable business
+              results. We exist to help our partners navigate the noise of modern markets with
+              clarity, precision, and soul. By integrating strategy, design, and performance, we
+              build growth engines that are as effective as they are beautiful.
             </p>
           </div>
         </div>

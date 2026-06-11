@@ -3,7 +3,6 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
-  useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -93,11 +92,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "HabiGo 360 — Seen. Remembered. Trusted." },
-      { name: "description", content: "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise." },
-      { property: "og:description", content: "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise." },
-      { name: "twitter:description", content: "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4355f667-c481-4806-a3da-c9da8cb8b9c1/id-preview-930e6780--d03e3ad0-f8e3-475c-b667-171874f39086.lovable.app-1780922218620.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4355f667-c481-4806-a3da-c9da8cb8b9c1/id-preview-930e6780--d03e3ad0-f8e3-475c-b667-171874f39086.lovable.app-1780922218620.png" },
+      {
+        name: "description",
+        content:
+          "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise.",
+      },
+      {
+        property: "og:description",
+        content:
+          "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Elevate Marketing Hub is a premium website showcasing a full-service marketing and creative agency's expertise.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4355f667-c481-4806-a3da-c9da8cb8b9c1/id-preview-930e6780--d03e3ad0-f8e3-475c-b667-171874f39086.lovable.app-1780922218620.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4355f667-c481-4806-a3da-c9da8cb8b9c1/id-preview-930e6780--d03e3ad0-f8e3-475c-b667-171874f39086.lovable.app-1780922218620.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -134,7 +153,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );

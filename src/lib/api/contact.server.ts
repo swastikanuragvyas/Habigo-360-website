@@ -37,7 +37,10 @@ export const submitContact = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const error = await deliverNotification(data);
     if (error) {
-      return { success: false, error: "Failed to send message. Please try again or email us directly." };
+      return {
+        success: false,
+        error: "Failed to send message. Please try again or email us directly.",
+      };
     }
     return { success: true, error: null };
   });

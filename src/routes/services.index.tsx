@@ -45,7 +45,9 @@ function Hero() {
     <section className="bg-emerald-deep text-ivory pt-40 pb-28 lg:pt-52 lg:pb-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.12),_transparent_55%)]" />
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 text-center relative z-10">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">Our Capabilities</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+          Our Capabilities
+        </span>
         <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,6rem)] leading-[1.02] font-light">
           Everything you need to <em className="italic text-accent">grow.</em>
         </h1>
@@ -68,8 +70,18 @@ function Hero() {
 
 function ClientsMarquee() {
   const clients = [
-    "Hyatt", "Marriott", "Radisson", "Taj", "Oberoi", "ITC Hotels",
-    "Leela", "Hilton", "Accor", "Four Seasons", "JW Marriott", "Westin",
+    "Hyatt",
+    "Marriott",
+    "Radisson",
+    "Taj",
+    "Oberoi",
+    "ITC Hotels",
+    "Leela",
+    "Hilton",
+    "Accor",
+    "Four Seasons",
+    "JW Marriott",
+    "Westin",
   ];
 
   return (
@@ -81,14 +93,17 @@ function ClientsMarquee() {
       </div>
       <div className="relative flex w-full overflow-hidden">
         <div className="marquee-track flex whitespace-nowrap items-center">
-          {clients.concat(clients).concat(clients).map((client, i) => (
-            <div
-              key={i}
-              className="mx-14 font-display text-2xl lg:text-4xl text-foreground/20 font-light uppercase tracking-wider hover:text-emerald-deep/60 transition-colors duration-500 cursor-default"
-            >
-              {client}
-            </div>
-          ))}
+          {clients
+            .concat(clients)
+            .concat(clients)
+            .map((client, i) => (
+              <div
+                key={i}
+                className="mx-14 font-display text-2xl lg:text-4xl text-foreground/20 font-light uppercase tracking-wider hover:text-emerald-deep/60 transition-colors duration-500 cursor-default"
+              >
+                {client}
+              </div>
+            ))}
         </div>
       </div>
       <style
@@ -120,8 +135,7 @@ function AllServices() {
             <span className="w-10 h-px bg-emerald-deep/40" /> What We Do
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
-            Twelve disciplines.{" "}
-            <em className="italic text-emerald-deep">One growth engine.</em>
+            Twelve disciplines. <em className="italic text-emerald-deep">One growth engine.</em>
           </h2>
         </div>
 
@@ -139,9 +153,7 @@ function AllServices() {
                 </span>
               </div>
               <div className="mt-12">
-                <h3 className="font-display text-2xl lg:text-3xl leading-tight mb-3">
-                  {s.t}
-                </h3>
+                <h3 className="font-display text-2xl lg:text-3xl leading-tight mb-3">{s.t}</h3>
                 <p className="text-sm text-foreground/65 group-hover:text-ivory/70 leading-relaxed">
                   {s.d}
                 </p>
@@ -161,18 +173,45 @@ function OurWork() {
   const { ref, shown } = useReveal();
 
   const projects = [
-    { title: "Radisson Blu Rebrand", category: "Branding & Identity", desc: "Complete brand overhaul driving 42% increase in direct bookings." },
-    { title: "Taj Social Launch", category: "Social Media Marketing", desc: "0 to 150K followers in 6 months with a retention-first strategy." },
-    { title: "Oberoi Campaign Film", category: "Brand Films", desc: "Cinematic brand film that earned 2.4M views organically." },
-    { title: "Leela Performance Overhaul", category: "Performance Marketing", desc: "Slashed CPA by 58% while scaling spend 3x." },
-    { title: "ITC Website Redesign", category: "Website Development", desc: "Editorial design with 94 Lighthouse score and 3.2x conversion lift." },
-    { title: "Hyatt Event Series", category: "Event Curation", desc: "Quarterly thought-leadership dinners generating $2.1M in pipeline." },
+    {
+      title: "Radisson Blu Rebrand",
+      category: "Branding & Identity",
+      desc: "Complete brand overhaul driving 42% increase in direct bookings.",
+    },
+    {
+      title: "Taj Social Launch",
+      category: "Social Media Marketing",
+      desc: "0 to 150K followers in 6 months with a retention-first strategy.",
+    },
+    {
+      title: "Oberoi Campaign Film",
+      category: "Brand Films",
+      desc: "Cinematic brand film that earned 2.4M views organically.",
+    },
+    {
+      title: "Leela Performance Overhaul",
+      category: "Performance Marketing",
+      desc: "Slashed CPA by 58% while scaling spend 3x.",
+    },
+    {
+      title: "ITC Website Redesign",
+      category: "Website Development",
+      desc: "Editorial design with 94 Lighthouse score and 3.2x conversion lift.",
+    },
+    {
+      title: "Hyatt Event Series",
+      category: "Event Curation",
+      desc: "Quarterly thought-leadership dinners generating $2.1M in pipeline.",
+    },
   ];
 
   return (
     <section className="bg-emerald-deep text-ivory py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div ref={ref as React.RefObject<HTMLDivElement>} className={`mb-16 ${shown ? "reveal" : "opacity-0"}`}>
+        <div
+          ref={ref as React.RefObject<HTMLDivElement>}
+          className={`mb-16 ${shown ? "reveal" : "opacity-0"}`}
+        >
           <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
             <span className="w-10 h-px bg-ivory/30" /> Portfolio
           </span>
@@ -190,7 +229,16 @@ function OurWork() {
   );
 }
 
-function WorkCard({ project, idx }: { project: any; idx: number }) {
+interface WorkCardProps {
+  project: {
+    category: string;
+    title: string;
+    desc: string;
+  };
+  idx: number;
+}
+
+function WorkCard({ project, idx }: WorkCardProps) {
   const { ref, shown } = useReveal();
   return (
     <article
@@ -198,8 +246,12 @@ function WorkCard({ project, idx }: { project: any; idx: number }) {
       className={`group border border-ivory/10 p-8 hover:border-accent/40 transition-all duration-700 cursor-pointer ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       style={{ transitionDelay: `${idx * 120}ms` }}
     >
-      <div className="text-[10px] uppercase tracking-[0.22em] text-accent/70 mb-6">{project.category}</div>
-      <h3 className="font-display text-2xl lg:text-3xl mb-4 group-hover:text-accent transition-colors">{project.title}</h3>
+      <div className="text-[10px] uppercase tracking-[0.22em] text-accent/70 mb-6">
+        {project.category}
+      </div>
+      <h3 className="font-display text-2xl lg:text-3xl mb-4 group-hover:text-accent transition-colors">
+        {project.title}
+      </h3>
       <p className="text-ivory/60 text-sm leading-relaxed">{project.desc}</p>
       <ArrowUpRight className="mt-8 !size-5 text-ivory/30 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
     </article>
@@ -211,17 +263,38 @@ function WorkCard({ project, idx }: { project: any; idx: number }) {
 function Process() {
   const { ref, shown } = useReveal();
   const steps = [
-    { num: "01", title: "Discovery & Audit", desc: "We strip your brand down to the studs. Understanding your unit economics, market positioning, and where the actual growth leverage lies." },
-    { num: "02", title: "Strategic Architecture", desc: "We don't guess. We map out a bespoke strategy across creative, media, and technology to ensure every dollar works efficiently." },
-    { num: "03", title: "Execution & Craft", desc: "Our in-house specialists take over. From cinematic brand films to razor-sharp ad copy, we produce assets that stop the scroll." },
-    { num: "04", title: "Optimization & Scale", desc: "Launch is just the beginning. We continuously test, iterate, and scale the winners to turn your brand into a compounding growth engine." },
+    {
+      num: "01",
+      title: "Discovery & Audit",
+      desc: "We strip your brand down to the studs. Understanding your unit economics, market positioning, and where the actual growth leverage lies.",
+    },
+    {
+      num: "02",
+      title: "Strategic Architecture",
+      desc: "We don't guess. We map out a bespoke strategy across creative, media, and technology to ensure every dollar works efficiently.",
+    },
+    {
+      num: "03",
+      title: "Execution & Craft",
+      desc: "Our in-house specialists take over. From cinematic brand films to razor-sharp ad copy, we produce assets that stop the scroll.",
+    },
+    {
+      num: "04",
+      title: "Optimization & Scale",
+      desc: "Launch is just the beginning. We continuously test, iterate, and scale the winners to turn your brand into a compounding growth engine.",
+    },
   ];
 
   return (
     <section className="bg-background py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div ref={ref as React.RefObject<HTMLDivElement>} className={`text-center mb-20 ${shown ? "reveal" : "opacity-0"}`}>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">Our Process</span>
+        <div
+          ref={ref as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-20 ${shown ? "reveal" : "opacity-0"}`}
+        >
+          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">
+            Our Process
+          </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
             How we <em className="italic text-emerald-deep">deliver.</em>
           </h2>
@@ -236,7 +309,16 @@ function Process() {
   );
 }
 
-function ProcessCard({ step, idx }: { step: any; idx: number }) {
+interface ProcessCardProps {
+  step: {
+    num: string;
+    title: string;
+    desc: string;
+  };
+  idx: number;
+}
+
+function ProcessCard({ step, idx }: ProcessCardProps) {
   const { ref, shown } = useReveal();
   return (
     <div
@@ -250,4 +332,3 @@ function ProcessCard({ step, idx }: { step: any; idx: number }) {
     </div>
   );
 }
-

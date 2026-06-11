@@ -25,7 +25,11 @@ function FloatingParticles() {
             left: p.left,
             animation: `${p.anim} 20s ease-in-out infinite`, // Slowed from 12s to 20s
             animationDelay: p.delay,
-            fontSize: p.size.includes("2xl") ? "1.5rem" : p.size.includes("xl") ? "1.25rem" : "1.75rem",
+            fontSize: p.size.includes("2xl")
+              ? "1.5rem"
+              : p.size.includes("xl")
+                ? "1.25rem"
+                : "1.75rem",
           }}
         >
           {p.icon}
@@ -36,7 +40,13 @@ function FloatingParticles() {
 }
 
 /* ─── Staggered Typewriter (per-word, single RAF) ─── */
-function StaggeredTypewriter({ phrases, className = "" }: { phrases: string[]; className?: string }) {
+function StaggeredTypewriter({
+  phrases,
+  className = "",
+}: {
+  phrases: string[];
+  className?: string;
+}) {
   const [visibleWords, setVisibleWords] = useState<number[]>([]);
   const [done, setDone] = useState(false);
   const mountedRef = useRef(true);
@@ -120,17 +130,17 @@ function MorphCTA({
   icon?: typeof ArrowUpRight;
   variant?: "primary" | "outline";
 }) {
-  const base = "inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-500 relative overflow-hidden group";
+  const base =
+    "inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-500 relative overflow-hidden group";
   const primaryStyles = "bg-ivory text-emerald-deep hover:bg-accent";
   const outlineStyles = "border border-ivory/30 text-ivory hover:border-accent";
 
   return (
-    <a
-      href={href}
-      className={`${base} ${variant === "primary" ? primaryStyles : outlineStyles}`}
-    >
+    <a href={href} className={`${base} ${variant === "primary" ? primaryStyles : outlineStyles}`}>
       <span className="default-text flex items-center gap-2">
-        {Icon && <Icon className="!size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
+        {Icon && (
+          <Icon className="!size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        )}
         {label}
       </span>
       <span className="hover-text flex items-center gap-2">
@@ -142,7 +152,15 @@ function MorphCTA({
 }
 
 /* ─── Counter with animated reveal ─── */
-function Counter({ to, suffix = "", duration = 1800 }: { to: number; suffix?: string; duration?: number }) {
+function Counter({
+  to,
+  suffix = "",
+  duration = 1800,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
   const [n, setN] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -151,7 +169,12 @@ function Counter({ to, suffix = "", duration = 1800 }: { to: number; suffix?: st
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setShown(true); io.disconnect(); } },
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
       { threshold: 0.3 },
     );
     io.observe(el);
@@ -174,7 +197,8 @@ function Counter({ to, suffix = "", duration = 1800 }: { to: number; suffix?: st
 
   return (
     <span ref={ref}>
-      {n}{suffix}
+      {n}
+      {suffix}
     </span>
   );
 }

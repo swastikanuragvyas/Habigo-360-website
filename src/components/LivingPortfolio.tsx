@@ -14,16 +14,22 @@ const PROJECTS = [
     tag: "Hospitality / Branding",
     title: "Maison Lumière",
     meta: "+312% direct bookings",
-    description: "Complete brand overhaul for a luxury boutique hotel chain. Identity system, website, social campaign and OTA optimisation working as one motion.",
+    description:
+      "Complete brand overhaul for a luxury boutique hotel chain. Identity system, website, social campaign and OTA optimisation working as one motion.",
     category: "branding",
-    results: ["312% direct booking increase", "4.8x ROAS on launch campaign", "94 Lighthouse score"],
+    results: [
+      "312% direct booking increase",
+      "4.8x ROAS on launch campaign",
+      "94 Lighthouse score",
+    ],
   },
   {
     img: work2,
     tag: "F&B / Content",
     title: "Olive & Ember",
     meta: "8.4M organic reach",
-    description: "Always-on content ecosystem for a premium restaurant group. Editorial calendars, reel production and influencer seeding that drove 8.4M organic impressions.",
+    description:
+      "Always-on content ecosystem for a premium restaurant group. Editorial calendars, reel production and influencer seeding that drove 8.4M organic impressions.",
     category: "content",
     results: ["8.4M organic reach", "6.2% engagement rate", "120+ pieces/month"],
   },
@@ -32,7 +38,8 @@ const PROJECTS = [
     tag: "Fashion / Campaign",
     title: "Atelier Noir",
     meta: "5.2x ROAS · 90 days",
-    description: "Full-funnel performance campaign for a direct-to-consumer fashion label. Creative production, audience strategy and conversion optimisation.",
+    description:
+      "Full-funnel performance campaign for a direct-to-consumer fashion label. Creative production, audience strategy and conversion optimisation.",
     category: "performance",
     results: ["5.2x ROAS", "38% CVR lift", "₹12L+ revenue in 90 days"],
   },
@@ -41,7 +48,8 @@ const PROJECTS = [
     tag: "Resort / Film",
     title: "Verde Sanctuary",
     meta: "Brand film + drone series",
-    description: "Cinematic brand film and aerial photography series for a wellness resort. Pre-production through post, delivered across social, web and OTA.",
+    description:
+      "Cinematic brand film and aerial photography series for a wellness resort. Pre-production through post, delivered across social, web and OTA.",
     category: "film",
     results: ["82% avg. watch time", "2.4M organic views", "35+ deliverables"],
   },
@@ -50,7 +58,8 @@ const PROJECTS = [
     tag: "Identity System",
     title: "Ivory & Co.",
     meta: "Full visual rebuild",
-    description: "End-to-end brand identity for a luxury home fragrance label. Logo system, packaging, guidelines and digital presence.",
+    description:
+      "End-to-end brand identity for a luxury home fragrance label. Logo system, packaging, guidelines and digital presence.",
     category: "branding",
     results: ["6-week turnaround", "94% client satisfaction", "Scalable system"],
   },
@@ -59,7 +68,8 @@ const PROJECTS = [
     tag: "Social / Reel Strategy",
     title: "Aurora Rooms",
     meta: "1.2M plays in 7 days",
-    description: "Short-form content strategy for a boutique stay brand. Viral reel production, trend adaptation and community growth.",
+    description:
+      "Short-form content strategy for a boutique stay brand. Viral reel production, trend adaptation and community growth.",
     category: "content",
     results: ["1.2M plays", "92% completion rate", "15K new followers"],
   },
@@ -107,7 +117,10 @@ export default function LivingPortfolio() {
   return (
     <section id="work" className="bg-emerald-deep text-ivory py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div ref={ref as React.RefObject<HTMLDivElement>} className={`flex items-end justify-between flex-wrap gap-6 mb-16 ${shown ? "reveal" : "opacity-0"}`}>
+        <div
+          ref={ref as React.RefObject<HTMLDivElement>}
+          className={`flex items-end justify-between flex-wrap gap-6 mb-16 ${shown ? "reveal" : "opacity-0"}`}
+        >
           <div>
             <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
               <span className="w-10 h-px bg-ivory/30" /> Selected Work
@@ -167,7 +180,9 @@ export default function LivingPortfolio() {
                     {project.tag}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8">
-                    <h3 className="font-display text-2xl lg:text-3xl text-ivory">{project.title}</h3>
+                    <h3 className="font-display text-2xl lg:text-3xl text-ivory">
+                      {project.title}
+                    </h3>
                     <div className="text-sm text-accent/80 mt-2 font-semibold">{project.meta}</div>
                   </div>
                   <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/40 transition-colors duration-500 flex items-center justify-center">
@@ -253,7 +268,9 @@ export default function LivingPortfolio() {
                   {currentProject.description}
                 </p>
                 <div className="mt-6 space-y-3">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">Key Results</div>
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
+                    Key Results
+                  </div>
                   {currentProject.results.map((r, i) => (
                     <div key={i} className="flex items-center gap-3 text-sm">
                       <span className="size-1.5 rounded-full bg-accent shrink-0" />
@@ -275,7 +292,7 @@ export default function LivingPortfolio() {
               <button
                 onClick={() =>
                   setLightbox((prev) =>
-                    prev !== null ? (prev > 0 ? prev - 1 : filtered.length - 1) : 0
+                    prev !== null ? (prev > 0 ? prev - 1 : filtered.length - 1) : 0,
                   )
                 }
                 className="pointer-events-auto size-10 rounded-full bg-ivory/90 text-emerald-deep flex items-center justify-center hover:bg-accent transition-colors"
@@ -286,7 +303,7 @@ export default function LivingPortfolio() {
               <button
                 onClick={() =>
                   setLightbox((prev) =>
-                    prev !== null ? (prev < filtered.length - 1 ? prev + 1 : 0) : 0
+                    prev !== null ? (prev < filtered.length - 1 ? prev + 1 : 0) : 0,
                   )
                 }
                 className="pointer-events-auto size-10 rounded-full bg-ivory/90 text-emerald-deep flex items-center justify-center hover:bg-accent transition-colors"
