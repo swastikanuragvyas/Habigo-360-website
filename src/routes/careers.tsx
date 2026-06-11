@@ -46,17 +46,12 @@ const openings = [
     team: "Content",
     type: "Full time",
     location: "Jaipur",
-<<<<<<< Updated upstream
     summary: "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
     questions: [
       "Which social media campaigns or pages have you managed before?",
       "How do you turn a brand brief into a monthly content calendar?",
       "Share one trend you would adapt for a premium hospitality or lifestyle brand.",
     ],
-=======
-    summary:
-      "Plan content calendars, decode trends and turn brand goals into sharp social ideas.",
->>>>>>> Stashed changes
   },
   {
     title: "Performance Marketing Executive",
@@ -71,17 +66,12 @@ const openings = [
     team: "Creative",
     type: "Full time",
     location: "Jaipur",
-<<<<<<< Updated upstream
     summary: "Build reels, brand films and campaign edits that feel premium and move fast.",
     questions: [
       "Which editing and motion tools do you use confidently?",
       "Share links to reels, films or motion work that best represent your style.",
       "How do you approach pacing, music and typography for short-form videos?",
     ],
-=======
-    summary:
-      "Build reels, brand films and campaign edits that feel premium and move fast.",
->>>>>>> Stashed changes
   },
 ];
 
