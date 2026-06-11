@@ -5,10 +5,10 @@ export function AnimatedNumber({ value }: { value: number }) {
   const [current, setCurrent] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const isFloat = value % 1 !== 0;
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && typeof value === 'number' && !isNaN(value)) {
+      const isFloat = value % 1 !== 0;
       const controls = animate(0, value, {
         duration: 2,
         ease: "easeOut",
@@ -16,7 +16,7 @@ export function AnimatedNumber({ value }: { value: number }) {
       });
       return controls.stop;
     }
-  }, [value, isInView, isFloat]);
+  }, [value, isInView]);
 
-  return <span ref={ref}>{current}</span>;
+  return <span ref={ref}>{current || value}</span>;
 }

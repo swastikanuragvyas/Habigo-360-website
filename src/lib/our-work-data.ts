@@ -1,3 +1,11 @@
+import work1 from "@/assets/work-1.jpg";
+import work2 from "@/assets/work-2.jpg";
+import work3 from "@/assets/work-3.jpg";
+import work4 from "@/assets/work-4.jpg";
+import work5 from "@/assets/work-5.jpg";
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
+
 export interface ServiceWork {
   id: string;
   title: string;
@@ -43,24 +51,23 @@ export const ourWorkData: ServiceWork[] = [
     description:
       "Complete social media overhaul for a luxury hotel chain, resulting in 340% increase in engagement and 180% increase in direct bookings through social channels.",
     metrics: [
-      { label: "Engagement Increase", value: "340%", suffix: "" },
-      { label: "Direct Bookings", value: "180%", suffix: "" },
-      { label: "Follower Growth", value: "85K+", suffix: "" },
-      { label: "Content Reach", value: "12M+", suffix: "" },
+      { label: "Engagement Increase", value: "340", suffix: "%" },
+      { label: "Direct Bookings", value: "180", suffix: "%" },
+      { label: "Follower Growth", value: "85K", suffix: "+" },
+      { label: "Content Reach", value: "12M", suffix: "+" },
     ],
     media: [
       {
         type: "image",
-        url: "/assets/work-1.jpg",
+        url: work1,
         alt: "Hotel Luxuria social media campaign",
         caption: "Instagram carousel post showcasing hotel amenities",
       },
       {
-        type: "video",
-        url: "/assets/work-1-video.mp4",
-        thumbnail: "/assets/work-1-video-thumb.jpg",
+        type: "image", // Changing to image since we don't have mp4s locally
+        url: work5,
         alt: "Hotel Luxuria property tour video",
-        caption: "30-second property tour video that drove booking inquiries",
+        caption: "Property tour that drove booking inquiries",
       },
     ],
     kpis: [
@@ -73,16 +80,16 @@ export const ourWorkData: ServiceWork[] = [
       posts: [
         {
           id: "ig1",
-          url: "https://instagram.com/p/abc123",
-          thumbnail: "/assets/ig-post-1.jpg",
+          url: "https://instagram.com",
+          thumbnail: work1,
           caption: "Luxury suite reveal",
           likes: 12400,
           comments: 380,
         },
         {
           id: "ig2",
-          url: "https://instagram.com/p/def456",
-          thumbnail: "/assets/ig-post-2.jpg",
+          url: "https://instagram.com",
+          thumbnail: work2,
           caption: "Behind the scenes: spa day",
           likes: 9800,
           comments: 220,
@@ -98,20 +105,20 @@ export const ourWorkData: ServiceWork[] = [
       "Data-driven performance marketing campaign for a DTC fashion brand that achieved 8.2x ROAS while reducing CAC by 45%.",
     metrics: [
       { label: "ROAS", value: "8.2", suffix: "x" },
-      { label: "CAC Reduction", value: "45%", suffix: "" },
-      { label: "Revenue Increase", value: "220%", suffix: "" },
-      { label: "Ad Spend Efficiency", value: "92%", suffix: "" },
+      { label: "CAC Reduction", value: "45", suffix: "%" },
+      { label: "Revenue Increase", value: "220", suffix: "%" },
+      { label: "Ad Spend Efficiency", value: "92", suffix: "%" },
     ],
     media: [
       {
         type: "image",
-        url: "/assets/work-2.jpg",
+        url: work2,
         alt: "Fashion brand performance marketing dashboard",
         caption: "Real-time ROAS and conversion tracking dashboard",
       },
       {
         type: "image",
-        url: "/assets/work-2-graph.jpg",
+        url: work3,
         alt: "Performance marketing performance over time",
         caption: "6-month performance trend showing consistent growth",
       },
@@ -129,34 +136,33 @@ export const ourWorkData: ServiceWork[] = [
     description:
       "Cinematic brand film and photography series for a tropical resort that increased online engagement by 280% and became their most shared content asset.",
     metrics: [
-      { label: "Engagement Increase", value: "280%", suffix: "" },
-      { label: "Video Completion Rate", value: "78%", suffix: "" },
-      { label: "Shares", value: "12K+", suffix: "" },
-      { label: "Booking Inquiry Increase", value: "160%", suffix: "" },
+      { label: "Engagement Increase", value: "280", suffix: "%" },
+      { label: "Video Completion Rate", value: "78", suffix: "%" },
+      { label: "Shares", value: "12K", suffix: "+" },
+      { label: "Booking Inquiry Increase", value: "160", suffix: "%" },
     ],
     media: [
       {
-        type: "video",
-        url: "/assets/work-3-video.mp4",
-        thumbnail: "/assets/work-3-video-thumb.jpg",
+        type: "image", // changed to image since no mp4
+        url: work3,
         alt: "Resort brand film trailer",
-        caption: "60-second brand film showcasing resort experience",
+        caption: "Brand film showcasing resort experience",
       },
       {
         type: "image",
-        url: "/assets/work-3-photo1.jpg",
+        url: work4,
         alt: "Resort beachfront photography",
         caption: "Golden hour beachfront shot",
       },
       {
         type: "image",
-        url: "/assets/work-3-photo2.jpg",
+        url: hero1,
         alt: "Resort villa interior photography",
         caption: "Luxury villa interior detail shot",
       },
     ],
     kpis: [
-      { label: "Video Completion Rate", value: 78, suffix: "%", trend: "up", trendValue: 280 },
+      { label: "Completion Rate", value: 78, suffix: "%", trend: "up", trendValue: 280 },
       { label: "Social Shares", value: 12, suffix: "K", trend: "up", trendValue: 320 },
       { label: "Engagement Rate", value: 12.4, suffix: "%", trend: "up", trendValue: 280 },
     ],
@@ -168,21 +174,21 @@ export const ourWorkData: ServiceWork[] = [
     description:
       "Complete brand identity refresh for a 20-location restaurant group that increased brand recognition by 140% and improved customer perception scores.",
     metrics: [
-      { label: "Brand Recognition", value: "140%", suffix: "" },
-      { label: "Customer Perception", value: "89%", suffix: "" },
-      { label: "Loyalty Program Signups", value: "65%", suffix: "" },
-      { label: "Social Media Mentions", value: "220%", suffix: "" },
+      { label: "Brand Recognition", value: "140", suffix: "%" },
+      { label: "Customer Perception", value: "89", suffix: "%" },
+      { label: "Loyalty Program Signups", value: "65", suffix: "%" },
+      { label: "Social Media Mentions", value: "220", suffix: "%" },
     ],
     media: [
       {
         type: "image",
-        url: "/assets/work-4.jpg",
+        url: work4,
         alt: "Restaurant group brand identity application",
         caption: "Brand identity applied across menus, signage, and merchandise",
       },
       {
         type: "image",
-        url: "/assets/work-4-logo.jpg",
+        url: hero2,
         alt: "Restaurant group new logo",
         caption: "Primary and secondary logo variations",
       },
