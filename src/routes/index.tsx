@@ -188,7 +188,7 @@ export function Nav({
     >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         <a href="/" className="flex items-center">
-          <img src={logoImg} alt="HabiGo 360" className="h-32 w-auto" />
+          <img src={logoImg} alt="HabiGo 360" className="h-44 w-auto" />
         </a>
         <nav className="hidden lg:flex items-center gap-9">
           {NAV.map((n) => {
@@ -1228,7 +1228,7 @@ export function Footer() {
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-16 grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5">
           <div className="flex items-center">
-            <img src={logoImg} alt="HabiGo 360" className="h-36 w-auto" />
+            <img src={logoImg} alt="HabiGo 360" className="h-48 w-auto" />
           </div>
           <p className="mt-6 text-ivory/55 text-sm max-w-sm leading-relaxed">
             A creative growth agency for ambitious brands. Marketing, content, branding, technology

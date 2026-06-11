@@ -135,7 +135,7 @@ function CareersPage() {
       <header className="fixed top-0 inset-x-0 z-50 bg-[color:var(--emerald-deep)]/92 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center">
-            <img src={logoImg} alt="HabiGo 360" className="h-32 w-auto" />
+            <img src={logoImg} alt="HabiGo 360" className="h-44 w-auto" />
           </a>
           <nav className="hidden lg:flex items-center gap-9">
             {navItems.map((item) => {
