@@ -91,13 +91,11 @@ const perks = [
 
 const navItems = [
   { id: "home", label: "Home", href: "/" },
-  { id: "about", label: "About", href: "/about" },
+  { id: "about", label: "About us", href: "/about" },
   { id: "services", label: "Services", href: "/services" },
+  { id: "work", label: "Our Work", href: "/#work" },
   { id: "careers", label: "Careers", href: "/careers" },
-  { id: "results", label: "Results", href: "/#results" },
-  { id: "clients", label: "Clients", href: "/#clients" },
-  { id: "team", label: "Team", href: "/#team" },
-  { id: "contact", label: "Contact", href: "/#contact" },
+  { id: "contact", label: "Contact us", href: "/#contact" },
 ];
 
 const serviceLinks = [
