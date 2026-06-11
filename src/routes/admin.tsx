@@ -1,276 +1,452 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import api from "@/lib/api";
 import {
-  Activity,
-  ArrowUpRight,
-  Bell,
-  CalendarDays,
-  CheckCircle2,
-  ChevronDown,
-  ClipboardList,
-  Clock3,
-  FileText,
   LayoutDashboard,
-  Megaphone,
-  MessageSquareText,
-  MoreHorizontal,
-  PanelLeft,
-  Plus,
-  Search,
   Settings,
   Sparkles,
-  TrendingUp,
-  Users,
+  LogOut,
+  Plus,
+  MoreHorizontal,
+  Edit,
+  Trash,
+  Eye,
+  EyeOff,
+  Image as ImageIcon,
+  Loader2,
+  X,
+  Upload,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
       { title: "Admin Panel | HabiGo 360" },
-      {
-        name: "description",
-        content: "Manage HabiGo 360 leads, campaigns, content approvals, and growth reporting.",
-      },
+      { name: "description", content: "Manage HabiGo 360 portfolio." },
     ],
   }),
   component: AdminPanel,
 });
 
-const stats = [
-  { label: "New leads", value: "42", change: "+18%", icon: Users },
-  { label: "Active campaigns", value: "16", change: "+4", icon: Megaphone },
-  { label: "Content in review", value: "28", change: "7 due today", icon: FileText },
-  { label: "Avg. response time", value: "1.8h", change: "-24%", icon: Clock3 },
-];
-
-const leads = [
-  { brand: "UrbanNest Hospitality", service: "Performance marketing", value: "₹4.8L", stage: "Proposal", owner: "Arpit" },
-  { brand: "Veda Wellness Co.", service: "Brand identity", value: "₹2.6L", stage: "Discovery", owner: "Dipanshu" },
-  { brand: "Northline Builders", service: "Website + content", value: "₹6.2L", stage: "Negotiation", owner: "Arpit" },
-  { brand: "Fable Foods", service: "Social media", value: "₹1.9L", stage: "Qualified", owner: "Team" },
-];
-
-const campaigns = [
-  { name: "Q3 Growth Sprint", channel: "Meta + Google", progress: 74, status: "On track" },
-  { name: "Founders Story Series", channel: "Instagram", progress: 48, status: "Creative review" },
-  { name: "Hospitality Launch Kit", channel: "Web + SEO", progress: 88, status: "Final QA" },
-];
-
-const tasks = [
-  "Approve client onboarding deck",
-  "Review weekly ad spend report",
-  "Assign reels batch to editing team",
-  "Schedule discovery call with Veda Wellness",
-];
-
 function AdminPanel() {
+  const [adminInfo, setAdminInfo] = useState<{ _id: string; email: string; token: string } | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("adminInfo");
+    if (stored) {
+      setAdminInfo(JSON.parse(stored));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminInfo");
+    setAdminInfo(null);
+  };
+
+  if (!adminInfo) {
+    return <AdminLogin onLogin={(data) => setAdminInfo(data)} />;
+  }
+
+  return <AdminDashboard onLogout={handleLogout} />;
+}
+
+function AdminLogin({ onLogin }: { onLogin: (data: any) => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const { data } = await api.post("/auth/login", { email, password });
+      localStorage.setItem("adminInfo", JSON.stringify(data));
+      onLogin(data);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#f7f4eb] text-foreground">
-      <div className="flex min-h-screen">
-        <aside className="hidden w-72 shrink-0 border-r border-emerald-deep/10 bg-[#fffdf6] px-5 py-6 lg:flex lg:flex-col">
-          <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-md bg-emerald-deep text-ivory">
-              <Sparkles className="size-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">HabiGo 360</p>
-              <p className="text-xs text-muted-foreground">Admin panel</p>
-            </div>
+    <div className="min-h-screen bg-[#f7f4eb] flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-[#fffdf6] rounded-xl shadow-sm border border-emerald-deep/10 p-8">
+        <div className="flex justify-center mb-8">
+          <div className="flex size-12 items-center justify-center rounded-lg bg-emerald-deep text-ivory">
+            <Sparkles className="size-6" />
           </div>
-
-          <nav className="mt-10 space-y-1">
-            {[
-              { label: "Dashboard", icon: LayoutDashboard, active: true },
-              { label: "Leads", icon: Users },
-              { label: "Campaigns", icon: Megaphone },
-              { label: "Content", icon: ClipboardList },
-              { label: "Reports", icon: Activity },
-              { label: "Settings", icon: Settings },
-            ].map((item) => (
-              <button
-                key={item.label}
-                className={`flex h-11 w-full items-center gap-3 rounded-md px-3 text-left text-sm transition-colors ${
-                  item.active
-                    ? "bg-emerald-deep text-ivory"
-                    : "text-foreground/70 hover:bg-secondary hover:text-foreground"
-                }`}
-              >
-                <item.icon className="size-4" />
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          <div className="mt-auto rounded-md border border-emerald-deep/10 bg-secondary/50 p-4">
-            <p className="text-sm font-medium">Monthly target</p>
-            <div className="mt-4 h-2 rounded-full bg-emerald-deep/10">
-              <div className="h-2 w-[68%] rounded-full bg-gold" />
-            </div>
-            <p className="mt-3 text-xs text-muted-foreground">68% of June pipeline closed</p>
+        </div>
+        <h2 className="text-2xl font-bold text-center text-emerald-deep mb-6">Admin Login</h2>
+        {error && <div className="bg-red-50 text-red-500 p-3 rounded-md mb-4 text-sm">{error}</div>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-emerald-deep/70 mb-1">Email</label>
+            <input
+              type="email"
+              className="w-full rounded-md border border-emerald-deep/20 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-deep"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
-        </aside>
+          <div>
+            <label className="block text-sm font-medium text-emerald-deep/70 mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full rounded-md border border-emerald-deep/20 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-deep"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-md bg-emerald-deep py-2 text-ivory font-medium transition-colors hover:bg-emerald-deep/90 flex justify-center items-center"
+          >
+            {loading ? <Loader2 className="animate-spin size-5" /> : "Sign In"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
-        <main className="min-w-0 flex-1">
-          <header className="sticky top-0 z-20 border-b border-emerald-deep/10 bg-[#f7f4eb]/90 backdrop-blur">
-            <div className="flex min-h-16 items-center gap-3 px-4 sm:px-6 lg:px-8">
-              <button className="inline-flex size-10 items-center justify-center rounded-md border border-emerald-deep/10 bg-[#fffdf6] lg:hidden">
-                <PanelLeft className="size-5" />
-              </button>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs uppercase tracking-[0.24em] text-emerald-deep/60">Workspace</p>
-                <h1 className="truncate text-lg font-semibold sm:text-xl">Admin dashboard</h1>
-              </div>
-              <div className="hidden h-10 min-w-64 items-center gap-2 rounded-md border border-emerald-deep/10 bg-[#fffdf6] px-3 md:flex">
-                <Search className="size-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">Search leads, campaigns, reports</span>
-              </div>
-              <button className="inline-flex size-10 items-center justify-center rounded-md border border-emerald-deep/10 bg-[#fffdf6]">
-                <Bell className="size-5" />
-              </button>
-              <button className="inline-flex h-10 items-center gap-2 rounded-md bg-emerald-deep px-3 text-sm font-medium text-ivory">
-                <Plus className="size-4" />
-                <span className="hidden sm:inline">New item</span>
-              </button>
-            </div>
-          </header>
+function AdminDashboard({ onLogout }: { onLogout: () => void }) {
+  const [activeTab, setActiveTab] = useState("Projects");
 
-          <div className="space-y-6 px-4 py-6 sm:px-6 lg:px-8">
-            <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="rounded-md border border-emerald-deep/10 bg-[#fffdf6] p-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground">{stat.label}</p>
-                      <p className="mt-2 text-3xl font-semibold tracking-normal">{stat.value}</p>
-                    </div>
-                    <div className="flex size-10 items-center justify-center rounded-md bg-secondary text-emerald-deep">
-                      <stat.icon className="size-5" />
-                    </div>
-                  </div>
-                  <p className="mt-4 flex items-center gap-1 text-sm text-emerald-deep">
-                    <TrendingUp className="size-4" />
-                    {stat.change}
-                  </p>
-                </div>
-              ))}
-            </section>
+  return (
+    <div className="min-h-screen bg-[#f7f4eb] text-foreground flex">
+      <aside className="hidden w-72 shrink-0 border-r border-emerald-deep/10 bg-[#fffdf6] px-5 py-6 lg:flex lg:flex-col">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-md bg-emerald-deep text-ivory">
+            <Sparkles className="size-5" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold">HabiGo 360</p>
+            <p className="text-xs text-muted-foreground">Admin panel</p>
+          </div>
+        </div>
 
-            <section className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
-              <div className="min-w-0 rounded-md border border-emerald-deep/10 bg-[#fffdf6]">
-                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-emerald-deep/10 p-5">
-                  <div>
-                    <h2 className="text-base font-semibold">Lead pipeline</h2>
-                    <p className="text-sm text-muted-foreground">Track qualified opportunities and ownership.</p>
-                  </div>
-                  <button className="inline-flex h-9 items-center gap-2 rounded-md border border-emerald-deep/10 px-3 text-sm">
-                    This month
-                    <ChevronDown className="size-4" />
+        <nav className="mt-10 space-y-1 flex-1">
+          {[
+            { label: "Dashboard", icon: LayoutDashboard },
+            { label: "Projects", icon: ImageIcon },
+            { label: "Settings", icon: Settings },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={() => setActiveTab(item.label)}
+              className={`flex h-11 w-full items-center gap-3 rounded-md px-3 text-left text-sm transition-colors ${
+                activeTab === item.label
+                  ? "bg-emerald-deep text-ivory"
+                  : "text-foreground/70 hover:bg-secondary hover:text-foreground"
+              }`}
+            >
+              <item.icon className="size-4" />
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-auto">
+          <button
+            onClick={onLogout}
+            className="flex h-11 w-full items-center gap-3 rounded-md px-3 text-left text-sm text-red-500 transition-colors hover:bg-red-50"
+          >
+            <LogOut className="size-4" />
+            Sign Out
+          </button>
+        </div>
+      </aside>
+
+      <main className="min-w-0 flex-1 flex flex-col">
+        <header className="sticky top-0 z-20 border-b border-emerald-deep/10 bg-[#f7f4eb]/90 backdrop-blur px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-semibold">{activeTab}</h1>
+          </div>
+        </header>
+
+        <div className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
+          {activeTab === "Projects" && <ProjectsView />}
+          {activeTab === "Dashboard" && <div>Welcome to the HabiGo 360 Admin Panel.</div>}
+          {activeTab === "Settings" && <div>Settings coming soon...</div>}
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function ProjectsView() {
+  const queryClient = useQueryClient();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState<any>(null);
+
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ["projects"],
+    queryFn: async () => {
+      const { data } = await api.get("/projects");
+      return data;
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => await api.delete(`/projects/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["projects"] }),
+  });
+
+  const toggleVisibilityMutation = useMutation({
+    mutationFn: async ({ id, visibility }: { id: string; visibility: boolean }) =>
+      await api.put(`/projects/${id}`, { visibility }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["projects"] }),
+  });
+
+  if (isLoading) return <div className="flex justify-center p-8"><Loader2 className="animate-spin size-8 text-emerald-deep" /></div>;
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-base font-semibold">Portfolio Projects</h2>
+          <p className="text-sm text-muted-foreground">Manage your dynamic work showcase.</p>
+        </div>
+        <button
+          onClick={() => {
+            setEditingProject(null);
+            setIsModalOpen(true);
+          }}
+          className="inline-flex h-10 items-center gap-2 rounded-md bg-emerald-deep px-3 text-sm font-medium text-ivory"
+        >
+          <Plus className="size-4" />
+          <span>New Project</span>
+        </button>
+      </div>
+
+      <div className="rounded-md border border-emerald-deep/10 bg-[#fffdf6] overflow-x-auto">
+        <table className="w-full min-w-[800px] text-left text-sm">
+          <thead className="border-b border-emerald-deep/10 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            <tr>
+              <th className="px-5 py-4 font-medium">Title</th>
+              <th className="px-5 py-4 font-medium">Service</th>
+              <th className="px-5 py-4 font-medium">Visibility</th>
+              <th className="px-5 py-4 font-medium">Order</th>
+              <th className="px-5 py-4 font-medium text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-emerald-deep/10">
+            {projects?.map((project: any) => (
+              <tr key={project._id} className="hover:bg-secondary/30 transition-colors">
+                <td className="px-5 py-4 font-medium">{project.title}</td>
+                <td className="px-5 py-4 text-muted-foreground">{project.service}</td>
+                <td className="px-5 py-4">
+                  <button
+                    onClick={() => toggleVisibilityMutation.mutate({ id: project._id, visibility: !project.visibility })}
+                    className="inline-flex items-center gap-1 hover:text-emerald-deep"
+                  >
+                    {project.visibility ? <Eye className="size-4 text-emerald-deep" /> : <EyeOff className="size-4 text-muted-foreground" />}
                   </button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-[720px] text-left text-sm">
-                    <thead className="border-b border-emerald-deep/10 text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                      <tr>
-                        <th className="px-5 py-4 font-medium">Brand</th>
-                        <th className="px-5 py-4 font-medium">Service</th>
-                        <th className="px-5 py-4 font-medium">Value</th>
-                        <th className="px-5 py-4 font-medium">Stage</th>
-                        <th className="px-5 py-4 font-medium">Owner</th>
-                        <th className="px-5 py-4 font-medium" />
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-emerald-deep/10">
-                      {leads.map((lead) => (
-                        <tr key={lead.brand} className="hover:bg-secondary/30">
-                          <td className="px-5 py-4 font-medium">{lead.brand}</td>
-                          <td className="px-5 py-4 text-muted-foreground">{lead.service}</td>
-                          <td className="px-5 py-4">{lead.value}</td>
-                          <td className="px-5 py-4">
-                            <span className="inline-flex rounded-md bg-emerald-deep/10 px-2.5 py-1 text-xs font-medium text-emerald-deep">
-                              {lead.stage}
-                            </span>
-                          </td>
-                          <td className="px-5 py-4 text-muted-foreground">{lead.owner}</td>
-                          <td className="px-5 py-4 text-right">
-                            <button className="inline-flex size-8 items-center justify-center rounded-md hover:bg-secondary">
-                              <MoreHorizontal className="size-4" />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                </td>
+                <td className="px-5 py-4">{project.sortOrder}</td>
+                <td className="px-5 py-4 text-right flex justify-end gap-2">
+                  <button
+                    onClick={() => {
+                      setEditingProject(project);
+                      setIsModalOpen(true);
+                    }}
+                    className="inline-flex size-8 items-center justify-center rounded-md hover:bg-secondary text-blue-600"
+                  >
+                    <Edit className="size-4" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (window.confirm("Are you sure you want to delete this project?")) {
+                        deleteMutation.mutate(project._id);
+                      }
+                    }}
+                    className="inline-flex size-8 items-center justify-center rounded-md hover:bg-secondary text-red-600"
+                  >
+                    <Trash className="size-4" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {projects?.length === 0 && (
+              <tr>
+                <td colSpan={5} className="px-5 py-8 text-center text-muted-foreground">
+                  No projects found. Add one to get started.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
-              <div className="space-y-6">
-                <div className="rounded-md border border-emerald-deep/10 bg-[#fffdf6] p-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <h2 className="text-base font-semibold">Today</h2>
-                      <p className="text-sm text-muted-foreground">Priority work queue</p>
-                    </div>
-                    <CalendarDays className="size-5 text-emerald-deep" />
-                  </div>
-                  <div className="mt-5 space-y-3">
-                    {tasks.map((task) => (
-                      <label key={task} className="flex items-start gap-3 rounded-md border border-emerald-deep/10 p-3">
-                        <input className="mt-1 size-4 accent-[var(--emerald-deep)]" type="checkbox" />
-                        <span className="text-sm leading-6">{task}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+      {isModalOpen && (
+        <ProjectModal
+          project={editingProject}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            queryClient.invalidateQueries({ queryKey: ["projects"] });
+          }}
+        />
+      )}
+    </div>
+  );
+}
 
-                <div className="rounded-md border border-emerald-deep/10 bg-emerald-deep p-5 text-ivory">
-                  <p className="text-sm text-ivory/70">Revenue forecast</p>
-                  <div className="mt-3 flex items-end justify-between gap-4">
-                    <p className="text-3xl font-semibold">₹18.4L</p>
-                    <span className="inline-flex items-center gap-1 rounded-md bg-ivory/10 px-2.5 py-1 text-xs">
-                      <ArrowUpRight className="size-3" />
-                      12%
-                    </span>
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-ivory/70">
-                    Based on weighted pipeline value, active retainers, and pending approvals.
-                  </p>
-                </div>
-              </div>
-            </section>
+function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: () => void; onSuccess: () => void }) {
+  const isEditing = !!project;
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: project?.title || "",
+    service: project?.service || "",
+    description: project?.description || "",
+    visibility: project?.visibility ?? true,
+    sortOrder: project?.sortOrder || 0,
+    media: project?.media || [],
+    metrics: project?.metrics || [],
+    kpis: project?.kpis || [],
+  });
 
-            <section className="rounded-md border border-emerald-deep/10 bg-[#fffdf6]">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-emerald-deep/10 p-5">
-                <div>
-                  <h2 className="text-base font-semibold">Campaign health</h2>
-                  <p className="text-sm text-muted-foreground">Live delivery status across active client work.</p>
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.[0]) return;
+    setUploadingImage(true);
+    const file = e.target.files[0];
+    const uploadData = new FormData();
+    uploadData.append("media", file);
+
+    try {
+      const { data } = await api.post("/projects/upload", uploadData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setFormData((prev) => ({
+        ...prev,
+        media: [...prev.media, { type: data.format === "video" ? "video" : "image", url: data.url, alt: formData.title }],
+      }));
+    } catch (err) {
+      console.error("Upload failed", err);
+      alert("Failed to upload image");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const removeMedia = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      media: prev.media.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (isEditing) {
+        await api.put(`/projects/${project._id}`, formData);
+      } else {
+        await api.post("/projects", formData);
+      }
+      onSuccess();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save project");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div className="bg-[#fffdf6] rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col border border-emerald-deep/10">
+        <div className="flex justify-between items-center p-5 border-b border-emerald-deep/10">
+          <h2 className="text-xl font-semibold">{isEditing ? "Edit Project" : "New Project"}</h2>
+          <button onClick={onClose} className="text-muted-foreground hover:text-emerald-deep"><X className="size-5" /></button>
+        </div>
+        
+        <div className="flex-1 overflow-auto p-5">
+          <form id="project-form" onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-sm font-medium">Title *</label>
+                <input required value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              </div>
+              <div className="space-y-1">
+                <label className="text-sm font-medium">Service / Category *</label>
+                <input required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-sm font-medium">Description *</label>
+              <textarea required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1 flex items-center gap-2 h-full pt-6">
+                <input type="checkbox" id="visibility" checked={formData.visibility} onChange={(e) => setFormData({...formData, visibility: e.target.checked})} className="size-4 accent-emerald-deep" />
+                <label htmlFor="visibility" className="text-sm font-medium cursor-pointer">Visible to Public</label>
+              </div>
+              <div className="space-y-1">
+                <label className="text-sm font-medium">Sort Order (Lower appears first)</label>
+                <input type="number" value={formData.sortOrder} onChange={(e) => setFormData({...formData, sortOrder: parseInt(e.target.value) || 0})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              </div>
+            </div>
+
+            {/* Media Upload */}
+            <div className="space-y-3">
+              <label className="text-sm font-medium flex justify-between items-center">
+                <span>Media Gallery</span>
+                <label className="cursor-pointer inline-flex items-center gap-1 text-xs bg-emerald-deep/10 text-emerald-deep px-2 py-1 rounded hover:bg-emerald-deep/20">
+                  <Upload className="size-3" />
+                  {uploadingImage ? "Uploading..." : "Add Media"}
+                  <input type="file" className="hidden" accept="image/*,video/*" onChange={handleFileUpload} disabled={uploadingImage} />
+                </label>
+              </label>
+              {formData.media.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {formData.media.map((m: any, i: number) => (
+                    <div key={i} className="relative group aspect-video bg-emerald-deep/5 rounded-md overflow-hidden border border-emerald-deep/10">
+                      {m.type === "video" ? (
+                         <video src={m.url} className="w-full h-full object-cover" />
+                      ) : (
+                         <img src={m.url} alt="media" className="w-full h-full object-cover" />
+                      )}
+                      <button type="button" onClick={() => removeMedia(i)} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <X className="size-3" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
-                <button className="inline-flex h-9 items-center gap-2 rounded-md bg-secondary px-3 text-sm text-emerald-deep">
-                  <MessageSquareText className="size-4" />
-                  Team notes
-                </button>
-              </div>
-              <div className="grid gap-4 p-5 lg:grid-cols-3">
-                {campaigns.map((campaign) => (
-                  <div key={campaign.name} className="rounded-md border border-emerald-deep/10 p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="font-medium">{campaign.name}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{campaign.channel}</p>
-                      </div>
-                      <CheckCircle2 className="size-5 text-emerald-deep" />
-                    </div>
-                    <div className="mt-5 h-2 rounded-full bg-secondary">
-                      <div className="h-2 rounded-full bg-emerald-deep" style={{ width: `${campaign.progress}%` }} />
-                    </div>
-                    <div className="mt-4 flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">{campaign.status}</span>
-                      <span className="font-medium">{campaign.progress}%</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
-        </main>
+              ) : (
+                <div className="text-sm text-muted-foreground italic bg-secondary p-4 rounded-md text-center border border-dashed border-emerald-deep/20">
+                  No media added yet. Upload images or videos to showcase the project.
+                </div>
+              )}
+            </div>
+
+            {/* Metrics & KPIs can be expanded here, keeping it simple for the form layout. */}
+            <div className="text-xs text-muted-foreground border-t border-emerald-deep/10 pt-4">
+              Note: Metrics and KPIs arrays can be added programmatically or extended in a future update to keep this form simple.
+            </div>
+
+          </form>
+        </div>
+        
+        <div className="p-5 border-t border-emerald-deep/10 bg-secondary/30 flex justify-end gap-3">
+          <button onClick={onClose} className="px-4 py-2 rounded-md border border-emerald-deep/20 text-sm font-medium hover:bg-secondary transition-colors">Cancel</button>
+          <button type="submit" form="project-form" disabled={loading} className="px-4 py-2 rounded-md bg-emerald-deep text-ivory text-sm font-medium hover:bg-emerald-deep/90 flex items-center gap-2">
+            {loading && <Loader2 className="animate-spin size-4" />}
+            {isEditing ? "Save Changes" : "Create Project"}
+          </button>
+        </div>
       </div>
     </div>
   );

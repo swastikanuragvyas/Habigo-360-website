@@ -1,11 +1,50 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useRef } from "react";
-import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/lib/api";
+import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight, Loader2 } from "lucide-react";
 import { Nav, Footer, StickyCTA } from "./index";
-import { ourWorkData, ServiceWork } from "@/lib/our-work-data";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
+
+export interface ServiceWork {
+  _id: string;
+  title: string;
+  service: string;
+  description: string;
+  visibility: boolean;
+  metrics: {
+    label: string;
+    value: string;
+    suffix?: string;
+  }[];
+  media: {
+    type: "image" | "video" | "reel";
+    url: string;
+    thumbnail?: string;
+    alt: string;
+    caption?: string;
+  }[];
+  kpis: {
+    label: string;
+    value: number;
+    suffix: string;
+    trend?: "up" | "down" | "neutral";
+    trendValue?: number;
+  }[];
+  instagram?: {
+    handle: string;
+    posts: {
+      id: string;
+      url: string;
+      thumbnail: string;
+      caption?: string;
+      likes: number;
+      comments: number;
+    }[];
+  };
+}
 
 export const Route = createFileRoute("/our-work")({
   component: OurWorkPage,
@@ -27,25 +66,42 @@ function OurWorkPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ["publicProjects"],
+    queryFn: async () => {
+      const { data } = await api.get("/projects");
+      return data.filter((p: any) => p.visibility !== false);
+    },
+  });
+
   return (
     <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-accent selection:text-emerald-deep overflow-x-hidden">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
 
       <main className="relative">
-        {/* Hero Section */}
         <HeroSection />
 
-        {/* Service Work Showcases */}
-        <section className="py-24 lg:py-32 bg-background">
-          <div className="max-w-[1500px] mx-auto px-6 lg:px-10 space-y-32">
-            {ourWorkData.map((work, index) => (
-              <WorkShowcase key={work.id} work={work} index={index} />
-            ))}
-          </div>
+        <section className="py-24 lg:py-32 bg-background min-h-[40vh]">
+          {isLoading ? (
+            <div className="flex justify-center items-center h-full">
+              <Loader2 className="animate-spin size-10 text-emerald-deep" />
+            </div>
+          ) : (
+            <div className="max-w-[1500px] mx-auto px-6 lg:px-10 space-y-32">
+              {projects?.length > 0 ? (
+                projects.map((work: ServiceWork, index: number) => (
+                  <WorkShowcase key={work._id} work={work} index={index} />
+                ))
+              ) : (
+                <div className="text-center text-muted-foreground text-xl">
+                  New projects are being added soon. Check back later!
+                </div>
+              )}
+            </div>
+          )}
         </section>
 
-        {/* Instagram Integration Section */}
-        <InstagramSection />
+        {!isLoading && projects && <InstagramSection projects={projects} />}
       </main>
 
       <Footer />
@@ -85,7 +141,6 @@ function HeroSection() {
           </div>
         </ScrollReveal>
 
-        {/* KPI Overview */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-24">
           {[
             { label: "Brands Served", value: 50, suffix: "+", icon: Users },
@@ -107,7 +162,6 @@ function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-accent/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-light/10 rounded-full blur-[120px]" />
@@ -118,9 +172,8 @@ function HeroSection() {
 
 function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
   return (
-    <div id={work.id} className="relative">
+    <div id={work._id} className="relative">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-        {/* Sticky Left/Top Section */}
         <div className="lg:col-span-5 relative">
           <div className="lg:sticky lg:top-32 space-y-8">
             <ScrollReveal x={-30}>
@@ -133,53 +186,52 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
               <p className="mt-6 text-foreground/70 text-lg leading-relaxed">{work.description}</p>
             </ScrollReveal>
 
-            <ScrollReveal x={-30} delay={0.2}>
-              <div className="grid grid-cols-2 gap-4 pt-8 border-t border-emerald-deep/10">
-                {work.kpis.map((kpi, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      {kpi.trend === "up" ? (
-                        <TrendingUp className="!size-4 text-accent" />
-                      ) : kpi.trend === "down" ? (
-                        <TrendingUp className="!size-4 text-emerald-deep rotate-180" />
-                      ) : null}
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-                        {kpi.label}
+            {work.kpis && work.kpis.length > 0 && (
+              <ScrollReveal x={-30} delay={0.2}>
+                <div className="grid grid-cols-2 gap-4 pt-8 border-t border-emerald-deep/10">
+                  {work.kpis.map((kpi, idx) => (
+                    <div key={idx} className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        {kpi.trend === "up" ? (
+                          <TrendingUp className="!size-4 text-accent" />
+                        ) : kpi.trend === "down" ? (
+                          <TrendingUp className="!size-4 text-emerald-deep rotate-180" />
+                        ) : null}
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+                          {kpi.label}
+                        </p>
+                      </div>
+                      <p className="font-display text-3xl font-light text-emerald-deep">
+                        <AnimatedNumber value={kpi.value} />
+                        {kpi.suffix}
                       </p>
                     </div>
-                    <p className="font-display text-3xl font-light text-emerald-deep">
-                      <AnimatedNumber value={kpi.value} />
-                      {kpi.suffix}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
+                  ))}
+                </div>
+              </ScrollReveal>
+            )}
           </div>
         </div>
 
-        {/* Scrolling Media on the Right */}
         <div className="lg:col-span-7 space-y-8">
-          {work.media.map((media, idx) => (
-            <ScrollReveal key={idx} y={40} delay={0.1}>
-              <MediaCard media={media} />
-            </ScrollReveal>
-          ))}
+          {work.media && work.media.length > 0 ? (
+             work.media.map((media, idx) => (
+              <ScrollReveal key={idx} y={40} delay={0.1}>
+                <MediaCard media={media} />
+              </ScrollReveal>
+            ))
+          ) : (
+            <div className="aspect-[4/3] bg-emerald-deep/5 rounded-2xl flex items-center justify-center border border-emerald-deep/10">
+               <ImageIcon className="size-10 text-emerald-deep/30" />
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-interface MediaItem {
-  type: "image" | "video" | "reel";
-  url: string;
-  thumbnail?: string;
-  alt: string;
-  caption?: string;
-}
-
-function MediaCard({ media }: { media: MediaItem }) {
+function MediaCard({ media }: { media: any }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -194,11 +246,11 @@ function MediaCard({ media }: { media: MediaItem }) {
           <>
             {!isExpanded && (
               <>
-                <img
-                  src={media.thumbnail || media.url}
-                  alt={media.alt}
+                <video
+                  src={media.url}
                   className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
+                  muted
+                  playsInline
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-emerald-deep/20 group-hover:bg-emerald-deep/40 transition-colors duration-500">
                   <div className="w-20 h-20 flex items-center justify-center rounded-full bg-ivory/20 backdrop-blur-md text-ivory group-hover:scale-110 transition-transform duration-500">
@@ -214,7 +266,7 @@ function MediaCard({ media }: { media: MediaItem }) {
         ) : (
           <img
             src={media.url}
-            alt={media.alt}
+            alt={media.alt || "Portfolio media"}
             className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
@@ -232,8 +284,8 @@ function MediaCard({ media }: { media: MediaItem }) {
   );
 }
 
-function InstagramSection() {
-  const posts = ourWorkData.flatMap(
+function InstagramSection({ projects }: { projects: ServiceWork[] }) {
+  const posts = projects.flatMap(
     (work) => work.instagram?.posts.map((p) => ({ ...p, service: work.service })) || [],
   );
 
@@ -262,7 +314,6 @@ function InstagramSection() {
         </ScrollReveal>
       </div>
 
-      {/* Marquee/Masonry hybrid */}
       <div className="relative flex overflow-x-hidden group">
         <div className="animate-marquee flex whitespace-nowrap gap-6 px-6">
           {[...posts, ...posts, ...posts].map((post, idx) => (
@@ -281,8 +332,8 @@ function InstagramSection() {
                   <Instagram className="!size-8 mb-4 text-accent" />
                   <p className="text-sm line-clamp-3 mb-4">{post.caption}</p>
                   <div className="flex gap-4 text-xs font-medium tracking-wider">
-                    <span>{post.likes.toLocaleString()} LIKES</span>
-                    <span>{post.comments.toLocaleString()} CMTS</span>
+                    <span>{post.likes?.toLocaleString()} LIKES</span>
+                    <span>{post.comments?.toLocaleString()} CMTS</span>
                   </div>
                 </div>
               </div>
