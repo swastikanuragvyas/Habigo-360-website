@@ -75,26 +75,6 @@
   --cursor-trail: oklch(0.78 0.11 80 / 0.5);
 }
 
-.dark {
-  --background: oklch(0.16 0.025 165);
-  --foreground: var(--ivory);
-  --card: oklch(0.22 0.04 165);
-  --card-foreground: var(--ivory);
-  --popover: var(--card);
-  --popover-foreground: var(--ivory);
-  --primary: var(--ivory);
-  --primary-foreground: var(--emerald-deep);
-  --secondary: oklch(0.25 0.04 165);
-  --secondary-foreground: var(--ivory);
-  --muted: oklch(0.25 0.04 165);
-  --muted-foreground: oklch(0.7 0.02 90);
-  --accent: var(--gold);
-  --accent-foreground: var(--emerald-deep);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: var(--gold);
-  --cursor-trail: oklch(0.78 0.11 80 / 0.7);
-}
 
 @layer base {
   * {
@@ -347,16 +327,6 @@
   }
 }
 
-/* ─── Dark mode transition ─── */
-html.dark-transition *,
-html.dark-transition *::before,
-html.dark-transition *::after {
-  transition:
-    background-color 0.6s ease,
-    color 0.6s ease,
-    border-color 0.6s ease,
-    box-shadow 0.6s ease !important;
-}
 
 /* ─── Portfolio lightbox ─── */
 .lightbox-backdrop {

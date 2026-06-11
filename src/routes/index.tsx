@@ -31,7 +31,7 @@ import {
 
 import ImmersiveHero from "@/components/ImmersiveHero";
 import LivingPortfolio from "@/components/LivingPortfolio";
-import { ScrollProgress, SocialProofTicker, DarkModeToggle } from "@/components/AmbientStorytelling";
+import { ScrollProgress, SocialProofTicker } from "@/components/AmbientStorytelling";
 import { useStaggerReveal, staggerItemStyle } from "@/hooks/useStaggerReveal";
 import { useMutation } from "@tanstack/react-query";
 import { submitContact } from "@/lib/api/contact.server";
@@ -140,7 +140,6 @@ function HabiGoHome() {
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
       <ImmersiveHero />
       <ScrollProgress />
-      <DarkModeToggle />
       <About />
       <Services />
       <ImpactCounters />
