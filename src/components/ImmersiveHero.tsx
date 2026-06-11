@@ -273,7 +273,6 @@ export default function ImmersiveHero() {
               </span>
             </h1>
           </div>
-
         </div>
 
         {/* Stats strip */}

@@ -9,6 +9,12 @@ import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 export const Route = createFileRoute("/our-work")({
   component: OurWorkPage,
+  head: () => ({
+    meta: [
+      { title: "Our Work | HabiGo 360" },
+      { name: "description", content: "Explore our portfolio of successful brand transformations, marketing campaigns, and creative productions." }
+    ]
+  })
 });
 
 function OurWorkPage() {

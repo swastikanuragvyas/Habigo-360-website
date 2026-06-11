@@ -4,6 +4,12 @@ import { Nav, Footer, Founders, StickyCTA } from "./index";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
+  head: () => ({
+    meta: [
+      { title: "About Us | HabiGo 360" },
+      { name: "description", content: "Learn more about HabiGo 360, a creative growth agency helping ambitious brands lead their markets." }
+    ]
+  })
 });
 
 function AboutPage() {

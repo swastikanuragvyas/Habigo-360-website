@@ -70,51 +70,7 @@ export function CursorTrails() {
   );
 }
 
-/* ─── Social Proof Notification Ticker ─── */
-const SOCIAL_PROOFS = [
-  { name: "Hilton", action: "closed a brand strategy session", time: "2 mins ago" },
-  { name: "Marriott", action: "approved Q3 content calendar", time: "8 mins ago" },
-  { name: "Taj Hotels", action: "launched new social campaign", time: "15 mins ago" },
-  { name: "Oberoi", action: "requested performance audit", time: "24 mins ago" },
-  { name: "ITC Hotels", action: "signed quarterly retainer", time: "36 mins ago" },
-  { name: "Leela", action: "reviewed brand film cut", time: "1 hour ago" },
-];
 
-export function SocialProofTicker() {
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % SOCIAL_PROOFS.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="fixed bottom-24 left-6 z-40 max-w-xs">
-      <div className="relative h-16 overflow-hidden">
-        {SOCIAL_PROOFS.map((item, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 flex items-center gap-3 bg-emerald-deep/90 backdrop-blur-xl border border-ivory/10 rounded-lg px-4 py-3 shadow-2xl transition-all duration-500 ${
-              idx === activeIdx ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
-            }`}
-          >
-            <div className="shrink-0 size-8 rounded-full bg-accent/20 flex items-center justify-center">
-              <MessageCircle className="!size-4 text-accent" />
-            </div>
-            <div className="min-w-0">
-              <div className="text-[13px] text-ivory truncate font-medium">
-                <span className="text-accent">{item.name}</span> {item.action}
-              </div>
-              <div className="text-[10px] text-ivory/50 uppercase tracking-wider">{item.time}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─── Scroll Progress Bar ─── */
 export function ScrollProgress() {
@@ -132,5 +88,3 @@ export function ScrollProgress() {
 
   return <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />;
 }
-
-

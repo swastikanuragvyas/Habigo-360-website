@@ -101,7 +101,15 @@ export function useReveal() {
   return { ref, shown };
 }
 
-function Counter({ to, suffix = "", duration = 1800 }: { to: number; suffix?: string; duration?: number }) {
+function Counter({
+  to,
+  suffix = "",
+  duration = 1800,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
   const [n, setN] = useState(0);
   const { ref, shown } = useReveal();
   useEffect(() => {
@@ -191,7 +199,10 @@ function WhyChooseUs() {
         </div>
         <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
           {reasons.map((r, idx) => (
-            <div key={idx} className="bg-background p-10 lg:p-14 hover:bg-secondary/40 transition-colors">
+            <div
+              key={idx}
+              className="bg-background p-10 lg:p-14 hover:bg-secondary/40 transition-colors"
+            >
               <div className="font-mono text-sm text-accent mb-6">{r.num}</div>
               <h3 className="font-display text-3xl mb-4">{r.title}</h3>
               <p className="text-foreground/70 leading-relaxed max-w-md">{r.desc}</p>
@@ -235,12 +246,16 @@ function FAQs() {
             Common <em className="italic text-emerald-deep">questions.</em>
           </h2>
           <p className="mt-6 text-foreground/70 max-w-md">
-            Everything you need to know about how we work, what we charge, and what you can expect from a partnership with HabiGo 360.
+            Everything you need to know about how we work, what we charge, and what you can expect
+            from a partnership with HabiGo 360.
           </p>
         </div>
         <div className="lg:col-span-7 space-y-4">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="border border-border bg-background rounded-sm overflow-hidden">
+            <div
+              key={idx}
+              className="border border-border bg-background rounded-sm overflow-hidden"
+            >
               <button
                 onClick={() => setOpen(open === idx ? null : idx)}
                 className="w-full flex items-center justify-between p-6 lg:p-8 text-left hover:bg-secondary/20 transition-colors"
@@ -255,9 +270,7 @@ function FAQs() {
                   open === idx ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="p-6 lg:p-8 pt-0 text-foreground/70 leading-relaxed">
-                  {faq.a}
-                </div>
+                <div className="p-6 lg:p-8 pt-0 text-foreground/70 leading-relaxed">{faq.a}</div>
               </div>
             </div>
           ))}
@@ -301,7 +314,7 @@ export function Nav({
         </a>
         <nav className="hidden lg:flex items-center gap-9">
           {NAV.map((n) => {
-            if (n.id === 'services') {
+            if (n.id === "services") {
               return (
                 <div
                   key={n.id}
@@ -316,7 +329,19 @@ export function Nav({
                     }`}
                   >
                     {n.label}
-                    <svg className={`inline-block ml-1.5 w-3 h-3 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    <svg
+                      className={`inline-block ml-1.5 w-3 h-3 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </a>
                   <div
                     className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-emerald-deep/95 backdrop-blur-xl border border-ivory/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-300 ${
@@ -329,7 +354,7 @@ export function Nav({
                       {SERVICES.map((s) => (
                         <a
                           key={s.t}
-                          href={`/services/${s.t.toLowerCase().replace(/\s+/g, '-').replace(/-&-/g, '-')}`}
+                          href={`/services/${s.t.toLowerCase().replace(/\s+/g, "-").replace(/-&-/g, "-")}`}
                           className="flex items-center gap-3 px-6 py-2.5 text-sm text-ivory/70 hover:text-accent hover:bg-white/5 transition-colors"
                         >
                           <s.i className="!size-4 text-accent/60" />
@@ -337,7 +362,10 @@ export function Nav({
                         </a>
                       ))}
                       <div className="border-t border-ivory/10 mt-2 pt-2">
-                        <a href="/services" className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors">
+                        <a
+                          href="/services"
+                          className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
+                        >
                           View All Services →
                         </a>
                       </div>
@@ -349,7 +377,7 @@ export function Nav({
             return (
               <a
                 key={n.id}
-                href={n.href ?? (n.id === 'home' ? '/' : n.id === 'about' ? '/about' : `/#${n.id}`)}
+                href={n.href ?? (n.id === "home" ? "/" : n.id === "about" ? "/about" : `/#${n.id}`)}
                 className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
               >
                 {n.label}
@@ -377,7 +405,16 @@ export function Nav({
           {NAV.map((n) => (
             <a
               key={n.id}
-              href={n.href ?? (n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`)}
+              href={
+                n.href ??
+                (n.id === "home"
+                  ? "/"
+                  : n.id === "about"
+                    ? "/about"
+                    : n.id === "services"
+                      ? "/services"
+                      : `/#${n.id}`)
+              }
               onClick={() => setNavOpen(false)}
               className="block text-ivory text-lg font-display"
             >
@@ -398,37 +435,6 @@ export function Nav({
 }
 
 // Hero replaced by ImmersiveHero component
-
-function TrustBar() {
-  const tags = [
-    "Hospitality",
-    "Lifestyle",
-    "F&B",
-    "Real Estate",
-    "Fashion",
-    "Wellness",
-    "Tech",
-    "Retail",
-  ];
-  return (
-    <div className="bg-emerald-deep text-ivory border-y border-ivory/10">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-5 flex items-center gap-8 overflow-hidden">
-        <span className="shrink-0 text-[10px] uppercase tracking-[0.3em] text-ivory/50 relative z-10 bg-emerald-deep pr-4">
-          Industries
-        </span>
-        <div className="overflow-hidden flex-1">
-          <div className="flex gap-10 animate-marquee whitespace-nowrap">
-            {[...tags, ...tags, ...tags].map((t, i) => (
-              <span key={i} className="text-sm font-display italic text-ivory/80">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function About() {
   const { ref, shown } = useReveal();
@@ -477,7 +483,12 @@ function About() {
 
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-              <img src={about} alt="HabiGo studio in production" className="size-full object-cover" loading="lazy" />
+              <img
+                src={about}
+                alt="HabiGo studio in production"
+                className="size-full object-cover"
+                loading="lazy"
+              />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-emerald-deep to-transparent">
                 <div className="font-display italic text-ivory text-2xl">
                   "Strategy that performs. Craft that lasts."
@@ -540,7 +551,8 @@ export function Founders() {
             Built by operators, <em className="italic text-accent">not observers.</em>
           </h2>
           <p className="mt-6 text-ivory/50 text-[15px] max-w-lg mx-auto leading-relaxed">
-            Two people who believe that brand and growth are the same discipline — and that great agencies prove it every quarter.
+            Two people who believe that brand and growth are the same discipline — and that great
+            agencies prove it every quarter.
           </p>
         </div>
 
@@ -553,10 +565,8 @@ export function Founders() {
                 <div
                   className="relative aspect-[3/4] overflow-hidden rounded-sm"
                   style={{
-                    maskImage:
-                      "linear-gradient(to bottom, black 65%, transparent 100%)",
-                    WebkitMaskImage:
-                      "linear-gradient(to bottom, black 65%, transparent 100%)",
+                    maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
                   }}
                 >
                   <img
@@ -570,9 +580,7 @@ export function Founders() {
 
               {/* Name & Role */}
               <div className="mb-5">
-                <div className="font-display text-3xl lg:text-4xl tracking-tight">
-                  {p.name}
-                </div>
+                <div className="font-display text-3xl lg:text-4xl tracking-tight">{p.name}</div>
                 <div className="text-[11px] uppercase tracking-[0.25em] text-accent mt-2 font-semibold">
                   {p.role}
                 </div>
@@ -582,13 +590,13 @@ export function Founders() {
               <div className="w-10 h-px bg-accent/60 mx-auto mb-5" />
 
               {/* Bio */}
-              <p className="text-sm text-ivory/50 leading-relaxed max-w-xs mx-auto mb-6">
-                {p.bio}
-              </p>
+              <p className="text-sm text-ivory/50 leading-relaxed max-w-xs mx-auto mb-6">{p.bio}</p>
 
               {/* Quote */}
               <blockquote className="relative max-w-sm mx-auto">
-                <span className="font-display text-5xl text-accent/15 leading-none select-none absolute -top-5 -left-2">"</span>
+                <span className="font-display text-5xl text-accent/15 leading-none select-none absolute -top-5 -left-2">
+                  "
+                </span>
                 <p className="font-display text-lg italic text-ivory/75 leading-snug pl-4">
                   {p.quote}
                 </p>
@@ -609,18 +617,54 @@ export function Founders() {
 }
 
 export const SERVICES = [
-  { i: Megaphone, t: "Social Media Marketing", d: "Always-on content systems built for retention and reach." },
-  { i: TrendingUp, t: "Performance Marketing", d: "Paid media engineered for ROAS, not vanity metrics." },
-  { i: Camera, t: "Photography & Videography", d: "Cinematic capture for hospitality, lifestyle and brand films." },
-  { i: Sparkles, t: "Influencer Marketing", d: "Curated talent partnerships that feel native to your category." },
-  { i: Palette, t: "Branding & Identity", d: "Logo systems, visual language and brand books that age well." },
+  {
+    i: Megaphone,
+    t: "Social Media Marketing",
+    d: "Always-on content systems built for retention and reach.",
+  },
+  {
+    i: TrendingUp,
+    t: "Performance Marketing",
+    d: "Paid media engineered for ROAS, not vanity metrics.",
+  },
+  {
+    i: Camera,
+    t: "Photography & Videography",
+    d: "Cinematic capture for hospitality, lifestyle and brand films.",
+  },
+  {
+    i: Sparkles,
+    t: "Influencer Marketing",
+    d: "Curated talent partnerships that feel native to your category.",
+  },
+  {
+    i: Palette,
+    t: "Branding & Identity",
+    d: "Logo systems, visual language and brand books that age well.",
+  },
   { i: MailIcon, t: "Email Marketing", d: "Lifecycle journeys that turn lists into revenue." },
-  { i: MessageCircle, t: "WhatsApp Marketing", d: "Conversational commerce that closes warm leads in hours." },
+  {
+    i: MessageCircle,
+    t: "WhatsApp Marketing",
+    d: "Conversational commerce that closes warm leads in hours.",
+  },
   { i: Globe, t: "Website Development", d: "Fast, conversion-tuned websites with editorial soul." },
-  { i: Database, t: "CRM Services", d: "Set up, segment and automate so growth stops being manual." },
+  {
+    i: Database,
+    t: "CRM Services",
+    d: "Set up, segment and automate so growth stops being manual.",
+  },
   { i: Hotel, t: "OTA Listings & Management", d: "Hospitality distribution done with discipline." },
-  { i: Calendar, t: "Event Curation", d: "Brand experiences that move audiences and the algorithm." },
-  { i: Play, t: "Brand Films", d: "High-end visual storytelling that commands attention and emotion." },
+  {
+    i: Calendar,
+    t: "Event Curation",
+    d: "Brand experiences that move audiences and the algorithm.",
+  },
+  {
+    i: Play,
+    t: "Brand Films",
+    d: "High-end visual storytelling that commands attention and emotion.",
+  },
 ];
 
 function Services() {
@@ -634,7 +678,8 @@ function Services() {
               <span className="w-10 h-px bg-emerald-deep/40" /> Capabilities
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
-              Twelve disciplines.<br />
+              Twelve disciplines.
+              <br />
               <em className="italic text-emerald-deep">One growth engine.</em>
             </h2>
           </div>
@@ -644,12 +689,14 @@ function Services() {
           </p>
         </div>
 
-        <div ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+        <div
+          ref={containerRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border"
+        >
           {SERVICES.map((s, idx) => (
             <a
               key={s.t}
-              href={`/services/${s.t.toLowerCase().replace(/\s+/g, '-').replace(/-&-/g, '-')}`}
+              href={`/services/${s.t.toLowerCase().replace(/\s+/g, "-").replace(/-&-/g, "-")}`}
               className="group relative bg-background p-8 lg:p-10 hover:bg-emerald-deep hover:text-ivory transition-colors duration-500 cursor-pointer min-h-[260px] flex flex-col justify-between"
               style={staggerItemStyle(shown, idx, 80)}
             >
@@ -669,252 +716,6 @@ function Services() {
             </a>
           ))}
           {/* Grid completely filled with 12 services */}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SocialShowcase() {
-  const posts = [
-    { img: hero2, kind: "Reel", metric: "1.2M plays" },
-    { img: work3, kind: "Carousel", metric: "84K saves" },
-    { img: work2, kind: "Story", metric: "92% completion" },
-    { img: work4, kind: "Reel", metric: "608K plays" },
-    { img: work1, kind: "Campaign", metric: "+412% reach" },
-    { img: hero1, kind: "Reel", metric: "Viral · 2.4M" },
-  ];
-  return (
-    <section className="bg-background py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
-              <span className="w-10 h-px bg-emerald-deep/40" /> Social Media
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-              Content that <em className="italic text-emerald-deep">earns the scroll.</em>
-            </h2>
-          </div>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-emerald-deep border-b border-emerald-deep pb-1"
-          >
-            <Instagram className="!size-4" /> Follow @habigo.360
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {posts.map((p, i) => (
-            <article
-              key={i}
-              className={`group relative overflow-hidden rounded-sm bg-secondary ${
-                i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-[4/5]"
-              }`}
-            >
-              <img src={p.img} alt="" className="size-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-              <div className="absolute inset-0 bg-emerald-deep/0 group-hover:bg-emerald-deep/85 transition-colors duration-500 flex flex-col items-center justify-center text-center p-4">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                  {p.kind}
-                </div>
-                <div className="font-display text-xl text-ivory mt-2 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  {p.metric}
-                </div>
-              </div>
-              <div className="absolute top-3 right-3 bg-ivory/95 backdrop-blur text-emerald-deep text-[9px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full">
-                {p.kind}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ResultsDashboard() {
-  return (
-    <section id="results" className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.18),_transparent_50%)]" />
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
-        <div className="grid lg:grid-cols-12 gap-10 mb-16 items-end">
-          <div className="lg:col-span-7">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-              <span className="w-10 h-px bg-ivory/30" /> Paid Marketing
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(2rem,5vw,5rem)] leading-[1] font-light">
-              Creativity is great.<br />
-              <em className="italic text-accent">Results are better.</em>
-            </h2>
-          </div>
-          <p className="lg:col-span-5 text-ivory/65 text-[15px] leading-relaxed">
-            Every campaign tied to a number. Every number tied to a decision. Here's the proof from
-            the last twelve months.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/15 border border-white/15 rounded-sm overflow-hidden">
-          {[
-            { v: 45, s: "L+", l: "Revenue Generated", sub: "Lakhs INR" },
-            { v: 7, s: "x", l: "ROAS Peak", sub: "On scaled accounts" },
-            { v: 703, s: "K", l: "Revenue in 15 days", sub: "Single campaign" },
-            { v: 38, s: "%", l: "Avg CVR Lift", sub: "Pre vs post takeover" },
-          ].map((m) => (
-            <div key={m.l} className="bg-ivory-warm p-8">
-              <div className="font-display text-5xl lg:text-6xl text-emerald-deep">
-                <Counter to={m.v} suffix={m.s} />
-              </div>
-              <div className="mt-4 text-sm text-foreground">{m.l}</div>
-              <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/45 mt-1">
-                {m.sub}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mini chart card */}
-        <div className="mt-8 grid lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-emerald-soft/40 border border-ivory/10 rounded-sm p-8">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/50">
-                  Revenue Trend · Q3
-                </div>
-                <div className="font-display text-3xl mt-1">₹ 703,420</div>
-              </div>
-              <div className="text-accent text-sm">▲ 312% vs Q2</div>
-            </div>
-            <MiniChart />
-          </div>
-          <div className="bg-emerald-soft/40 border border-ivory/10 rounded-sm p-8 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/50">
-                Top Performing
-              </div>
-              <div className="font-display text-2xl mt-2 leading-tight">Maison Lumière</div>
-              <div className="text-sm text-ivory/60 mt-1">Hospitality · Meta + Google</div>
-            </div>
-            <div className="mt-6 space-y-3 text-sm">
-              {[
-                ["CTR", "4.8%"],
-                ["CPM", "₹ 142"],
-                ["ROAS", "7.2x"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex justify-between border-t border-ivory/10 pt-3">
-                  <span className="text-ivory/55 uppercase text-[10px] tracking-[0.2em]">{k}</span>
-                  <span className="text-accent font-mono">{v}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MiniChart() {
-  const points = [10, 18, 14, 26, 22, 38, 34, 52, 48, 64, 78, 88];
-  const max = 100;
-  const w = 600;
-  const h = 160;
-  const step = w / (points.length - 1);
-  const d = points
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (p / max) * h}`)
-    .join(" ");
-  const area = `${d} L ${w} ${h} L 0 ${h} Z`;
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-40">
-      <defs>
-        <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="oklch(0.78 0.11 80)" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="oklch(0.78 0.11 80)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={area} fill="url(#g)" />
-      <path d={d} stroke="oklch(0.78 0.11 80)" strokeWidth="2" fill="none" />
-      {points.map((p, i) => (
-        <circle key={i} cx={i * step} cy={h - (p / max) * h} r="3" fill="oklch(0.97 0.012 90)" />
-      ))}
-    </svg>
-  );
-}
-
-function Gallery() {
-  const cats = [
-    { img: work1, label: "Property" },
-    { img: work2, label: "Hospitality" },
-    { img: work3, label: "Lifestyle" },
-    { img: work4, label: "Drone & Aerial" },
-  ];
-  return (
-    <section className="bg-background py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">
-            Photography & Videography
-          </span>
-          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-            A gallery, not a catalogue.
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {cats.map((c) => (
-            <article key={c.label} className="group relative aspect-[3/4] overflow-hidden rounded-sm">
-              <img src={c.img} alt={c.label} className="size-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/90 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6">
-                <div className="font-display text-2xl text-ivory">{c.label}</div>
-                <div className="text-[10px] uppercase tracking-[0.22em] text-accent mt-1">
-                  View series →
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Process() {
-  const { shown, containerRef } = useStaggerReveal({ staggerMs: 100 });
-  const steps = [
-    ["01", "Research & Discovery", "Deep dive into category, customer and competitive whitespace."],
-    ["02", "Audience Profiling", "Behavioral segments built from data, not demographics."],
-    ["03", "Strategy Development", "Positioning, narrative and a measurable growth plan."],
-    ["04", "Content Production", "Cinematic capture, design systems and platform-native assets."],
-    ["05", "Campaign Execution", "Paid, organic and CRM moving as one orchestrated motion."],
-    ["06", "Optimization & Reporting", "Weekly iteration. Monthly insight. Always-on growth."],
-  ];
-  return (
-    <section className="bg-emerald-deep text-ivory py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="mb-16 max-w-2xl">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-            <span className="w-10 h-px bg-ivory/30" /> Our Process
-          </span>
-          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-            Six steps from <em className="italic text-accent">brief</em> to{" "}
-            <em className="italic text-accent">breakthrough.</em>
-          </h2>
-        </div>
-        <div className="relative">
-          <div className="absolute left-0 right-0 top-12 h-px bg-ivory/15 hidden lg:block" />
-          <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
-            {steps.map(([n, t, d]) => (
-              <div key={n} className="relative">
-                <div className="hidden lg:block absolute -top-1.5 size-4 rounded-full bg-accent ring-4 ring-emerald-deep" />
-                <div className="lg:pt-12">
-                  <div className="font-mono text-xs text-accent mb-3">{n}</div>
-                  <div className="font-display text-xl mb-2">{t}</div>
-                  <p className="text-sm text-ivory/60 leading-relaxed">{d}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -948,118 +749,6 @@ function ImpactCounters() {
   );
 }
 
-function Team() {
-  const { shown, containerRef } = useStaggerReveal({ staggerMs: 80 });
-  const team = [
-    { 
-      n: "Strategy", 
-      c: 5, 
-      e: "Brand & business strategy",
-      members: [
-        { name: "Strategy Specialist 1" },
-        { name: "Strategy Specialist 2" },
-        { name: "Strategy Specialist 3" },
-      ]
-    },
-    { 
-      n: "Brand Management", 
-      c: 4, 
-      e: "Client & account leadership",
-      members: [
-        { name: "Brand Specialist 1" },
-        { name: "Brand Specialist 2" },
-      ]
-    },
-    { 
-      n: "Design", 
-      c: 6, 
-      e: "Identity, motion & UI",
-      members: [
-        { name: "Design Specialist 1" },
-        { name: "Design Specialist 2" },
-        { name: "Design Specialist 3" },
-        { name: "Design Specialist 4" },
-      ]
-    },
-    { 
-      n: "Video Production", 
-      c: 5, 
-      e: "Direction, capture & edit",
-      members: [
-        { name: "Arpit", photo: arpitImg },
-        { name: "Dipanshu", photo: dipanshuImg },
-        { name: "Video Specialist 3" },
-      ]
-    },
-    { 
-      n: "Performance Marketing", 
-      c: 4, 
-      e: "Paid, CRM & analytics",
-      members: [
-        { name: "Marketing Specialist 1" },
-        { name: "Marketing Specialist 2" },
-      ]
-    },
-  ];
-  return (
-    <section id="team" className="bg-background py-28 lg:py-40">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-12 gap-12 mb-20 items-end">
-          <div className="lg:col-span-7">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
-              <span className="w-10 h-px bg-emerald-deep/40" /> The Team
-            </span>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
-              A studio of <em className="italic text-emerald-deep">specialists.</em>
-            </h2>
-          </div>
-        </div>
-        <div className="flex flex-col gap-24">
-          {team.map((t, i) => (
-            <div key={t.n}>
-              {/* Category Header */}
-              <div className="border-b border-border pb-6 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div className="flex items-center gap-6">
-                  <div className="font-mono text-sm text-emerald-deep/40">0{i + 1}</div>
-                  <h3 className="font-display text-3xl md:text-4xl text-emerald-deep">{t.n}</h3>
-                </div>
-                <div className="md:text-right">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
-                    {t.c} Specialists · 7+ yrs avg
-                  </div>
-                  <div className="text-sm text-foreground/60 mt-1">{t.e}</div>
-                </div>
-              </div>
-
-              {/* Members Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10">
-                {t.members.map((m: any, idx) => (
-                  <div key={idx} className="flex flex-col gap-4 group">
-                    <div className="aspect-[4/5] bg-secondary rounded-sm overflow-hidden relative group-hover:opacity-90 transition-opacity">
-                      {m.photo ? (
-                        <img src={m.photo} alt={m.name} className="size-full object-cover" loading="lazy" />
-                      ) : (
-                        <div className="size-full flex flex-col items-center justify-center text-foreground/20 bg-emerald-soft/10">
-                          <Camera className="size-8 opacity-20 mb-2" />
-                          <span className="text-[9px] uppercase tracking-[0.2em] opacity-40">Photo pending</span>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <div className="font-display text-xl leading-tight text-foreground">{m.name}</div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-deep/60 mt-1">{t.n}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Clients() {
   const logos = [
     { name: "Maison Lumière" },
@@ -1077,7 +766,10 @@ function Clients() {
   ];
 
   return (
-    <section id="clients" className="bg-emerald-deep text-ivory py-24 lg:py-32 border-t border-ivory/5 overflow-hidden">
+    <section
+      id="clients"
+      className="bg-emerald-deep text-ivory py-24 lg:py-32 border-t border-ivory/5 overflow-hidden"
+    >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 mb-14">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">Clients</span>
@@ -1089,32 +781,43 @@ function Clients() {
           </p>
         </div>
       </div>
-      
+
       {/* Infinite slider row 1 */}
       <div className="relative flex overflow-x-hidden border-y border-ivory/10">
         <div className="py-10 flex gap-8 animate-marquee whitespace-nowrap min-w-full">
           {[...logos, ...logos, ...logos].map((l, i) => (
-            <div key={i} className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0">
-               <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
-                 <Globe className="!size-4 text-accent" />
-               </div>
-               <span className="font-display text-xl text-ivory">{l.name}</span>
+            <div
+              key={i}
+              className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0"
+            >
+              <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
+                <Globe className="!size-4 text-accent" />
+              </div>
+              <span className="font-display text-xl text-ivory">{l.name}</span>
             </div>
           ))}
         </div>
       </div>
-      
+
       {/* Infinite slider row 2 - Reverse */}
       <div className="relative flex overflow-x-hidden border-b border-ivory/10">
-        <div className="py-10 flex gap-8 animate-marquee-slow whitespace-nowrap min-w-full" style={{ animationDirection: "reverse" }}>
-          {[...logos.slice().reverse(), ...logos.slice().reverse(), ...logos.slice().reverse()].map((l, i) => (
-            <div key={i} className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0">
-               <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
-                 <Globe className="!size-4 text-accent" />
-               </div>
-               <span className="font-display text-xl text-ivory">{l.name}</span>
-            </div>
-          ))}
+        <div
+          className="py-10 flex gap-8 animate-marquee-slow whitespace-nowrap min-w-full"
+          style={{ animationDirection: "reverse" }}
+        >
+          {[...logos.slice().reverse(), ...logos.slice().reverse(), ...logos.slice().reverse()].map(
+            (l, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0"
+              >
+                <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
+                  <Globe className="!size-4 text-accent" />
+                </div>
+                <span className="font-display text-xl text-ivory">{l.name}</span>
+              </div>
+            ),
+          )}
         </div>
       </div>
     </section>
@@ -1155,7 +858,8 @@ function Testimonials() {
           {t.map((x, i) => (
             <article
               key={i}
-              style={staggerItemStyle(shown, i, 100)} className="group bg-card border border-border rounded-sm p-8 lg:p-10 flex flex-col justify-between min-h-[380px] hover:bg-emerald-deep hover:text-ivory transition-colors duration-500"
+              style={staggerItemStyle(shown, i, 100)}
+              className="group bg-card border border-border rounded-sm p-8 lg:p-10 flex flex-col justify-between min-h-[380px] hover:bg-emerald-deep hover:text-ivory transition-colors duration-500"
             >
               <div>
                 <div className="font-display text-6xl leading-none text-accent">"</div>
@@ -1178,27 +882,46 @@ function Testimonials() {
 }
 
 export function Contact() {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', industry: '', service: '', brief: '' });
-  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    industry: "",
+    service: "",
+    brief: "",
+  });
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
   const mutation = useMutation({
     mutationFn: submitContact,
     onSuccess: (result) => {
       if (result.success) {
-        setFormStatus('success');
-        setForm({ name: '', company: '', email: '', phone: '', industry: '', service: '', brief: '' });
-        setTimeout(() => setFormStatus('idle'), 5000);
+        setFormStatus("success");
+        setForm({
+          name: "",
+          company: "",
+          email: "",
+          phone: "",
+          industry: "",
+          service: "",
+          brief: "",
+        });
+        setTimeout(() => setFormStatus("idle"), 5000);
       } else {
-        setFormStatus('error');
+        setFormStatus("error");
       }
     },
-    onError: () => setFormStatus('error'),
+    onError: () => setFormStatus("error"),
   });
 
   const updateField = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
   return (
-    <section id="contact" className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
+    <section
+      id="contact"
+      className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15),_transparent_55%)]" />
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
         <div className="grid lg:grid-cols-12 gap-16">
@@ -1216,30 +939,40 @@ export function Contact() {
 
             <div className="mt-12 space-y-6">
               {[
-                { i: MessageCircle, l: "WhatsApp", v: "+91 89638 58888", href: "https://wa.me/918963858888" },
-                { i: MailIcon, l: "Email", v: "admin@habigo360.com", href: "mailto:admin@habigo360.com" },
+                {
+                  i: MessageCircle,
+                  l: "WhatsApp",
+                  v: "+91 89638 58888",
+                  href: "https://wa.me/918963858888",
+                },
+                {
+                  i: MailIcon,
+                  l: "Email",
+                  v: "admin@habigo360.com",
+                  href: "mailto:admin@habigo360.com",
+                },
                 { i: Phone, l: "Phone", v: "+91 89638 58888", href: "tel:+918963858888" },
                 { i: MapPin, l: "Studio", v: "Jaipur", href: undefined },
               ].map((x) => {
                 const Tag = x.href ? "a" : "div";
                 return (
-                <Tag
-                  key={x.l}
-                  href={x.href ?? undefined}
-                  target={x.href?.startsWith("http") ? "_blank" : undefined}
-                  rel={x.href?.startsWith("http") ? "noreferrer" : undefined}
-                  className="flex items-center gap-5 group"
-                >
-                  <div className="size-12 rounded-full bg-ivory/5 border border-ivory/10 grid place-items-center group-hover:bg-accent group-hover:border-accent transition-colors">
-                    <x.i className="!size-5 text-accent group-hover:text-emerald-deep" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45">
-                      {x.l}
+                  <Tag
+                    key={x.l}
+                    href={x.href ?? undefined}
+                    target={x.href?.startsWith("http") ? "_blank" : undefined}
+                    rel={x.href?.startsWith("http") ? "noreferrer" : undefined}
+                    className="flex items-center gap-5 group"
+                  >
+                    <div className="size-12 rounded-full bg-ivory/5 border border-ivory/10 grid place-items-center group-hover:bg-accent group-hover:border-accent transition-colors">
+                      <x.i className="!size-5 text-accent group-hover:text-emerald-deep" />
                     </div>
-                    <div className="text-base">{x.v}</div>
-                  </div>
-                </Tag>
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45">
+                        {x.l}
+                      </div>
+                      <div className="text-base">{x.v}</div>
+                    </div>
+                  </Tag>
                 );
               })}
             </div>
@@ -1251,13 +984,13 @@ export function Contact() {
               const target = e.target as HTMLFormElement;
               const fd = new FormData(target);
               const data = {
-                name: fd.get('name') as string || '',
-                company: fd.get('company') as string || '',
-                email: fd.get('email') as string || '',
-                phone: fd.get('phone') as string || '',
-                industry: fd.get('industry') as string || '',
-                service: fd.get('service') as string || '',
-                brief: fd.get('brief') as string || '',
+                name: (fd.get("name") as string) || "",
+                company: (fd.get("company") as string) || "",
+                email: (fd.get("email") as string) || "",
+                phone: (fd.get("phone") as string) || "",
+                industry: (fd.get("industry") as string) || "",
+                service: (fd.get("service") as string) || "",
+                brief: (fd.get("brief") as string) || "",
               };
               mutation.mutate({ data });
             }}
@@ -1275,9 +1008,17 @@ export function Contact() {
                 <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                   Services Required
                 </label>
-                <select name="service" required className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors">
-                  <option value="" disabled selected>Select a service</option>
-                  <option value="Full-stack growth partnership">Full-stack growth partnership</option>
+                <select
+                  name="service"
+                  required
+                  className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors"
+                >
+                  <option value="" disabled selected>
+                    Select a service
+                  </option>
+                  <option value="Full-stack growth partnership">
+                    Full-stack growth partnership
+                  </option>
                   <option value="Branding & identity">Branding & identity</option>
                   <option value="Performance marketing">Performance marketing</option>
                   <option value="Content & production">Content & production</option>
@@ -1297,15 +1038,39 @@ export function Contact() {
                 className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors resize-none"
               />
             </div>
-            {formStatus === 'success' && (
+            {formStatus === "success" && (
               <div className="flex items-center gap-3 px-5 py-3 rounded-lg bg-emerald-soft/20 text-emerald-soft text-sm">
-                <svg className="!size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                <svg
+                  className="!size-5 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
                 Thank you! We'll be in touch within one working day.
               </div>
             )}
-            {formStatus === 'error' && (
+            {formStatus === "error" && (
               <div className="flex items-center gap-3 px-5 py-3 rounded-lg bg-red-500/10 text-red-600 text-sm">
-                <svg className="!size-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <svg
+                  className="!size-5 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
                 Something went wrong. Please email us directly at admin@habigo360.com
               </div>
             )}
@@ -1385,7 +1150,18 @@ export function Footer() {
           <ul className="space-y-3 text-sm">
             {NAV.map((n) => (
               <li key={n.id}>
-                <a href={n.id === 'home' ? '/' : n.id === 'about' ? '/about' : n.id === 'services' ? '/services' : `/#${n.id}`} className="text-ivory/75 hover:text-accent">
+                <a
+                  href={
+                    n.id === "home"
+                      ? "/"
+                      : n.id === "about"
+                        ? "/about"
+                        : n.id === "services"
+                          ? "/services"
+                          : `/#${n.id}`
+                  }
+                  className="text-ivory/75 hover:text-accent"
+                >
                   {n.label}
                 </a>
               </li>
@@ -1409,9 +1185,7 @@ export function Footer() {
           <ul className="space-y-3 text-sm text-ivory/75">
             <li>admin@habigo360.com</li>
             <li>+91 89638 58888</li>
-            <li>
-              Jaipur
-            </li>
+            <li>Jaipur</li>
           </ul>
         </div>
       </div>

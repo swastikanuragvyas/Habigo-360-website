@@ -5,6 +5,12 @@ import { Nav, Footer, Contact, StickyCTA, SERVICES, useReveal } from "./index";
 
 export const Route = createFileRoute("/services/")({
   component: ServicesPage,
+  head: () => ({
+    meta: [
+      { title: "Services & Capabilities | HabiGo 360" },
+      { name: "description", content: "From performance marketing to brand films, explore our twelve core disciplines designed to build your growth engine." }
+    ]
+  })
 });
 
 /* ─── Main Layout ─────────────────────────────────────────────────────── */
