@@ -31,6 +31,8 @@ import {
 
 import ImmersiveHero from "@/components/ImmersiveHero";
 import LivingPortfolio from "@/components/LivingPortfolio";
+import InstagramMockups from "@/components/InstagramMockups";
+import OurWorkCarousels from "@/components/OurWorkCarousels";
 import { ScrollProgress, SocialProofTicker } from "@/components/AmbientStorytelling";
 import { useStaggerReveal, staggerItemStyle } from "@/hooks/useStaggerReveal";
 import { useMutation } from "@tanstack/react-query";
@@ -153,6 +155,8 @@ function HabiGoHome() {
       <ImpactCounters />
       <Clients />
       <WhyChooseUs />
+      <OurWorkCarousels />
+      <InstagramMockups />
       <Testimonials />
       <FAQs />
       <Contact />
