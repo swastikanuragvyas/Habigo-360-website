@@ -751,18 +751,26 @@ function ImpactCounters() {
 
 function Clients() {
   const logos = [
-    { name: "Maison Lumière" },
-    { name: "Olive & Ember" },
-    { name: "Atelier Noir" },
-    { name: "Verde Sanctuary" },
-    { name: "Ivory & Co." },
-    { name: "Aurora Rooms" },
-    { name: "Mistral" },
-    { name: "House of Saffron" },
-    { name: "Lush Stay" },
-    { name: "North Cove" },
-    { name: "Velvet Hour" },
-    { name: "The Calico Co." },
+    { name: "Bhanpur Haveli", image: "/logos/1.png" },
+    { name: "Namli Hospitality", image: "/logos/2.png" },
+    { name: "Sajjanbagh", image: "/logos/3.png" },
+    { name: "Indian Kitchen", image: "/logos/4.png" },
+    { name: "Dolce Vita", image: "/logos/5.png" },
+    { name: "Prestige Group", image: "/logos/6.png" },
+    { name: "Flat Fee Buyers", image: "/logos/7.png" },
+    { name: "The Gypsy Adventures", image: "/logos/8.png" },
+    { name: "Maxus Builder", image: "/logos/9.png" },
+    { name: "Anvaya", image: "/logos/10.png" },
+    { name: "The Times of India", image: "/logos/11.png" },
+    { name: "Vicinity", image: "/logos/12.png" },
+    { name: "SMR Holdings", image: "/logos/13.png" },
+    { name: "Nakoda Jewellers", image: "/logos/14.png" },
+    { name: "Foodworks", image: "/logos/15.png" },
+    { name: "Rare Rabbit", image: "/logos/16.png" },
+    { name: "Burger Farm", image: "/logos/17.png" },
+    { name: "Hotel Vishranti", image: "/logos/18.png" },
+    { name: "Bari's Personal Training", image: "/logos/19.png" },
+    { name: "IIM Mumbai", image: "/logos/20.png" },
   ];
 
   return (
@@ -788,12 +796,9 @@ function Clients() {
           {[...logos, ...logos, ...logos].map((l, i) => (
             <div
               key={i}
-              className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0"
+              className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors shrink-0 w-64 h-28 shadow-sm"
             >
-              <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
-                <Globe className="!size-4 text-accent" />
-              </div>
-              <span className="font-display text-xl text-ivory">{l.name}</span>
+              <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
             </div>
           ))}
         </div>
@@ -809,12 +814,9 @@ function Clients() {
             (l, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 bg-ivory/5 border border-ivory/10 px-8 py-5 rounded-sm hover:bg-ivory/10 transition-colors cursor-default shrink-0"
+                className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors shrink-0 w-64 h-28 shadow-sm"
               >
-                <div className="size-10 bg-ivory/10 rounded-full flex items-center justify-center">
-                  <Globe className="!size-4 text-accent" />
-                </div>
-                <span className="font-display text-xl text-ivory">{l.name}</span>
+                <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
               </div>
             ),
           )}
