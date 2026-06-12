@@ -792,13 +792,14 @@ function Clients() {
 
       {/* Infinite slider row 1 */}
       <div className="relative flex overflow-x-hidden border-y border-ivory/10">
-        <div className="py-10 flex gap-8 animate-marquee whitespace-nowrap min-w-full">
-          {[...logos, ...logos, ...logos].map((l, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors shrink-0 w-64 h-28 shadow-sm"
-            >
-              <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
+        <div className="py-10 flex animate-marquee whitespace-nowrap w-max hover:[animation-play-state:paused]">
+          {[...logos, ...logos].map((l, i) => (
+            <div key={i} className="pr-8 shrink-0">
+              <div
+                className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors w-64 h-28 shadow-sm"
+              >
+                <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply opacity-80 hover:opacity-100 transition-opacity" />
+              </div>
             </div>
           ))}
         </div>
@@ -807,16 +808,17 @@ function Clients() {
       {/* Infinite slider row 2 - Reverse */}
       <div className="relative flex overflow-x-hidden border-b border-ivory/10">
         <div
-          className="py-10 flex gap-8 animate-marquee-slow whitespace-nowrap min-w-full"
+          className="py-10 flex animate-marquee-slow whitespace-nowrap w-max hover:[animation-play-state:paused]"
           style={{ animationDirection: "reverse" }}
         >
-          {[...logos.slice().reverse(), ...logos.slice().reverse(), ...logos.slice().reverse()].map(
+          {[...logos.slice().reverse(), ...logos.slice().reverse()].map(
             (l, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors shrink-0 w-64 h-28 shadow-sm"
-              >
-                <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
+              <div key={i} className="pr-8 shrink-0">
+                <div
+                  className="flex items-center justify-center bg-white px-6 py-4 rounded-xl hover:bg-white/90 transition-colors w-64 h-28 shadow-sm"
+                >
+                  <img src={l.image} alt={l.name} className="max-w-full max-h-full object-contain mix-blend-multiply opacity-80 hover:opacity-100 transition-opacity" />
+                </div>
               </div>
             ),
           )}
