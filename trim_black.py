@@ -31,3 +31,4 @@ logos_dir = "public/logos"
 for filename in os.listdir(logos_dir):
     if filename.lower().endswith(".png"):
         trim_black_borders(os.path.join(logos_dir, filename))
+
