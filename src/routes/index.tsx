@@ -1000,7 +1000,7 @@ export function Contact() {
                 service: (fd.get("service") as string) || "",
                 brief: (fd.get("brief") as string) || "",
               };
-              mutation.mutate({ data });
+              mutation.mutate(data);
             }}
             className="lg:col-span-7 bg-ivory text-foreground p-8 lg:p-12 rounded-sm space-y-6"
           >

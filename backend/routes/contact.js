@@ -2,6 +2,9 @@ const express = require("express");
 const Contact = require("../models/Contact");
 
 const router = express.Router();
+router.get("/", (req, res) => {
+  res.send("Contact API working");
+});
 
 // POST /api/contact
 router.post("/", async (req, res) => {
