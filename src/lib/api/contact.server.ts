@@ -17,19 +17,28 @@ export type ContactInput = z.infer<typeof contactSchema>;
 // Current implementation logs to console and returns success for demo purposes.
 
 async function deliverNotification(data: ContactInput) {
-  // Example: send email via Resend
-  // const { error } = await resend.emails.send({
-  //   from: "HabiGo 360 <admin@habigo360.com>",
-  //   to: "admin@habigo360.com",
-  //   subject: `New inquiry from ${data.name}`,
-  //   text: `Name: ${data.name}\nCompany: ${data.company}\nEmail: ${data.email}\nPhone: ${data.phone}\nIndustry: ${data.industry}\nService: ${data.service}\nBrief: ${data.brief}`,
-  // });
-  // return error;
+  try {
+    const apiUrl = process.env.VITE_API_URL || "http://localhost:5000/api";
+    const response = await fetch(`${apiUrl}/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-  // Cloudflare Workers: use await fetch(EMAIL_WORKER_URL, { method: "POST", body: JSON.stringify(data) })
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to submit contact to backend:", errorText);
+      return "Failed to save inquiry.";
+    }
 
-  console.log("[HabiGo Contact]", JSON.stringify(data, null, 2));
-  return null; // null = no error
+    console.log("[HabiGo Contact] Successfully saved to MongoDB:", data.email);
+    return null; // null = no error
+  } catch (error) {
+    console.error("Error connecting to backend:", error);
+    return "Failed to connect to the database.";
+  }
 }
 
 export const submitContact = createServerFn({ method: "POST" })
