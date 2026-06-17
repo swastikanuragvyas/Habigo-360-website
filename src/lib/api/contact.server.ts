@@ -17,6 +17,17 @@ export type ContactInput = z.infer<typeof contactSchema>;
 // Current implementation logs to console and returns success for demo purposes.
 
 async function deliverNotification(data: ContactInput) {
+  // Example: send email via Resend
+  // const { error } = await resend.emails.send({
+  //   from: "HabiGo 360 <admin@habigo360.com>",
+  //   to: "admin@habigo360.com",
+  //   subject: `New inquiry from ${data.name}`,
+  //   text: `Name: ${data.name}\nCompany: ${data.company}\nEmail: ${data.email}\nPhone: ${data.phone}\nIndustry: ${data.industry}\nService: ${data.service}\nBrief: ${data.brief}`,
+  // });
+  // return error;
+
+  // Cloudflare Workers: use await fetch(EMAIL_WORKER_URL, { method: "POST", body: JSON.stringify(data) })
+
   console.log("[HabiGo Contact]", JSON.stringify(data, null, 2));
   return null; // null = no error
 }
