@@ -1042,6 +1042,8 @@ export function Contact() {
               <textarea
                 name="brief"
                 rows={4}
+                required
+                minLength={10}
                 placeholder="A few lines about your goals, timeline and budget range..."
                 className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors resize-none"
               />
