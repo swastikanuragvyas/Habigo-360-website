@@ -1016,40 +1016,23 @@ export function Contact() {
                 <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                   Services Required
                 </label>
-               <select
-  name="service"
-  required
-  defaultValue=""
-  className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors"
->
-  <option value="" disabled>
-    Select a service
-  </option>
-
-  <option value="Full-stack growth partnership">
-    Full-stack growth partnership
-  </option>
-
-  <option value="Branding & identity">
-    Branding & identity
-  </option>
-
-  <option value="Performance marketing">
-    Performance marketing
-  </option>
-
-  <option value="Content & production">
-    Content & production
-  </option>
-
-  <option value="Website development">
-    Website development
-  </option>
-
-  <option value="Other / not sure yet">
-    Other / not sure yet
-  </option>
-</select>
+                <select
+                  name="service"
+                  required
+                  className="w-full bg-transparent border-b border-border py-2.5 focus:border-emerald-deep outline-none text-sm transition-colors"
+                >
+                  <option value="" disabled selected>
+                    Select a service
+                  </option>
+                  <option value="Full-stack growth partnership">
+                    Full-stack growth partnership
+                  </option>
+                  <option value="Branding & identity">Branding & identity</option>
+                  <option value="Performance marketing">Performance marketing</option>
+                  <option value="Content & production">Content & production</option>
+                  <option value="Website development">Website development</option>
+                  <option value="Other / not sure yet">Other / not sure yet</option>
+                </select>
               </div>
             </div>
             <div>
