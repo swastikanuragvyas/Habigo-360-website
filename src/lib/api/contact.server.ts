@@ -18,7 +18,7 @@ export type ContactInput = z.infer<typeof contactSchema>;
 
 async function deliverNotification(data: ContactInput) {
   try {
-    const apiUrl = process.env.VITE_API_URL || "http://localhost:5000/api";
+    const apiUrl = process.env.VITE_API_URL || "http://localhost:5001/api";
     const response = await fetch(`${apiUrl}/contact`, {
       method: "POST",
       headers: {
