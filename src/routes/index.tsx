@@ -307,17 +307,21 @@ export function Nav({
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[color:var(--emerald-deep)]/90 backdrop-blur-xl border-b border-white/5"
-          : "bg-transparent"
+      className={`fixed inset-x-0 z-50 transition-all duration-500 flex justify-center px-4 md:px-6 ${
+        scrolled ? "top-4" : "top-0"
       }`}
     >
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <div
+        className={`max-w-[1500px] w-full mx-auto px-6 lg:px-10 flex items-center justify-between transition-all duration-500 ${
+          scrolled
+            ? "h-16 rounded-full bg-[color:var(--emerald-deep)]/70 backdrop-blur-2xl border border-white/10 shadow-2xl"
+            : "h-20 bg-transparent rounded-none border-transparent"
+        }`}
+      >
         <a href="/" className="flex items-center">
           <img src={logoImg} alt="HabiGo 360" className="h-44 w-auto" />
         </a>
-        <nav className="hidden lg:flex items-center gap-9">
+        <nav className="hidden lg:flex items-center gap-2">
           {NAV.map((n) => {
             if (n.id === "services") {
               return (
@@ -329,8 +333,8 @@ export function Nav({
                 >
                   <a
                     href="/services"
-                    className={`text-[12px] uppercase tracking-[0.18em] transition-colors py-4 inline-block ${
-                      dropdownOpen ? "text-accent" : "text-ivory/70 hover:text-accent"
+                    className={`text-[11px] uppercase font-medium tracking-[0.15em] transition-all px-4 py-2.5 rounded-full inline-block ${
+                      dropdownOpen ? "text-accent bg-white/10" : "text-ivory hover:text-accent hover:bg-white/5"
                     }`}
                   >
                     {n.label}
@@ -349,7 +353,7 @@ export function Nav({
                     </svg>
                   </a>
                   <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-emerald-deep/95 backdrop-blur-xl border border-ivory/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-300 ${
+                    className={`absolute top-[calc(100%+0.5rem)] left-1/2 -translate-x-1/2 w-72 bg-emerald-deep/80 backdrop-blur-3xl border border-white/10 shadow-2xl rounded-2xl overflow-hidden transition-all duration-300 ${
                       dropdownOpen
                         ? "opacity-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 translate-y-3 pointer-events-none"
@@ -383,7 +387,7 @@ export function Nav({
               <a
                 key={n.id}
                 href={n.href ?? (n.id === "home" ? "/" : n.id === "about" ? "/about" : `/#${n.id}`)}
-                className="text-[12px] uppercase tracking-[0.18em] text-ivory/70 hover:text-accent transition-colors"
+                className="text-[11px] uppercase font-medium tracking-[0.15em] text-ivory hover:text-accent hover:bg-white/5 transition-all px-4 py-2.5 rounded-full"
               >
                 {n.label}
               </a>

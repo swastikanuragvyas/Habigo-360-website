@@ -756,12 +756,23 @@ function CareerModal({ career, onClose }: { career: any; onClose: () => void }) 
 
 function SiteContentView() {
   const queryClient = useQueryClient();
-  const keys = [
-    "hero1", "hero2", "hero3", 
-    "founder1", "founder2", 
-    "work1", "work2", "work3", "work4", "work5", 
-    "about", "arpit", "dipanshu"
-  ];
+  const photoLabels: Record<string, string> = {
+    "hero1": "Homepage Hero Slideshow 1",
+    "hero2": "Homepage Hero Slideshow 2",
+    "hero3": "Homepage Hero Slideshow 3",
+    "founder1": "Founder Profile (Anushka)",
+    "founder2": "Founder Profile (Saurabh)",
+    "work1": "Portfolio Gallery Image 1",
+    "work2": "Portfolio Gallery Image 2",
+    "work3": "Portfolio Gallery Image 3",
+    "work4": "Portfolio Gallery Image 4",
+    "work5": "Portfolio Gallery Image 5",
+    "about": "About Us Section Cover",
+    "arpit": "Team Member Profile (Arpit)",
+    "dipanshu": "Team Member Profile (Dipanshu)"
+  };
+
+  const keys = Object.keys(photoLabels);
 
   const { data: settings, isLoading } = useQuery({
     queryKey: ["settings"],
@@ -801,8 +812,9 @@ function SiteContentView() {
           const setting = settings?.find((s: any) => s.key === key);
           const val = setting?.value;
           return (
-            <div key={key} className="border border-emerald-deep/10 rounded-lg p-4 bg-[#fffdf6]">
-              <h3 className="font-medium mb-3 capitalize">{key.replace(/([A-Z0-9])/g, ' $1').trim()}</h3>
+            <div key={key} className="border border-white/10 rounded-xl p-5 bg-white/5 backdrop-blur-md">
+              <h3 className="font-medium text-ivory">{photoLabels[key]}</h3>
+              <p className="text-xs text-white/40 mb-4 font-mono">ID: {key}</p>
               <div className="aspect-video bg-secondary/30 rounded-md overflow-hidden mb-3 relative group flex items-center justify-center border border-dashed border-emerald-deep/20">
                 {val ? (
                   <img src={val} alt={key} className="w-full h-full object-cover" />

@@ -22,8 +22,8 @@ export default function DashboardAnalytics({ adminInfo }: { adminInfo: any }) {
             <Sparkles className="size-8 text-emerald-400" />
           </div>
           <div>
-            <h2 className="text-3xl font-light tracking-tight text-ivory">Welcome back, {(adminInfo.name || "Admin").split(" ")[0]}</h2>
-            <p className="text-white/50 mt-1">Here is what's happening with HabiGo 360 today.</p>
+            <h2 className="text-5xl font-light tracking-tight text-ivory">Welcome back, {(adminInfo.name || "Admin").split(" ")[0]}</h2>
+            <p className="text-white/60 text-lg mt-2">Here is what's happening with HabiGo 360 today.</p>
           </div>
         </div>
       </div>
@@ -46,8 +46,8 @@ export default function DashboardAnalytics({ adminInfo }: { adminInfo: any }) {
               </div>
             </div>
             <div>
-              <p className="text-3xl font-light text-ivory tracking-tight">{kpi.value}</p>
-              <p className="text-sm text-white/50 mt-1">{kpi.label}</p>
+              <p className="text-5xl font-light text-ivory tracking-tight">{kpi.value}</p>
+              <p className="text-base text-white/50 mt-2">{kpi.label}</p>
             </div>
           </div>
         ))}
@@ -56,7 +56,7 @@ export default function DashboardAnalytics({ adminInfo }: { adminInfo: any }) {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-          <h3 className="text-lg font-medium text-ivory mb-6">Website Traffic</h3>
+          <h3 className="text-xl font-medium text-ivory mb-6">Website Traffic</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={mockVisitorData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
@@ -80,7 +80,7 @@ export default function DashboardAnalytics({ adminInfo }: { adminInfo: any }) {
         </div>
         
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-          <h3 className="text-lg font-medium text-ivory mb-6">Lead Conversions</h3>
+          <h3 className="text-xl font-medium text-ivory mb-6">Lead Conversions</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={mockVisitorData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
