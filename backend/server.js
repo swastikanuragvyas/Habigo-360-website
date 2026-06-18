@@ -15,6 +15,11 @@ connectDB();
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/projects", require("./routes/projects"));
+app.use("/api/careers", require("./routes/careers"));
+app.use("/api/settings", require("./routes/settings"));
+app.use("/api/admins", require("./routes/admins"));
+app.use("/api/testimonials", require("./routes/testimonials"));
+app.use("/api/case-studies", require("./routes/case-studies"));
 
 // Basic route for testing
 app.get("/", (req, res) => {

@@ -33,10 +33,11 @@ import ImmersiveHero from "@/components/ImmersiveHero";
 import LivingPortfolio from "@/components/LivingPortfolio";
 import InstagramMockups from "@/components/InstagramMockups";
 import OurWorkCarousels from "@/components/OurWorkCarousels";
-import { ScrollProgress, SocialProofTicker } from "@/components/AmbientStorytelling";
+import { ScrollProgress } from "@/components/AmbientStorytelling";
 import { useStaggerReveal, staggerItemStyle } from "@/hooks/useStaggerReveal";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { submitContact } from "@/lib/api/contact.server";
+import api from "@/lib/api";
 
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
@@ -521,16 +522,25 @@ function About() {
 }
 
 export function Founders() {
+  const { data: settings } = useQuery({
+    queryKey: ["settings"],
+    queryFn: async () => {
+      const { data } = await api.get("/settings");
+      return data;
+    },
+  });
+  const getImg = (key: string, def: string) => settings?.find((s: any) => s.key === key)?.value || def;
+
   const f = [
     {
-      img: founder1,
+      img: getImg("founder1", founder1),
       name: "Anushka Mittal",
       role: "Founder & CEO",
       bio: "Leads strategy, brand vision and client growth. Hospitality-trained, obsessed with the details others miss.",
       quote: "We don't sell creativity. We sell outcomes — wrapped in beautiful work.",
     },
     {
-      img: founder2,
+      img: getImg("founder2", founder2),
       name: "Saurabh Sharma",
       role: "Co-Founder & CMO",
       bio: "Heads performance, content systems and platform marketing. Translates ambition into measurable distribution.",
@@ -569,8 +579,10 @@ export function Founders() {
                 <div
                   className="relative aspect-[3/4] overflow-hidden rounded-sm"
                   style={{
-                    maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
-                    WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+                    maskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                    maskComposite: "intersect",
+                    WebkitMaskComposite: "source-in",
                   }}
                 >
                   <img

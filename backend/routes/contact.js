@@ -21,4 +21,30 @@ router.post("/", async (req, res) => {
   }
 });
 
+// GET /api/contact
+router.get("/", async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// PUT /api/contact/:id
+router.put("/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+    
+    contact.status = req.body.status || contact.status;
+    const updatedContact = await contact.save();
+    res.json(updatedContact);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

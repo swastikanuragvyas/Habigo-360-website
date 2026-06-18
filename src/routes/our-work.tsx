@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
-import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight, Loader2 } from "lucide-react";
+import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight, Loader2, Image as ImageIcon } from "lucide-react";
 import { Nav, Footer, StickyCTA } from "./index";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";

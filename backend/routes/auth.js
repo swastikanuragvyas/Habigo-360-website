@@ -23,6 +23,8 @@ router.post("/login", async (req, res) => {
     if (admin && (await admin.matchPassword(password))) {
       res.json({
         _id: admin._id,
+        name: admin.name,
+        role: admin.role,
         email: admin.email,
         token: generateToken(admin._id),
       });
@@ -38,7 +40,7 @@ router.post("/login", async (req, res) => {
 // @desc    Register a new admin
 // @access  Public
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { name, role, email, password } = req.body;
 
   try {
     const adminExists = await Admin.findOne({ email });
@@ -48,6 +50,8 @@ router.post("/register", async (req, res) => {
     }
 
     const admin = await Admin.create({
+      name: name || "Admin User",
+      role: role || "Admin",
       email,
       password,
     });
@@ -55,6 +59,8 @@ router.post("/register", async (req, res) => {
     if (admin) {
       res.status(201).json({
         _id: admin._id,
+        name: admin.name,
+        role: admin.role,
         email: admin.email,
         token: generateToken(admin._id),
       });
@@ -72,6 +78,8 @@ router.post("/register", async (req, res) => {
 router.get("/me", protect, async (req, res) => {
   res.json({
     _id: req.admin._id,
+    name: req.admin.name,
+    role: req.admin.role,
     email: req.admin.email,
   });
 });

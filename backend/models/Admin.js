@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const adminSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    default: "Admin User",
+  },
+  role: {
+    type: String,
+    required: true,
+    default: "Admin",
+  },
   email: {
     type: String,
     required: true,

@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/lib/api";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -118,7 +120,17 @@ const serviceLinks = [
 ];
 
 function CareersPage() {
-  const [selectedRole, setSelectedRole] = useState<(typeof openings)[number] | null>(null);
+  const { data: dbOpenings, isLoading } = useQuery({
+    queryKey: ["careers"],
+    queryFn: async () => {
+      const { data } = await api.get("/careers");
+      return data;
+    },
+  });
+
+  const activeOpenings = dbOpenings || openings;
+
+  const [selectedRole, setSelectedRole] = useState<any>(null);
   const [navOpen, setNavOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -295,7 +307,9 @@ function CareersPage() {
           </div>
 
           <div className="lg:col-span-7 space-y-4">
-            {openings.map((role) => (
+            {isLoading ? (
+                <div className="py-12 text-center text-muted-foreground animate-pulse">Loading openings...</div>
+              ) : activeOpenings.map((role: any, idx: number) => (
               <button
                 key={role.title}
                 type="button"
