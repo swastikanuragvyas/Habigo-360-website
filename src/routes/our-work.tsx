@@ -7,6 +7,7 @@ import { Nav, Footer, StickyCTA } from "./index";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
+import OurWorkCarousels from "@/components/OurWorkCarousels";
 
 export interface ServiceWork {
   _id: string;
@@ -80,6 +81,7 @@ function OurWorkPage() {
 
       <main className="relative">
         <HeroSection />
+        <OurWorkCarousels />
 
         <section className="py-24 lg:py-32 bg-background min-h-[40vh]">
           {isLoading ? (
