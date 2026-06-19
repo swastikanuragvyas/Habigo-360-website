@@ -8,6 +8,9 @@ import about from "@/assets/about.jpg";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/lib/api";
+import { Loader2 } from "lucide-react";
 
 const CAROUSELS_1 = [
   { id: 1, title: "Experience Heritage\nat Kot Dunara", subtitle: "A 16th century castle near Jodhpur", img: work1, type: "tall" },
@@ -124,31 +127,89 @@ function FourColumnGrid({ items }: { items: any[] }) {
 }
 
 export default function OurWorkCarousels() {
+  const { data: feedData, isLoading: isFeedLoading } = useQuery({
+    queryKey: ["instagram-feed"],
+    queryFn: async () => {
+      const res = await api.get("/instagram/feed");
+      return res.data;
+    },
+  });
+
+  const { data: storiesData, isLoading: isStoriesLoading } = useQuery({
+    queryKey: ["instagram-stories"],
+    queryFn: async () => {
+      const res = await api.get("/instagram/stories");
+      return res.data;
+    },
+  });
+
+  const useLiveFeed = feedData && feedData.length > 0;
+  const useLiveStories = storiesData && storiesData.length > 0;
+
+  // Map live Instagram data if available
+  const liveCarousels = useLiveFeed 
+    ? feedData.filter((item: any) => item.type !== "VIDEO").map((item: any, i: number) => ({
+        id: item.instagramId,
+        title: item.caption ? item.caption.substring(0, 60) + (item.caption.length > 60 ? "..." : "") : "Recent Post",
+        subtitle: new Date(item.timestamp).toLocaleDateString(),
+        img: item.thumbnailUrl || item.mediaUrl,
+        type: i % 4 === 0 ? "tall" : "square",
+      }))
+    : [];
+
+  const liveReels = useLiveFeed 
+    ? feedData.filter((item: any) => item.type === "VIDEO").map((item: any) => ({
+        id: item.instagramId,
+        title: item.caption ? item.caption.substring(0, 40) + "..." : "Recent Reel",
+        img: item.thumbnailUrl || item.mediaUrl,
+      }))
+    : [];
+
+  const liveStories = useLiveStories 
+    ? storiesData.map((item: any) => ({
+        id: item.instagramId,
+        title: "Active Story",
+        img: item.thumbnailUrl || item.mediaUrl,
+      }))
+    : [];
+
   return (
     <section className="bg-background py-28 lg:py-40">
       <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
         
-        {/* Carousels 1 */}
+        {/* Carousels 1 & 2 */}
         <SectionHeader title="Our Work" type="Carousels" />
-        <MasonryGrid items={CAROUSELS_1} />
+        {isFeedLoading ? (
+          <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
+        ) : (
+          <>
+            <MasonryGrid items={useLiveFeed ? liveCarousels.slice(0, 6) : CAROUSELS_1} />
+            <div className="mt-8">
+              <MasonryGrid items={useLiveFeed ? liveCarousels.slice(6, 12) : CAROUSELS_2} />
+            </div>
+          </>
+        )}
 
-        {/* Carousels 2 */}
-        <div className="mt-8">
-          <MasonryGrid items={CAROUSELS_2} />
-        </div>
-
-        {/* Reels 1 */}
+        {/* Reels 1 & 2 */}
         <SectionHeader title="Our Work" type="Reels" />
-        <FourColumnGrid items={REELS_1} />
-
-        {/* Reels 2 */}
-        <div className="mt-8">
-          <FourColumnGrid items={REELS_2} />
-        </div>
+        {isFeedLoading ? (
+          <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
+        ) : (
+          <>
+            <FourColumnGrid items={useLiveFeed ? liveReels.slice(0, 4) : REELS_1} />
+            <div className="mt-8">
+              <FourColumnGrid items={useLiveFeed ? liveReels.slice(4, 8) : REELS_2} />
+            </div>
+          </>
+        )}
 
         {/* Stories */}
         <SectionHeader title="Our Work" type="Stories" />
-        <FourColumnGrid items={STORIES} />
+        {isStoriesLoading ? (
+          <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
+        ) : (
+          <FourColumnGrid items={useLiveStories ? liveStories : STORIES} />
+        )}
 
       </div>
     </section>
