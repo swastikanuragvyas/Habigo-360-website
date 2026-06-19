@@ -84,49 +84,49 @@ function AdminLogin({ onLogin }: { onLogin: (data: any) => void }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-ivory flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] size-[500px] rounded-full bg-emerald-deep/20 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] size-[400px] rounded-full bg-emerald-deep/10 blur-[100px] pointer-events-none"></div>
+    <div className="min-h-screen bg-[#f5f5f7] text-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Soft Background Gradients */}
+      <div className="absolute top-[-10%] left-[-10%] size-[500px] rounded-full bg-emerald-100 blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] size-[400px] rounded-full bg-blue-50 blur-[100px] pointer-events-none"></div>
 
-      <div className="max-w-md w-full bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 z-10 shadow-2xl relative">
+      <div className="max-w-md w-full bg-white/80 backdrop-blur-xl rounded-2xl border border-white p-8 z-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
         <div className="flex justify-center mb-8">
-          <div className="flex size-14 items-center justify-center rounded-xl bg-emerald-deep/20 border border-emerald-deep/30 text-emerald-400 shadow-[0_0_20px_rgba(4,92,69,0.3)]">
+          <div className="flex size-14 items-center justify-center rounded-xl bg-gradient-to-tr from-emerald-500 to-emerald-400 text-white shadow-lg shadow-emerald-500/30">
             <Sparkles className="size-7" />
           </div>
         </div>
-        <h2 className="text-3xl font-light text-center text-ivory mb-2 tracking-tight">Admin Portal</h2>
-        <p className="text-center text-white/50 text-sm mb-8">Sign in to manage HabiGo 360</p>
+        <h2 className="text-3xl font-medium text-center text-gray-900 mb-2 tracking-tight">Admin Portal</h2>
+        <p className="text-center text-gray-500 text-sm mb-8">Sign in to manage HabiGo 360</p>
         
-        {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg mb-6 text-sm text-center">{error}</div>}
-        
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-white/60 tracking-wider uppercase">Email Address</label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm border border-red-100 text-center">{error}</div>}
+          
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">Email</label>
             <input
               type="email"
-              className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
-              placeholder="admin@habigo.com"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
+              className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
+              placeholder="admin@habigo360.com"
             />
           </div>
-          <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-white/60 tracking-wider uppercase">Password</label>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">Password</label>
             <input
               type="password"
-              className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
-              placeholder="••••••••"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
+              className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 focus:border-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm"
+              placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-emerald-deep py-3 text-ivory font-medium transition-all hover:bg-emerald-deep/80 hover:shadow-[0_0_15px_rgba(4,92,69,0.4)] flex justify-center items-center mt-4"
+            className="w-full rounded-lg bg-gray-900 py-3 text-white font-medium transition-all hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/20 flex justify-center items-center mt-6"
           >
             {loading ? <Loader2 className="animate-spin size-5" /> : "Authenticate"}
           </button>
@@ -140,23 +140,19 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
   const [activeTab, setActiveTab] = useState("Dashboard");
 
   return (
-    <div className="min-h-screen bg-[#050505] text-ivory flex relative overflow-hidden">
-      {/* Background Glows */}
-      <div className="absolute top-[-20%] left-[-10%] size-[800px] rounded-full bg-emerald-deep/10 blur-[150px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] size-[600px] rounded-full bg-emerald-deep/10 blur-[120px] pointer-events-none"></div>
-
-      <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-white/5 backdrop-blur-xl px-5 py-6 lg:flex lg:flex-col z-10">
-        <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-deep/20 border border-emerald-deep/30 text-emerald-400 shadow-[0_0_15px_rgba(4,92,69,0.3)]">
-            <Sparkles className="size-5" />
+    <div className="min-h-screen bg-[#f5f5f7] text-gray-900 flex relative overflow-hidden selection:bg-emerald-200">
+      <aside className="hidden w-64 shrink-0 border-r border-gray-200/60 bg-white/60 backdrop-blur-xl px-5 py-6 lg:flex lg:flex-col z-10 shadow-[4px_0_24px_rgb(0,0,0,0.02)]">
+        <div className="flex items-center gap-3 pl-1">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gray-900 to-gray-700 text-white shadow-md shadow-gray-900/20">
+            <Sparkles className="size-4" />
           </div>
           <div>
-            <p className="text-sm font-medium tracking-wide">HabiGo 360</p>
-            <p className="text-xs text-white/50 uppercase tracking-widest mt-0.5">Admin Portal</p>
+            <p className="text-[15px] font-semibold tracking-tight text-gray-900 leading-none">HabiGo 360</p>
+            <p className="text-[11px] text-gray-500 uppercase tracking-widest mt-1 font-medium">Admin Portal</p>
           </div>
         </div>
 
-        <nav className="mt-12 space-y-1.5 flex-1">
+        <nav className="mt-10 space-y-1 flex-1">
           {[
             { label: "Dashboard", icon: LayoutDashboard },
             { label: "Inbox", icon: Inbox },
@@ -171,31 +167,31 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
             <button
               key={item.label}
               onClick={() => setActiveTab(item.label)}
-              className={`flex h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-sm transition-all ${
+              className={`flex h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-[14px] transition-all font-medium ${
                 activeTab === item.label
-                  ? "bg-emerald-deep/20 text-emerald-400 border border-emerald-deep/30 shadow-[0_0_10px_rgba(4,92,69,0.2)]"
-                  : "text-white/60 hover:bg-white/5 hover:text-white border border-transparent"
+                  ? "bg-gray-900 text-white shadow-md shadow-gray-900/10"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
               }`}
             >
-              <item.icon className="size-4" />
+              <item.icon className="size-[18px]" />
               {item.label}
             </button>
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-white/10">
-          <div className="mb-4 px-3 flex items-center gap-3">
-            <div className="size-8 rounded-full bg-gradient-to-tr from-emerald-deep to-emerald-400 flex items-center justify-center text-xs font-bold shadow-[0_0_10px_rgba(4,92,69,0.4)]">
+        <div className="mt-auto pt-6 border-t border-gray-200/60">
+          <div className="mb-4 px-2 flex items-center gap-3">
+            <div className="size-9 rounded-full bg-gradient-to-tr from-blue-100 to-emerald-100 border border-white flex items-center justify-center text-sm font-semibold text-gray-800 shadow-sm">
               {adminInfo.name?.charAt(0) || "A"}
             </div>
             <div className="overflow-hidden">
-              <p className="text-sm font-medium truncate">{adminInfo.name || "Admin User"}</p>
-              <p className="text-xs text-white/50 truncate">{adminInfo.role || "Admin"}</p>
+              <p className="text-sm font-semibold truncate text-gray-900">{adminInfo.name || "Admin User"}</p>
+              <p className="text-xs text-gray-500 truncate font-medium">{adminInfo.role || "Admin"}</p>
             </div>
           </div>
           <button
             onClick={onLogout}
-            className="flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-sm transition-colors hover:bg-red-500/20"
+            className="flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-red-50 text-red-600 text-sm font-medium transition-colors hover:bg-red-100"
           >
             <LogOut className="size-4" />
             Sign Out
@@ -203,17 +199,17 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
         </div>
       </aside>
 
-      <main className="min-w-0 flex-1 flex flex-col z-10">
-        <header className="sticky top-0 z-20 border-b border-white/10 bg-black/40 backdrop-blur-xl px-4 sm:px-6 lg:px-10 py-5 flex items-center justify-between">
+      <main className="min-w-0 flex-1 flex flex-col z-10 h-screen">
+        <header className="sticky top-0 z-20 border-b border-gray-200/60 bg-white/60 backdrop-blur-2xl px-6 lg:px-10 py-5 flex items-center justify-between shadow-[0_4px_20px_rgb(0,0,0,0.01)]">
           <div>
-            <h1 className="text-2xl font-light tracking-tight">{activeTab}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-gray-900">{activeTab}</h1>
           </div>
-          <div className="text-sm text-emerald-400/80 font-medium tracking-wide">
-            Welcome, {adminInfo.name || "Admin User"} <span className="text-white/40">({adminInfo.role || "Admin"})</span>
+          <div className="text-sm text-gray-500 font-medium tracking-wide">
+            Welcome back, <span className="text-gray-900">{adminInfo.name || "Admin User"}</span>
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto p-4 sm:p-6 lg:p-10">
+        <div className="flex-1 overflow-auto p-6 lg:p-10 pb-20">
           {activeTab === "Projects" && <ProjectsView />}
           {activeTab === "Careers" && <CareersView />}
           {activeTab === "Site Content" && <SiteContentView />}
@@ -253,59 +249,60 @@ function ProjectsView() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["projects"] }),
   });
 
-  if (isLoading) return <div className="flex justify-center p-8"><Loader2 className="animate-spin size-8 text-emerald-deep" /></div>;
+  if (isLoading) return <div className="flex justify-center p-8"><Loader2 className="animate-spin size-8 text-emerald-500" /></div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-base font-semibold">Portfolio Projects</h2>
-          <p className="text-sm text-muted-foreground">Manage your dynamic work showcase.</p>
+          <h2 className="text-xl font-semibold text-gray-900">Portfolio Projects</h2>
+          <p className="text-sm text-gray-500 font-medium">Manage your dynamic work showcase.</p>
         </div>
         <button
           onClick={() => {
             setEditingProject(null);
             setIsModalOpen(true);
           }}
-          className="inline-flex h-10 items-center gap-2 rounded-md bg-emerald-deep px-3 text-sm font-medium text-ivory"
+          className="inline-flex h-10 items-center gap-2 rounded-xl bg-gray-900 px-4 text-sm font-medium text-white shadow-md hover:bg-gray-800 transition-colors"
         >
           <Plus className="size-4" />
           <span>New Project</span>
         </button>
       </div>
 
-      <div className="rounded-xl border border-white/10 bg-white/5 overflow-x-auto backdrop-blur-md">
+      <div className="rounded-2xl border border-gray-200/60 bg-white/60 overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.02)] backdrop-blur-xl">
         <table className="w-full min-w-[800px] text-left text-sm">
-          <thead className="border-b border-emerald-deep/10 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+          <thead className="border-b border-gray-200/60 bg-gray-50/50 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
             <tr>
-              <th className="px-5 py-4 font-medium">Title</th>
-              <th className="px-5 py-4 font-medium">Service</th>
-              <th className="px-5 py-4 font-medium">Visibility</th>
-              <th className="px-5 py-4 font-medium">Order</th>
-              <th className="px-5 py-4 font-medium text-right">Actions</th>
+              <th className="px-6 py-4">Title</th>
+              <th className="px-6 py-4">Service</th>
+              <th className="px-6 py-4">Visibility</th>
+              <th className="px-6 py-4">Order</th>
+              <th className="px-6 py-4 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-emerald-deep/10">
+          <tbody className="divide-y divide-gray-200/60">
             {projects?.map((project: any) => (
-              <tr key={project._id} className="hover:bg-white/5 transition-colors">
-                <td className="px-5 py-4 font-medium">{project.title}</td>
-                <td className="px-5 py-4 text-muted-foreground">{project.service}</td>
-                <td className="px-5 py-4">
+              <tr key={project._id} className="hover:bg-gray-50/50 transition-colors group">
+                <td className="px-6 py-4 font-semibold text-gray-900">{project.title}</td>
+                <td className="px-6 py-4 text-gray-500 font-medium">{project.service}</td>
+                <td className="px-6 py-4">
                   <button
                     onClick={() => toggleVisibilityMutation.mutate({ id: project._id, visibility: !project.visibility })}
-                    className="inline-flex items-center gap-1 hover:text-emerald-deep"
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${project.visibility ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-500'}`}
                   >
-                    {project.visibility ? <Eye className="size-4 text-emerald-deep" /> : <EyeOff className="size-4 text-muted-foreground" />}
+                    {project.visibility ? <Eye className="size-3.5" /> : <EyeOff className="size-3.5" />}
+                    {project.visibility ? 'Visible' : 'Hidden'}
                   </button>
                 </td>
-                <td className="px-5 py-4">{project.sortOrder}</td>
-                <td className="px-5 py-4 text-right flex justify-end gap-2">
+                <td className="px-6 py-4 text-gray-500 font-medium">{project.sortOrder}</td>
+                <td className="px-6 py-4 text-right flex justify-end gap-2">
                   <button
                     onClick={() => {
                       setEditingProject(project);
                       setIsModalOpen(true);
                     }}
-                    className="inline-flex size-8 items-center justify-center rounded-md hover:bg-secondary text-blue-600"
+                    className="inline-flex size-8 items-center justify-center rounded-lg hover:bg-gray-100 text-gray-400 hover:text-blue-600 transition-colors"
                   >
                     <Edit className="size-4" />
                   </button>
@@ -315,7 +312,7 @@ function ProjectsView() {
                         deleteMutation.mutate(project._id);
                       }
                     }}
-                    className="inline-flex size-8 items-center justify-center rounded-md hover:bg-secondary text-red-600"
+                    className="inline-flex size-8 items-center justify-center rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600 transition-colors"
                   >
                     <Trash className="size-4" />
                   </button>
@@ -324,7 +321,7 @@ function ProjectsView() {
             ))}
             {projects?.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-5 py-8 text-center text-muted-foreground">
+                <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
                   No projects found. Add one to get started.
                 </td>
               </tr>
@@ -412,115 +409,115 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="bg-[#0a0a0a] rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col border border-white/10">
-        <div className="flex justify-between items-center p-5 border-b border-emerald-deep/10">
-          <h2 className="text-xl font-semibold">{isEditing ? "Edit Project" : "New Project"}</h2>
-          <button onClick={onClose} className="text-muted-foreground hover:text-emerald-deep"><X className="size-5" /></button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col border border-gray-200">
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
+          <h2 className="text-xl font-semibold text-gray-900">{isEditing ? "Edit Project" : "New Project"}</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="size-5" /></button>
         </div>
         
-        <div className="flex-1 overflow-auto p-5">
+        <div className="flex-1 overflow-auto p-6">
           <form id="project-form" onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <label className="text-sm font-medium">Title *</label>
-                <input required value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-gray-700">Title *</label>
+                <input required value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
               </div>
-              <div className="space-y-1">
-                <label className="text-sm font-medium">Service / Category *</label>
-                <input required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-gray-700">Service / Category *</label>
+                <input required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-medium">Description *</label>
-              <textarea required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-gray-700">Description *</label>
+              <textarea required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1 flex items-center gap-2 h-full pt-6">
-                <input type="checkbox" id="visibility" checked={formData.visibility} onChange={(e) => setFormData({...formData, visibility: e.target.checked})} className="size-4 accent-emerald-deep" />
-                <label htmlFor="visibility" className="text-sm font-medium cursor-pointer">Visible to Public</label>
+              <div className="space-y-1.5 flex items-center gap-2 h-full pt-6">
+                <input type="checkbox" id="visibility" checked={formData.visibility} onChange={(e) => setFormData({...formData, visibility: e.target.checked})} className="size-4 accent-emerald-500 rounded border-gray-300" />
+                <label htmlFor="visibility" className="text-sm font-semibold text-gray-700 cursor-pointer">Visible to Public</label>
               </div>
-              <div className="space-y-1">
-                <label className="text-sm font-medium">Sort Order (Lower appears first)</label>
-                <input type="number" value={formData.sortOrder} onChange={(e) => setFormData({...formData, sortOrder: parseInt(e.target.value) || 0})} className="w-full rounded-md border border-emerald-deep/20 px-3 py-2 text-sm focus:outline-none focus:border-emerald-deep bg-transparent" />
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-gray-700">Sort Order</label>
+                <input type="number" value={formData.sortOrder} onChange={(e) => setFormData({...formData, sortOrder: parseInt(e.target.value) || 0})} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
               </div>
             </div>
 
             {/* Media Upload */}
             <div className="space-y-3">
-              <label className="text-sm font-medium flex justify-between items-center">
+              <label className="text-sm font-semibold text-gray-700 flex justify-between items-center">
                 <span>Media Gallery</span>
-                <label className="cursor-pointer inline-flex items-center gap-1 text-xs bg-emerald-deep/10 text-emerald-deep px-2 py-1 rounded hover:bg-emerald-deep/20">
-                  <Upload className="size-3" />
+                <label className="cursor-pointer inline-flex items-center gap-1.5 text-xs font-semibold bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors">
+                  <Upload className="size-3.5" />
                   {uploadingImage ? "Uploading..." : "Add Media"}
                   <input type="file" className="hidden" accept="image/*,video/*" onChange={handleFileUpload} disabled={uploadingImage} />
                 </label>
               </label>
               {formData.media.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   {formData.media.map((m: any, i: number) => (
-                    <div key={i} className="relative group aspect-video bg-emerald-deep/5 rounded-md overflow-hidden border border-emerald-deep/10">
+                    <div key={i} className="relative group aspect-video bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
                       {m.type === "video" ? (
                          <video src={m.url} className="w-full h-full object-cover" />
                       ) : (
                          <img src={m.url} alt="media" className="w-full h-full object-cover" />
                       )}
-                      <button type="button" onClick={() => removeMedia(i)} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <X className="size-3" />
+                      <button type="button" onClick={() => removeMedia(i)} className="absolute top-2 right-2 bg-red-500 shadow-md text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity transform hover:scale-110">
+                        <X className="size-3.5" />
                       </button>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-sm text-muted-foreground italic bg-secondary p-4 rounded-md text-center border border-dashed border-emerald-deep/20">
+                <div className="text-sm text-gray-400 font-medium bg-gray-50 p-6 rounded-xl text-center border-2 border-dashed border-gray-200">
                   No media added yet. Upload images or videos to showcase the project.
                 </div>
               )}
             </div>
 
             {/* KPIs */}
-            <div className="space-y-3 pt-4 border-t border-emerald-deep/10">
+            <div className="space-y-3 pt-6 border-t border-gray-100">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">KPIs (Key Performance Indicators)</label>
+                <label className="text-sm font-semibold text-gray-700">KPIs (Key Performance Indicators)</label>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, kpis: [...formData.kpis, { label: "", value: 0, suffix: "", trend: "up", trendValue: 0 }] })}
-                  className="text-xs bg-emerald-deep/10 text-emerald-deep px-2 py-1 rounded hover:bg-emerald-deep/20"
+                  className="text-xs font-semibold bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition-colors"
                 >
                   + Add KPI
                 </button>
               </div>
               {formData.kpis.map((kpi: any, index: number) => (
-                <div key={index} className="grid grid-cols-12 gap-2 items-center bg-secondary/50 p-2 rounded border border-emerald-deep/10">
+                <div key={index} className="grid grid-cols-12 gap-2 items-center bg-gray-50 p-3 rounded-xl border border-gray-200">
                   <div className="col-span-3">
                     <input type="text" placeholder="Label (e.g. ROAS)" value={kpi.label} onChange={(e) => {
                       const newKpis = [...formData.kpis];
                       newKpis[index].label = e.target.value;
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-2">
                     <input type="number" placeholder="Value (e.g. 50)" value={kpi.value || ""} onChange={(e) => {
                       const newKpis = [...formData.kpis];
                       newKpis[index].value = Number(e.target.value);
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-2">
                     <input type="text" placeholder="Suffix (e.g. x, %)" value={kpi.suffix} onChange={(e) => {
                       const newKpis = [...formData.kpis];
                       newKpis[index].suffix = e.target.value;
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-2">
                     <select value={kpi.trend || "up"} onChange={(e) => {
                       const newKpis = [...formData.kpis];
                       newKpis[index].trend = e.target.value;
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent">
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500">
                       <option value="up">Trend Up</option>
                       <option value="down">Trend Down</option>
                       <option value="neutral">Neutral</option>
@@ -531,83 +528,81 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
                       const newKpis = [...formData.kpis];
                       newKpis[index].trendValue = Number(e.target.value);
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-1 text-right">
                     <button type="button" onClick={() => {
                       const newKpis = [...formData.kpis];
                       newKpis.splice(index, 1);
                       setFormData({ ...formData, kpis: newKpis });
-                    }} className="text-red-500 hover:text-red-700">
-                      <X className="size-4 inline" />
+                    }} className="text-red-500 hover:text-red-700 bg-red-50 p-1.5 rounded-lg">
+                      <X className="size-4" />
                     </button>
                   </div>
                 </div>
               ))}
               {formData.kpis.length === 0 && (
-                <div className="text-xs text-muted-foreground italic text-center p-2 bg-secondary/30 rounded border border-dashed border-emerald-deep/20">No KPIs added.</div>
+                <div className="text-xs text-gray-400 font-medium text-center p-4 bg-gray-50 rounded-xl border border-dashed border-gray-200">No KPIs added.</div>
               )}
             </div>
 
             {/* Metrics */}
-            <div className="space-y-3 pt-4 border-t border-emerald-deep/10">
+            <div className="space-y-3 pt-6 border-t border-gray-100">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium">Text Metrics</label>
+                <label className="text-sm font-semibold text-gray-700">Text Metrics</label>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, metrics: [...formData.metrics, { label: "", value: "", suffix: "" }] })}
-                  className="text-xs bg-emerald-deep/10 text-emerald-deep px-2 py-1 rounded hover:bg-emerald-deep/20"
+                  className="text-xs font-semibold bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition-colors"
                 >
                   + Add Metric
                 </button>
               </div>
               {formData.metrics.map((metric: any, index: number) => (
-                <div key={index} className="grid grid-cols-12 gap-2 items-center bg-secondary/50 p-2 rounded border border-emerald-deep/10">
+                <div key={index} className="grid grid-cols-12 gap-2 items-center bg-gray-50 p-3 rounded-xl border border-gray-200">
                   <div className="col-span-5">
                     <input type="text" placeholder="Label (e.g. Followers)" value={metric.label} onChange={(e) => {
                       const newMetrics = [...formData.metrics];
                       newMetrics[index].label = e.target.value;
                       setFormData({ ...formData, metrics: newMetrics });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-4">
                     <input type="text" placeholder="Value (e.g. 500)" value={metric.value} onChange={(e) => {
                       const newMetrics = [...formData.metrics];
                       newMetrics[index].value = e.target.value;
                       setFormData({ ...formData, metrics: newMetrics });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-2">
                     <input type="text" placeholder="Suffix (e.g. k+)" value={metric.suffix} onChange={(e) => {
                       const newMetrics = [...formData.metrics];
                       newMetrics[index].suffix = e.target.value;
                       setFormData({ ...formData, metrics: newMetrics });
-                    }} className="w-full text-xs rounded border border-emerald-deep/20 px-2 py-1 bg-transparent" />
+                    }} className="w-full text-xs rounded-md border border-gray-200 px-3 py-2 bg-white focus:outline-none focus:border-emerald-500" />
                   </div>
                   <div className="col-span-1 text-right">
                     <button type="button" onClick={() => {
                       const newMetrics = [...formData.metrics];
                       newMetrics.splice(index, 1);
                       setFormData({ ...formData, metrics: newMetrics });
-                    }} className="text-red-500 hover:text-red-700">
-                      <X className="size-4 inline" />
+                    }} className="text-red-500 hover:text-red-700 bg-red-50 p-1.5 rounded-lg">
+                      <X className="size-4" />
                     </button>
                   </div>
                 </div>
               ))}
               {formData.metrics.length === 0 && (
-                <div className="text-xs text-muted-foreground italic text-center p-2 bg-secondary/30 rounded border border-dashed border-emerald-deep/20">No Text Metrics added.</div>
+                <div className="text-xs text-gray-400 font-medium text-center p-4 bg-gray-50 rounded-xl border border-dashed border-gray-200">No Text Metrics added.</div>
               )}
             </div>
 
           </form>
         </div>
-        
-        <div className="p-5 border-t border-white/10 bg-white/5 flex justify-end gap-3">
-          <button onClick={onClose} className="px-4 py-2 rounded-md border border-emerald-deep/20 text-sm font-medium hover:bg-secondary transition-colors">Cancel</button>
-          <button type="submit" form="project-form" disabled={loading} className="px-4 py-2 rounded-md bg-emerald-deep text-ivory text-sm font-medium hover:bg-emerald-deep/90 flex items-center gap-2">
-            {loading && <Loader2 className="animate-spin size-4" />}
-            {isEditing ? "Save Changes" : "Create Project"}
+        <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
+          <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 text-sm font-semibold bg-white hover:bg-gray-50 transition-colors">Cancel</button>
+          <button type="submit" form="project-form" disabled={loading} className="px-5 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors shadow-md">
+            {loading ? "Saving..." : "Save Project"}
           </button>
         </div>
       </div>
@@ -873,43 +868,43 @@ function AdminsView() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admins"] }),
   });
 
-  if (isLoading) return <div className="flex justify-center p-10"><Loader2 className="animate-spin size-8 text-emerald-400" /></div>;
+  if (isLoading) return <div className="flex justify-center p-10"><Loader2 className="animate-spin size-8 text-emerald-500" /></div>;
 
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h2 className="text-xl font-light tracking-tight text-ivory">Access Management</h2>
-          <p className="text-sm text-white/50 mt-1">Manage who has access to the admin portal.</p>
+          <h2 className="text-xl font-semibold tracking-tight text-gray-900">Access Management</h2>
+          <p className="text-sm text-gray-500 font-medium mt-1">Manage who has access to the admin portal.</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 bg-emerald-deep text-ivory px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-deep/80 transition-all shadow-[0_0_15px_rgba(4,92,69,0.3)]"
+          className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-800 transition-all shadow-md"
         >
           <Plus className="size-4" />
           Add User
         </button>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden backdrop-blur-md">
+      <div className="bg-white border border-gray-200/60 rounded-2xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.02)]">
         <table className="w-full text-left text-sm">
-          <thead className="bg-black/40 text-white/60 text-xs uppercase tracking-wider">
+          <thead className="bg-gray-50/80 text-gray-500 text-xs uppercase tracking-wider font-semibold border-b border-gray-100">
             <tr>
-              <th className="px-6 py-4 font-medium">Name</th>
-              <th className="px-6 py-4 font-medium">Email</th>
-              <th className="px-6 py-4 font-medium">Role</th>
-              <th className="px-6 py-4 font-medium text-right">Actions</th>
+              <th className="px-6 py-4 font-semibold">Name</th>
+              <th className="px-6 py-4 font-semibold">Email</th>
+              <th className="px-6 py-4 font-semibold">Role</th>
+              <th className="px-6 py-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-gray-100/80">
             {admins?.map((admin: any) => (
-              <tr key={admin._id} className="hover:bg-white/5 transition-colors">
+              <tr key={admin._id} className="hover:bg-gray-50/50 transition-colors">
                 <td className="px-6 py-4">
-                  <div className="font-medium text-ivory">{admin.name}</div>
+                  <div className="font-semibold text-gray-900">{admin.name}</div>
                 </td>
-                <td className="px-6 py-4 text-white/70">{admin.email}</td>
+                <td className="px-6 py-4 font-medium text-gray-600">{admin.email}</td>
                 <td className="px-6 py-4">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-deep/20 text-emerald-400 border border-emerald-deep/30">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100/50 shadow-sm">
                     {admin.role}
                   </span>
                 </td>
@@ -920,7 +915,7 @@ function AdminsView() {
                         deleteMutation.mutate(admin._id);
                       }
                     }}
-                    className="text-red-400 hover:text-red-300 bg-red-400/10 p-2 rounded-md transition-colors"
+                    className="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition-colors border border-red-100 shadow-sm inline-flex items-center justify-center"
                     title="Revoke Access"
                   >
                     <Trash className="size-4" />
@@ -933,32 +928,32 @@ function AdminsView() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
-            <div className="flex justify-between items-center p-5 border-b border-white/10 bg-white/5">
-              <h3 className="text-lg font-light tracking-tight text-ivory">Invite New User</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-white/50 hover:text-white transition-colors"><X className="size-5" /></button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm">
+          <div className="bg-white border border-gray-200 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div className="flex justify-between items-center p-6 border-b border-gray-100">
+              <h3 className="text-lg font-bold tracking-tight text-gray-900">Invite New User</h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600 transition-colors"><X className="size-5" /></button>
             </div>
             
             <div className="p-6">
-              {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg mb-4 text-sm">{error}</div>}
+              {error && <div className="bg-red-50 border border-red-200 text-red-600 font-medium p-4 rounded-xl mb-5 text-sm shadow-sm">{error}</div>}
               
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Full Name</label>
-                  <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all" placeholder="e.g. Founder admin 1" />
+                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Full Name</label>
+                  <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm" placeholder="e.g. Founder admin 1" />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Email Address</label>
-                  <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all" placeholder="founder1@habigo.com" />
+                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Email Address</label>
+                  <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm" placeholder="founder1@habigo.com" />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Temporary Password</label>
-                  <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all" placeholder="••••••••" />
+                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Temporary Password</label>
+                  <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm" placeholder="••••••••" />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider">Role</label>
-                  <select value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all">
+                  <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Role</label>
+                  <select value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm cursor-pointer">
                     <option value="Founder">Founder</option>
                     <option value="Admin">Admin</option>
                     <option value="Editor">Editor</option>
@@ -967,9 +962,9 @@ function AdminsView() {
               </div>
             </div>
 
-            <div className="p-5 border-t border-white/10 bg-white/5 flex justify-end gap-3">
-              <button onClick={() => setIsModalOpen(false)} className="px-4 py-2.5 rounded-lg border border-white/10 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white transition-all">Cancel</button>
-              <button onClick={() => createMutation.mutate(formData)} disabled={createMutation.isPending} className="px-4 py-2.5 rounded-lg bg-emerald-deep text-ivory text-sm font-medium hover:bg-emerald-deep/80 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(4,92,69,0.3)]">
+            <div className="p-6 border-t border-gray-100 bg-gray-50/50 flex justify-end gap-3">
+              <button onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl border border-gray-300 text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 transition-all shadow-sm">Cancel</button>
+              <button onClick={() => createMutation.mutate(formData)} disabled={createMutation.isPending} className="px-5 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-md">
                 {createMutation.isPending && <Loader2 className="animate-spin size-4" />}
                 Grant Access
               </button>
