@@ -162,7 +162,7 @@ function AdminDashboard({ onLogout, adminInfo, onUpdate }: { onLogout: () => voi
   const navItems = [
     { label: "Dashboard", icon: LayoutDashboard },
     { label: "Inbox", icon: Inbox },
-    { label: "Projects", icon: ImageIcon },
+    { label: "Our Work", icon: ImageIcon },
     { label: "Case Studies", icon: FileText },
     { label: "Testimonials", icon: Star },
     { label: "Careers", icon: BriefcaseBusiness },
@@ -253,7 +253,7 @@ function AdminDashboard({ onLogout, adminInfo, onUpdate }: { onLogout: () => voi
         </header>
 
         <div className="flex-1 overflow-auto p-6 lg:p-10 pb-20">
-          {activeTab === "Projects" && <ProjectsView />}
+          {activeTab === "Our Work" && <ProjectsView />}
           {activeTab === "Careers" && <CareersView />}
           {activeTab === "Site Content" && <SiteContentView />}
           {activeTab === "Access" && <AdminsView />}
@@ -298,7 +298,7 @@ function ProjectsView() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Portfolio Projects</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Our Work</h2>
           <p className="text-sm text-gray-500 font-medium">Manage your dynamic work showcase.</p>
         </div>
         <button
@@ -309,7 +309,7 @@ function ProjectsView() {
           className="inline-flex h-10 items-center gap-2 rounded-xl bg-gray-900 px-4 text-sm font-medium text-white shadow-md hover:bg-gray-800 transition-colors"
         >
           <Plus className="size-4" />
-          <span>New Project</span>
+          <span>New Work</span>
         </button>
       </div>
 
@@ -351,7 +351,7 @@ function ProjectsView() {
                   </button>
                   <button
                     onClick={() => {
-                      if (window.confirm("Are you sure you want to delete this project?")) {
+                      if (window.confirm("Are you sure you want to delete this work item?")) {
                         deleteMutation.mutate(project._id);
                       }
                     }}
@@ -365,7 +365,7 @@ function ProjectsView() {
             {projects?.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
-                  No projects found. Add one to get started.
+                  No work added yet. Click New Work to get started.
                 </td>
               </tr>
             )}
@@ -445,7 +445,7 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
       onSuccess();
     } catch (err) {
       console.error(err);
-      alert("Failed to save project");
+      alert("Failed to save work");
     } finally {
       setLoading(false);
     }
@@ -455,8 +455,8 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col border border-gray-200">
         <div className="flex justify-between items-center p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-900">{isEditing ? "Edit Project" : "New Project"}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="size-5" /></button>
+          <h2 className="text-xl font-semibold text-gray-900">{isEditing ? "Edit Work" : "New Work"}</h2>
+          <button type="button" onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="size-5" /></button>
         </div>
         
         <div className="flex-1 overflow-auto p-6">
@@ -490,34 +490,36 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
 
             {/* Media Upload */}
             <div className="space-y-3">
-              <label className="text-sm font-semibold text-gray-700 flex justify-between items-center">
-                <span>Media Gallery</span>
-                <label className="cursor-pointer inline-flex items-center gap-1.5 text-xs font-semibold bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Upload className="size-3.5" />
-                  {uploadingImage ? "Uploading..." : "Add Media"}
+              <label className="text-sm font-semibold text-gray-700 block">Media Gallery</label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {formData.media.map((m: any, i: number) => (
+                  <div key={i} className="relative group aspect-video bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
+                    {m.type === "video" ? (
+                       <video src={m.url} className="w-full h-full object-cover" />
+                    ) : (
+                       <img src={m.url} alt="media" className="w-full h-full object-cover" />
+                    )}
+                    <button type="button" onClick={() => removeMedia(i)} className="absolute top-2 right-2 bg-red-500 shadow-md text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity transform hover:scale-110">
+                      <X className="size-3.5" />
+                    </button>
+                  </div>
+                ))}
+                
+                {/* Plus Icon Upload Card */}
+                <label className="cursor-pointer flex flex-col items-center justify-center aspect-video bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl hover:bg-gray-100 transition-colors group">
+                  {uploadingImage ? (
+                    <Loader2 className="size-6 text-gray-400 animate-spin" />
+                  ) : (
+                    <>
+                      <div className="p-3 bg-white rounded-full shadow-sm mb-2 group-hover:scale-110 transition-transform">
+                        <Plus className="size-6 text-emerald-500" />
+                      </div>
+                      <span className="text-xs font-medium text-gray-500">Add Media</span>
+                    </>
+                  )}
                   <input type="file" className="hidden" accept="image/*,video/*" onChange={handleFileUpload} disabled={uploadingImage} />
                 </label>
-              </label>
-              {formData.media.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {formData.media.map((m: any, i: number) => (
-                    <div key={i} className="relative group aspect-video bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
-                      {m.type === "video" ? (
-                         <video src={m.url} className="w-full h-full object-cover" />
-                      ) : (
-                         <img src={m.url} alt="media" className="w-full h-full object-cover" />
-                      )}
-                      <button type="button" onClick={() => removeMedia(i)} className="absolute top-2 right-2 bg-red-500 shadow-md text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity transform hover:scale-110">
-                        <X className="size-3.5" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-sm text-gray-400 font-medium bg-gray-50 p-6 rounded-xl text-center border-2 border-dashed border-gray-200">
-                  No media added yet. Upload images or videos to showcase the project.
-                </div>
-              )}
+              </div>
             </div>
 
             {/* KPIs */}
@@ -645,7 +647,7 @@ function ProjectModal({ project, onClose, onSuccess }: { project: any; onClose: 
         <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end gap-3">
           <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 text-sm font-semibold bg-white hover:bg-gray-50 transition-colors">Cancel</button>
           <button type="submit" form="project-form" disabled={loading} className="px-5 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors shadow-md">
-            {loading ? "Saving..." : "Save Project"}
+            {loading ? "Saving..." : "Save Work"}
           </button>
         </div>
       </div>

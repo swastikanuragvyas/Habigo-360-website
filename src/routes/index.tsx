@@ -79,7 +79,7 @@ export const NAV = [
   { id: "home", label: "Home" },
   { id: "about", label: "About us" },
   { id: "services", label: "Services" },
-  { id: "work", label: "Our Work" },
+  { id: "work", label: "Our Work", href: "/our-work" },
   { id: "careers", label: "Careers", href: "/careers" },
   { id: "contact", label: "Contact us" },
 ];
