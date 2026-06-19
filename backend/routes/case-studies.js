@@ -1,9 +1,11 @@
 const express = require("express");
 const CaseStudy = require("../models/CaseStudy");
+const { upload, cloudinary } = require("../config/cloudinary");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// GET all case studies
+// GET all case studies (public)
 router.get("/", async (req, res) => {
   try {
     const caseStudies = await CaseStudy.find().sort({ createdAt: -1 });
@@ -14,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST a new case study
-router.post("/", async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const caseStudy = await CaseStudy.create(req.body);
     res.status(201).json(caseStudy);
@@ -24,7 +26,7 @@ router.post("/", async (req, res) => {
 });
 
 // PUT update a case study
-router.put("/:id", async (req, res) => {
+router.put("/:id", protect, async (req, res) => {
   try {
     const caseStudy = await CaseStudy.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!caseStudy) {
@@ -37,7 +39,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE a case study
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   try {
     const caseStudy = await CaseStudy.findByIdAndDelete(req.params.id);
     if (!caseStudy) {
@@ -46,6 +48,15 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "Case study deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+// POST upload cover image to Cloudinary
+router.post("/upload-cover", protect, upload.single("image"), (req, res) => {
+  if (req.file) {
+    res.json({ url: req.file.path });
+  } else {
+    res.status(400).json({ message: "No file uploaded" });
   }
 });
 

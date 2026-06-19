@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpRight, X, ChevronLeft, ChevronRight, Filter } from "lucide-react";
 import { useReveal } from "@/routes/index";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/lib/api";
 
 import work1 from "@/assets/work-1.jpg";
 import work2 from "@/assets/work-2.jpg";
@@ -84,6 +86,28 @@ const FILTERS = [
 ];
 
 export default function LivingPortfolio() {
+  const { data: dbCaseStudies } = useQuery({
+    queryKey: ["publicCaseStudies"],
+    queryFn: async () => {
+      const { data } = await api.get("/case-studies");
+      return data;
+    }
+  });
+
+  const dynamicCaseStudies = (dbCaseStudies || [])
+    .filter((cs: any) => cs.visibility !== false)
+    .map((cs: any) => ({
+      img: cs.coverImage || work1,
+      tag: "Case Study",
+      title: cs.title,
+      meta: cs.metrics && cs.metrics.length > 0 ? cs.metrics[0] : "",
+      description: cs.description,
+      category: "all",
+      results: cs.metrics || [],
+    }));
+
+  const ALL_PROJECTS = [...dynamicCaseStudies, ...PROJECTS];
+
   const [filter, setFilter] = useState("all");
   const [lightbox, setLightbox] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -91,7 +115,7 @@ export default function LivingPortfolio() {
   const [maxScroll, setMaxScroll] = useState(0);
   const { ref, shown } = useReveal();
 
-  const filtered = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+  const filtered = filter === "all" ? ALL_PROJECTS : ALL_PROJECTS.filter((p) => p.category === filter || p.category === "all");
   const currentProject = lightbox !== null ? filtered[lightbox] : null;
 
   useEffect(() => {
@@ -271,7 +295,7 @@ export default function LivingPortfolio() {
                   <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
                     Key Results
                   </div>
-                  {currentProject.results.map((r, i) => (
+                  {currentProject.results.map((r: string, i: number) => (
                     <div key={i} className="flex items-center gap-3 text-sm">
                       <span className="size-1.5 rounded-full bg-accent shrink-0" />
                       {r}

@@ -157,6 +157,7 @@ function HabiGoHome() {
       <Clients />
       <WhyChooseUs />
       <OurWorkCarousels />
+      <LivingPortfolio />
       <InstagramMockups />
       <Testimonials />
       <FAQs />
@@ -850,7 +851,15 @@ function Clients() {
 
 function Testimonials() {
   const { shown, containerRef } = useStaggerReveal({ staggerMs: 100 });
-  const t = [
+  const { data: dbTestimonials } = useQuery({
+    queryKey: ["publicTestimonials"],
+    queryFn: async () => {
+      const { data } = await api.get("/testimonials");
+      return data;
+    }
+  });
+
+  const staticTestimonials = [
     {
       q: "HabiGo didn't just market our resort — they rebuilt how we present ourselves. Direct bookings up 312% in two quarters.",
       n: "Rohan Kapoor",
@@ -867,6 +876,17 @@ function Testimonials() {
       r: "CMO, Verde Group",
     },
   ];
+
+  const dynamicTestimonials = (dbTestimonials || [])
+    .filter((t: any) => t.visibility !== false)
+    .map((t: any) => ({
+      q: t.review,
+      n: t.clientName,
+      r: t.role ? `${t.role}, ${t.company}` : t.company,
+    }));
+
+  const t = [...dynamicTestimonials, ...staticTestimonials].slice(0, 6);
+
   return (
     <section className="bg-background py-28 lg:py-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
