@@ -21,11 +21,19 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profilePicture: {
+    type: String,
+    default: "",
+  },
+  theme: {
+    type: String,
+    default: "light",
+  },
 });
 
-adminSchema.pre("save", async function (next) {
+adminSchema.pre("save", async function () {
   if (!this.isModified("password")) {
-    next();
+    return;
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);

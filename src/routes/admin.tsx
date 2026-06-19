@@ -22,7 +22,9 @@ import {
   Users,
   Inbox,
   Star,
-  FileText
+  FileText,
+  Moon,
+  Sun
 } from "lucide-react";
 
 import InboxView from "@/components/admin/InboxView";
@@ -41,7 +43,7 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminPanel() {
-  const [adminInfo, setAdminInfo] = useState<{ _id: string; email: string; name: string; role: string; token: string } | null>(null);
+  const [adminInfo, setAdminInfo] = useState<{ _id: string; email: string; name: string; role: string; profilePicture?: string; theme?: string; token: string } | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("adminInfo");
@@ -59,7 +61,10 @@ function AdminPanel() {
     return <AdminLogin onLogin={(data) => setAdminInfo(data)} />;
   }
 
-  return <AdminDashboard onLogout={handleLogout} adminInfo={adminInfo} />;
+  return <AdminDashboard onLogout={handleLogout} adminInfo={adminInfo} onUpdate={(data) => {
+    localStorage.setItem("adminInfo", JSON.stringify(data));
+    setAdminInfo(data);
+  }} />;
 }
 
 function AdminLogin({ onLogin }: { onLogin: (data: any) => void }) {
@@ -136,41 +141,65 @@ function AdminLogin({ onLogin }: { onLogin: (data: any) => void }) {
   );
 }
 
-function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminInfo: { _id: string; email: string; name: string; role: string; token: string } }) {
-  const [activeTab, setActiveTab] = useState("Dashboard");
+function AdminDashboard({ onLogout, adminInfo, onUpdate }: { onLogout: () => void, adminInfo: { _id: string; email: string; name: string; role: string; profilePicture?: string; theme?: string; token: string }, onUpdate: (data: any) => void }) {
+  // Determine initial tab based on role
+  const initialTab = adminInfo.role === "Editor" ? "Site Content" : (adminInfo.role === "Admin" ? "Inbox" : "Dashboard");
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  const toggleThemeMutation = useMutation({
+    mutationFn: async (newTheme: string) => {
+      const res = await api.put("/auth/profile", { theme: newTheme });
+      return res.data;
+    },
+    onSuccess: (data) => {
+      onUpdate(data);
+    },
+    onError: (err: any) => {
+      alert("Failed to update theme: " + (err.response?.data?.message || err.message));
+    }
+  });
+
+  const navItems = [
+    { label: "Dashboard", icon: LayoutDashboard },
+    { label: "Inbox", icon: Inbox },
+    { label: "Projects", icon: ImageIcon },
+    { label: "Case Studies", icon: FileText },
+    { label: "Testimonials", icon: Star },
+    { label: "Careers", icon: BriefcaseBusiness },
+    { label: "Site Content", icon: ImagePlay },
+    { label: "Access", icon: Users },
+    { label: "Settings", icon: Settings },
+  ];
+
+  const filteredNavItems = navItems.filter(item => {
+    if (adminInfo.role === "Founder") return true;
+    if (adminInfo.role === "Admin") return item.label !== "Dashboard";
+    if (adminInfo.role === "Editor") return item.label === "Site Content" || item.label === "Settings";
+    return false;
+  });
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] text-gray-900 flex relative overflow-hidden selection:bg-emerald-200">
-      <aside className="hidden w-64 shrink-0 border-r border-gray-200/60 bg-white/60 backdrop-blur-xl px-5 py-6 lg:flex lg:flex-col z-10 shadow-[4px_0_24px_rgb(0,0,0,0.02)]">
+    <div className={`min-h-screen flex relative overflow-hidden selection:bg-emerald-200 ${adminInfo.theme === 'dark' ? 'dark bg-[#0a0a0a] text-ivory' : 'bg-[#f5f5f7] text-gray-900'}`}>
+      <aside className={`hidden w-64 shrink-0 border-r backdrop-blur-xl px-5 py-6 lg:flex lg:flex-col z-10 ${adminInfo.theme === 'dark' ? 'border-white/10 bg-black/40 shadow-[4px_0_24px_rgb(0,0,0,0.2)]' : 'border-gray-200/60 bg-white/60 shadow-[4px_0_24px_rgb(0,0,0,0.02)]'}`}>
         <div className="flex items-center gap-3 pl-1">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-tr from-gray-900 to-gray-700 text-white shadow-md shadow-gray-900/20">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-tr from-emerald-500 to-emerald-700 text-white shadow-md shadow-emerald-500/20">
             <Sparkles className="size-4" />
           </div>
           <div>
-            <p className="text-[15px] font-semibold tracking-tight text-gray-900 leading-none">HabiGo 360</p>
-            <p className="text-[11px] text-gray-500 uppercase tracking-widest mt-1 font-medium">Admin Portal</p>
+            <p className={`text-[15px] font-semibold tracking-tight leading-none ${adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}`}>HabiGo 360</p>
+            <p className={`text-[11px] uppercase tracking-widest mt-1 font-medium ${adminInfo.theme === 'dark' ? 'text-white/50' : 'text-gray-500'}`}>Admin Portal</p>
           </div>
         </div>
 
         <nav className="mt-10 space-y-1 flex-1">
-          {[
-            { label: "Dashboard", icon: LayoutDashboard },
-            { label: "Inbox", icon: Inbox },
-            { label: "Projects", icon: ImageIcon },
-            { label: "Case Studies", icon: FileText },
-            { label: "Testimonials", icon: Star },
-            { label: "Careers", icon: BriefcaseBusiness },
-            { label: "Site Content", icon: ImagePlay },
-            { label: "Access", icon: Users },
-            { label: "Settings", icon: Settings },
-          ].map((item) => (
+          {filteredNavItems.map((item) => (
             <button
               key={item.label}
               onClick={() => setActiveTab(item.label)}
               className={`flex h-10 w-full items-center gap-3 rounded-xl px-3 text-left text-[14px] transition-all font-medium ${
                 activeTab === item.label
-                  ? "bg-gray-900 text-white shadow-md shadow-gray-900/10"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  ? (adminInfo.theme === 'dark' ? 'bg-emerald-deep/20 text-emerald-400 shadow-md shadow-emerald-deep/10 border border-emerald-deep/30' : 'bg-gray-900 text-white shadow-md shadow-gray-900/10')
+                  : (adminInfo.theme === 'dark' ? 'text-white/60 hover:bg-white/5 hover:text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900')
               }`}
             >
               <item.icon className="size-[18px]" />
@@ -179,19 +208,23 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-gray-200/60">
+        <div className={`mt-auto pt-6 border-t ${adminInfo.theme === 'dark' ? 'border-white/10' : 'border-gray-200/60'}`}>
           <div className="mb-4 px-2 flex items-center gap-3">
-            <div className="size-9 rounded-full bg-gradient-to-tr from-blue-100 to-emerald-100 border border-white flex items-center justify-center text-sm font-semibold text-gray-800 shadow-sm">
-              {adminInfo.name?.charAt(0) || "A"}
-            </div>
+            {adminInfo.profilePicture ? (
+              <img src={adminInfo.profilePicture} alt="Profile" className={`size-9 rounded-full object-cover border shadow-sm ${adminInfo.theme === 'dark' ? 'border-white/20' : 'border-gray-200'}`} />
+            ) : (
+              <div className={`size-9 rounded-full border flex items-center justify-center text-sm font-semibold shadow-sm ${adminInfo.theme === 'dark' ? 'bg-gradient-to-tr from-emerald-900 to-emerald-700 border-emerald-500/30 text-white' : 'bg-gradient-to-tr from-blue-100 to-emerald-100 border-white text-gray-800'}`}>
+                {adminInfo.name?.charAt(0) || "A"}
+              </div>
+            )}
             <div className="overflow-hidden">
-              <p className="text-sm font-semibold truncate text-gray-900">{adminInfo.name || "Admin User"}</p>
-              <p className="text-xs text-gray-500 truncate font-medium">{adminInfo.role || "Admin"}</p>
+              <p className={`text-sm font-semibold truncate ${adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}`}>{adminInfo.name || "Admin User"}</p>
+              <p className={`text-xs truncate font-medium ${adminInfo.theme === 'dark' ? 'text-white/50' : 'text-gray-500'}`}>{adminInfo.role || "Admin"}</p>
             </div>
           </div>
           <button
             onClick={onLogout}
-            className="flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-red-50 text-red-600 text-sm font-medium transition-colors hover:bg-red-100"
+            className={`flex h-10 w-full items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors ${adminInfo.theme === 'dark' ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}
           >
             <LogOut className="size-4" />
             Sign Out
@@ -200,12 +233,22 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
       </aside>
 
       <main className="min-w-0 flex-1 flex flex-col z-10 h-screen">
-        <header className="sticky top-0 z-20 border-b border-gray-200/60 bg-white/60 backdrop-blur-2xl px-6 lg:px-10 py-5 flex items-center justify-between shadow-[0_4px_20px_rgb(0,0,0,0.01)]">
+        <header className={`sticky top-0 z-20 border-b backdrop-blur-2xl px-6 lg:px-10 py-5 flex items-center justify-between shadow-[0_4px_20px_rgb(0,0,0,0.01)] ${adminInfo.theme === 'dark' ? 'border-white/10 bg-black/40' : 'border-gray-200/60 bg-white/60'}`}>
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-gray-900">{activeTab}</h1>
+            <h1 className={`text-2xl font-semibold tracking-tight ${adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}`}>{activeTab}</h1>
           </div>
-          <div className="text-sm text-gray-500 font-medium tracking-wide">
-            Welcome back, <span className="text-gray-900">{adminInfo.name || "Admin User"}</span>
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => toggleThemeMutation.mutate(adminInfo.theme === 'dark' ? 'light' : 'dark')}
+              disabled={toggleThemeMutation.isPending}
+              className={`p-2 rounded-full transition-colors ${adminInfo.theme === 'dark' ? 'bg-white/10 text-yellow-300 hover:bg-white/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              title="Toggle Theme"
+            >
+              {toggleThemeMutation.isPending ? <Loader2 className="size-5 animate-spin" /> : (adminInfo.theme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />)}
+            </button>
+            <div className={`text-sm font-medium tracking-wide hidden sm:block ${adminInfo.theme === 'dark' ? 'text-white/50' : 'text-gray-500'}`}>
+              Welcome back, <span className={adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}>{adminInfo.name || "Admin User"}</span>
+            </div>
           </div>
         </header>
 
@@ -218,7 +261,7 @@ function AdminDashboard({ onLogout, adminInfo }: { onLogout: () => void, adminIn
           {activeTab === "Case Studies" && <CaseStudiesView />}
           {activeTab === "Testimonials" && <TestimonialsView />}
           {activeTab === "Dashboard" && <DashboardAnalytics adminInfo={adminInfo} />}
-          {activeTab === "Settings" && <div className="text-white/50 text-center py-20 border border-white/10 border-dashed rounded-xl">Settings module coming soon.</div>}
+          {activeTab === "Settings" && <SettingsView adminInfo={adminInfo} onUpdate={onUpdate} />}
         </div>
       </main>
     </div>
@@ -972,6 +1015,129 @@ function AdminsView() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function SettingsView({ adminInfo, onUpdate }: { adminInfo: any, onUpdate: (data: any) => void }) {
+  const [formData, setFormData] = useState({
+    name: adminInfo.name || "",
+    email: adminInfo.email || "",
+    password: ""
+  });
+  const [isUploading, setIsUploading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const updateMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await api.put("/auth/profile", data);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      onUpdate(data);
+      setMessage("Profile updated successfully!");
+      setFormData(prev => ({ ...prev, password: "" }));
+      setTimeout(() => setMessage(""), 3000);
+    },
+    onError: (err: any) => {
+      setError(err.response?.data?.message || "Failed to update profile");
+      setTimeout(() => setError(""), 3000);
+    }
+  });
+
+  const uploadProfilePicMutation = useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append("image", file);
+      const res = await api.post("/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+      return res.data.url;
+    },
+    onSuccess: (url) => {
+      updateMutation.mutate({ profilePicture: url });
+      setIsUploading(false);
+    },
+    onError: () => {
+      setError("Failed to upload image.");
+      setIsUploading(false);
+      setTimeout(() => setError(""), 3000);
+    }
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const dataToSubmit: any = { ...formData };
+    if (!dataToSubmit.password) {
+      delete dataToSubmit.password;
+    }
+    updateMutation.mutate(dataToSubmit);
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="mb-8">
+        <h2 className={`text-xl font-semibold tracking-tight ${adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}`}>Account Settings</h2>
+        <p className={`text-sm font-medium mt-1 ${adminInfo.theme === 'dark' ? 'text-white/50' : 'text-gray-500'}`}>Manage your profile and preferences.</p>
+      </div>
+
+      {message && <div className={`p-4 rounded-xl mb-6 text-sm font-medium border shadow-sm ${adminInfo.theme === 'dark' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-500/20' : 'bg-emerald-50 text-emerald-600 border-emerald-100'}`}>{message}</div>}
+      {error && <div className={`p-4 rounded-xl mb-6 text-sm font-medium border shadow-sm ${adminInfo.theme === 'dark' ? 'bg-red-900/30 text-red-400 border-red-500/20' : 'bg-red-50 text-red-600 border-red-100'}`}>{error}</div>}
+
+      <div className={`border rounded-2xl p-8 shadow-[0_4px_20px_rgb(0,0,0,0.02)] ${adminInfo.theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200/60'}`}>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className={`flex items-center gap-6 pb-6 border-b ${adminInfo.theme === 'dark' ? 'border-white/10' : 'border-gray-100'}`}>
+            <div className="relative group">
+              {adminInfo.profilePicture ? (
+                <img src={adminInfo.profilePicture} alt="Profile" className={`size-24 rounded-full object-cover border-2 shadow-md ${adminInfo.theme === 'dark' ? 'border-white/20' : 'border-white'}`} />
+              ) : (
+                <div className={`size-24 rounded-full border-2 flex items-center justify-center text-2xl font-semibold shadow-md ${adminInfo.theme === 'dark' ? 'bg-gradient-to-tr from-emerald-900 to-emerald-700 border-white/20 text-white' : 'bg-gradient-to-tr from-blue-100 to-emerald-100 border-white text-gray-800'}`}>
+                  {adminInfo.name?.charAt(0) || "A"}
+                </div>
+              )}
+              <label className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer backdrop-blur-sm">
+                {isUploading ? <Loader2 className="size-6 text-white animate-spin" /> : <Upload className="size-6 text-white" />}
+                <input type="file" className="hidden" accept="image/*" onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    setIsUploading(true);
+                    uploadProfilePicMutation.mutate(e.target.files[0]);
+                  }
+                }} />
+              </label>
+            </div>
+            <div>
+              <h3 className={`text-lg font-semibold ${adminInfo.theme === 'dark' ? 'text-ivory' : 'text-gray-900'}`}>Profile Picture</h3>
+              <p className={`text-sm font-medium mt-1 ${adminInfo.theme === 'dark' ? 'text-white/50' : 'text-gray-500'}`}>Click the image to upload a new one.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-1.5">
+              <label className={`text-xs font-bold uppercase tracking-wider ml-1 ${adminInfo.theme === 'dark' ? 'text-white/60' : 'text-gray-700'}`}>Full Name</label>
+              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className={`w-full border rounded-xl px-4 py-2.5 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm ${adminInfo.theme === 'dark' ? 'bg-black/40 border-white/10 text-white' : 'bg-gray-50 border-gray-200 text-gray-900'}`} required />
+            </div>
+            <div className="space-y-1.5">
+              <label className={`text-xs font-bold uppercase tracking-wider ml-1 ${adminInfo.theme === 'dark' ? 'text-white/60' : 'text-gray-700'}`}>Email Address</label>
+              <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className={`w-full border rounded-xl px-4 py-2.5 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm ${adminInfo.theme === 'dark' ? 'bg-black/40 border-white/10 text-white' : 'bg-gray-50 border-gray-200 text-gray-900'}`} required />
+            </div>
+          </div>
+
+          <div className={`pb-6 border-b ${adminInfo.theme === 'dark' ? 'border-white/10' : 'border-gray-100'}`}>
+            <div className="space-y-1.5 max-w-md">
+              <label className={`text-xs font-bold uppercase tracking-wider ml-1 ${adminInfo.theme === 'dark' ? 'text-white/60' : 'text-gray-700'}`}>New Password</label>
+              <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} className={`w-full border rounded-xl px-4 py-2.5 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm ${adminInfo.theme === 'dark' ? 'bg-black/40 border-white/10 text-white' : 'bg-gray-50 border-gray-200 text-gray-900'}`} placeholder="Leave blank to keep current" />
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button type="submit" disabled={updateMutation.isPending} className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 shadow-md ${adminInfo.theme === 'dark' ? 'bg-emerald-deep text-ivory hover:bg-emerald-deep/80' : 'bg-gray-900 text-white hover:bg-gray-800'}`}>
+              {updateMutation.isPending && <Loader2 className="animate-spin size-4" />}
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

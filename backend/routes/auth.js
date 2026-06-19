@@ -26,6 +26,8 @@ router.post("/login", async (req, res) => {
         name: admin.name,
         role: admin.role,
         email: admin.email,
+        profilePicture: admin.profilePicture,
+        theme: admin.theme,
         token: generateToken(admin._id),
       });
     } else {
@@ -62,6 +64,8 @@ router.post("/register", async (req, res) => {
         name: admin.name,
         role: admin.role,
         email: admin.email,
+        profilePicture: admin.profilePicture,
+        theme: admin.theme,
         token: generateToken(admin._id),
       });
     } else {
@@ -81,7 +85,44 @@ router.get("/me", protect, async (req, res) => {
     name: req.admin.name,
     role: req.admin.role,
     email: req.admin.email,
+    profilePicture: req.admin.profilePicture,
+    theme: req.admin.theme,
   });
+});
+
+// @route   PUT /api/auth/profile
+// @desc    Update admin profile
+// @access  Private
+router.put("/profile", protect, async (req, res) => {
+  const admin = await Admin.findById(req.admin._id);
+
+  if (admin) {
+    admin.name = req.body.name || admin.name;
+    admin.email = req.body.email || admin.email;
+    if (req.body.profilePicture !== undefined) {
+      admin.profilePicture = req.body.profilePicture;
+    }
+    if (req.body.theme !== undefined) {
+      admin.theme = req.body.theme;
+    }
+    if (req.body.password) {
+      admin.password = req.body.password;
+    }
+
+    const updatedAdmin = await admin.save();
+
+    res.json({
+      _id: updatedAdmin._id,
+      name: updatedAdmin.name,
+      role: updatedAdmin.role,
+      email: updatedAdmin.email,
+      profilePicture: updatedAdmin.profilePicture,
+      theme: updatedAdmin.theme,
+      token: generateToken(updatedAdmin._id),
+    });
+  } else {
+    res.status(404).json({ message: "Admin not found" });
+  }
 });
 
 module.exports = router;
