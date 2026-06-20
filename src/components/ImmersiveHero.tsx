@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import { Play, ArrowUpRight, Sparkles } from "lucide-react";
 
 import hero1 from "@/assets/hero-1.jpg";
@@ -215,13 +216,21 @@ export default function ImmersiveHero() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], ["0%", "50%"]);
+  const yText = useTransform(scrollY, [0, 1000], ["0%", "100%"]);
+  const opacityBg = useTransform(scrollY, [0, 800], [1, 0]);
+
   return (
     <section
       id="home"
       className="relative min-h-screen overflow-hidden bg-[color:var(--emerald-deep)] text-ivory"
     >
-      {/* Cinematic background slideshow */}
-      <div className="absolute inset-0">
+      {/* Cinematic background slideshow with Parallax */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: yBg, opacity: opacityBg }}
+      >
         {slides.map((src, i) => (
           <img
             key={i}
@@ -230,12 +239,13 @@ export default function ImmersiveHero() {
             className="absolute inset-0 size-full object-cover transition-opacity duration-[1500ms] ease-in-out"
             style={{ opacity: activeSlide === i ? 1 : 0 }}
             loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : "auto"}
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-deep/85 via-emerald-deep/65 to-emerald-deep/95" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.18),_transparent_55%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.10),_transparent_50%)]" />
-      </div>
+      </motion.div>
 
       {/* Floating brand particles */}
       <FloatingParticles />
@@ -256,7 +266,10 @@ export default function ImmersiveHero() {
         ))}
       </div>
 
-      <div className="relative max-w-[1500px] mx-auto px-6 lg:px-10 pt-40 lg:pt-48 pb-24 min-h-screen flex flex-col justify-between">
+      <motion.div 
+        className="relative max-w-[1500px] mx-auto px-6 lg:px-10 pt-40 lg:pt-48 pb-24 min-h-screen flex flex-col justify-between"
+        style={{ y: yText }}
+      >
         <div className="grid lg:grid-cols-12 gap-12 items-end flex-1">
           <div className="lg:col-span-9">
             <div className="flex items-center gap-3 mb-8 reveal">
@@ -293,7 +306,7 @@ export default function ImmersiveHero() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

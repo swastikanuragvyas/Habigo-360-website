@@ -8,6 +8,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import OurWorkCarousels from "@/components/OurWorkCarousels";
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { TextReveal } from "@/components/TextReveal";
+
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
 
 export interface ServiceWork {
   _id: string;
@@ -103,10 +108,36 @@ function OurWorkPage() {
           )}
         </section>
 
+        {/* Before/After Transformation Demo */}
+        <section className="bg-ivory-warm py-24">
+          <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
+            <div className="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+              <h2 className="font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light uppercase tracking-tight text-emerald-deep">
+                Transformations
+              </h2>
+              <p className="mt-4 text-foreground/70">See the impact of our visual branding before and after our touch.</p>
+            </div>
+            
+            <div className="max-w-4xl mx-auto scroll-reveal">
+              <div className="animated-gradient-border p-1 rounded-lg shadow-2xl">
+                <BeforeAfterSlider 
+                  beforeImage={hero2} 
+                  afterImage={hero1} 
+                  beforeLabel="Raw Footage" 
+                  afterLabel="Final Graded Output"
+                  className="aspect-video"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {!isLoading && projects && <InstagramSection projects={projects} />}
       </main>
 
-      <Footer />
+      <div className="defer-render">
+        <Footer />
+      </div>
       <StickyCTA />
     </div>
   );
@@ -182,11 +213,13 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
               <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
                 <span className="w-10 h-px bg-emerald-deep/40" /> {work.service}
               </span>
-              <h2 className="mt-4 font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1.05] font-light text-emerald-deep">
-                {work.title}
-              </h2>
-              <p className="mt-6 text-foreground/70 text-lg leading-relaxed">{work.description}</p>
-            </ScrollReveal>
+              <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-emerald-deep font-light">
+            <TextReveal text="A Collection of" />
+            <br />
+            <em className="text-foreground/80 italic font-serif">
+              <TextReveal text="Our Finest Work" delay={300} />
+            </em>
+          </h1>  </ScrollReveal>
 
             {work.kpis && work.kpis.length > 0 && (
               <ScrollReveal x={-30} delay={0.2}>

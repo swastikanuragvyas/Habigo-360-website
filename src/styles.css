@@ -127,6 +127,84 @@
   .reveal-delay-4 {
     animation-delay: 0.4s;
   }
+
+  /* Performance: Deferred Rendering */
+  .defer-render {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+  }
+
+  /* Native Scroll-driven reveals */
+  .scroll-reveal {
+    animation: fade-in-up linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+
+  /* Staggered Card Entrances */
+  .scroll-reveal:nth-child(2) { animation-range: entry 15% cover 35%; }
+  .scroll-reveal:nth-child(3) { animation-range: entry 20% cover 40%; }
+  .scroll-reveal:nth-child(4) { animation-range: entry 25% cover 45%; }
+  .scroll-reveal:nth-child(5) { animation-range: entry 30% cover 50%; }
+  .scroll-reveal:nth-child(6) { animation-range: entry 35% cover 55%; }
+  .scroll-reveal:nth-child(7) { animation-range: entry 40% cover 60%; }
+  .scroll-reveal:nth-child(8) { animation-range: entry 45% cover 65%; }
+
+  /* Animated Gradient Borders */
+  .animated-gradient-border {
+    position: relative;
+    border-radius: var(--radius-md);
+  }
+  .animated-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-md) + 2px);
+    background: conic-gradient(from var(--gradient-angle), var(--emerald-deep), var(--gold), var(--emerald-deep));
+    z-index: -1;
+    animation: spin-gradient 4s linear infinite;
+  }
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+}
+
+@keyframes spin-gradient {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+/* ─── View Transitions API Morphing ─── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
 }
 
 @keyframes reveal {
@@ -378,6 +456,8 @@
 .morph-cta:hover {
   color: var(--color-emerald-deep);
   border-color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
 }
 .morph-cta .default-text {
   display: inline;

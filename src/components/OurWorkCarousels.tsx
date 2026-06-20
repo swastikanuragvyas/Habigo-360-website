@@ -10,6 +10,8 @@ import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
+import { motion, AnimatePresence } from "framer-motion";
+import { MagneticCard } from "./MagneticCard";
 import { Loader2 } from "lucide-react";
 
 const CAROUSELS_1 = [
@@ -71,9 +73,9 @@ function MasonryGrid({ items }: { items: any[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[280px]">
       {items.map((c) => (
-        <div
+        <MagneticCard
           key={c.id}
-          className={`relative group overflow-hidden rounded-sm bg-secondary ${
+          className={`relative group overflow-hidden rounded-sm bg-secondary scroll-reveal ${
             c.type === "tall" ? "row-span-2" : "row-span-1"
           }`}
         >
@@ -94,7 +96,7 @@ function MasonryGrid({ items }: { items: any[] }) {
               </p>
             )}
           </div>
-        </div>
+        </MagneticCard>
       ))}
     </div>
   );
@@ -104,9 +106,9 @@ function FourColumnGrid({ items }: { items: any[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {items.map((c) => (
-        <div
+        <MagneticCard
           key={c.id}
-          className="relative group overflow-hidden rounded-sm bg-secondary aspect-[9/16]"
+          className="relative group overflow-hidden rounded-sm bg-secondary aspect-[9/16] scroll-reveal"
         >
           <img
             src={c.img}
@@ -120,7 +122,7 @@ function FourColumnGrid({ items }: { items: any[] }) {
               {c.title}
             </h3>
           </div>
-        </div>
+        </MagneticCard>
       ))}
     </div>
   );

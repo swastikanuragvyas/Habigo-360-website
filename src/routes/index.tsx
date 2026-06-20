@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 
 import ImmersiveHero from "@/components/ImmersiveHero";
+import { TextReveal } from "@/components/TextReveal";
 import LivingPortfolio from "@/components/LivingPortfolio";
 import InstagramMockups from "@/components/InstagramMockups";
 import { ScrollProgress } from "@/components/AmbientStorytelling";
@@ -157,10 +158,18 @@ function HabiGoHome() {
       <WhyChooseUs />
       <LivingPortfolio />
       <InstagramMockups />
-      <Testimonials />
-      <FAQs />
-      <Contact />
-      <Footer />
+      <div className="defer-render">
+        <Testimonials />
+      </div>
+      <div className="defer-render">
+        <FAQs />
+      </div>
+      <div className="defer-render">
+        <Contact />
+      </div>
+      <div className="defer-render">
+        <Footer />
+      </div>
       <StickyCTA />
     </div>
   );
@@ -697,9 +706,11 @@ function Services() {
               <span className="w-10 h-px bg-emerald-deep/40" /> Capabilities
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
-              Twelve disciplines.
+              <TextReveal text="Twelve disciplines." />
               <br />
-              <em className="italic text-emerald-deep">One growth engine.</em>
+              <em className="italic text-emerald-deep">
+                <TextReveal text="One growth engine." delay={300} />
+              </em>
             </h2>
           </div>
           <p className="lg:col-span-5 text-foreground/65 max-w-md text-[15px] leading-relaxed">
