@@ -1,5 +1,6 @@
 const express = require("express");
 const Contact = require("../models/Contact");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.post("/", async (req, res) => {
 });
 
 // GET /api/contact
-router.get("/", async (req, res) => {
+router.get("/", protect, async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
     res.json(contacts);
@@ -32,7 +33,7 @@ router.get("/", async (req, res) => {
 });
 
 // PUT /api/contact/:id
-router.put("/:id", async (req, res) => {
+router.put("/:id", protect, async (req, res) => {
   try {
     const contact = await Contact.findById(req.params.id);
     if (!contact) {

@@ -38,10 +38,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// @route   POST /api/auth/register (For initial setup only, you might want to comment this out in production)
-// @desc    Register a new admin
-// @access  Public
-router.post("/register", async (req, res) => {
+// @route   POST /api/auth/register
+// @desc    Register a new admin (Protected, only admins can create admins)
+// @access  Private
+router.post("/register", protect, async (req, res) => {
   const { name, role, email, password } = req.body;
 
   try {

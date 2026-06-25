@@ -1,5 +1,6 @@
 const express = require("express");
 const Testimonial = require("../models/Testimonial");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST a new testimonial
-router.post("/", async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const testimonial = await Testimonial.create(req.body);
     res.status(201).json(testimonial);
@@ -24,7 +25,7 @@ router.post("/", async (req, res) => {
 });
 
 // PUT update a testimonial
-router.put("/:id", async (req, res) => {
+router.put("/:id", protect, async (req, res) => {
   try {
     const testimonial = await Testimonial.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!testimonial) {
@@ -37,7 +38,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE a testimonial
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   try {
     const testimonial = await Testimonial.findByIdAndDelete(req.params.id);
     if (!testimonial) {
