@@ -41,7 +41,7 @@ router.get("/:id", async (req, res) => {
 // @access  Private
 router.post("/", protect, async (req, res) => {
   try {
-    const { title, service, description, metrics, kpis, media, visibility, sortOrder } = req.body;
+    const { title, service, description, metrics, kpis, media, visibility, sortOrder, category } = req.body;
     
     const project = new Project({
       title,
@@ -52,6 +52,7 @@ router.post("/", protect, async (req, res) => {
       media,
       visibility,
       sortOrder,
+      category,
     });
 
     const createdProject = await project.save();
@@ -66,7 +67,7 @@ router.post("/", protect, async (req, res) => {
 // @access  Private
 router.put("/:id", protect, async (req, res) => {
   try {
-    const { title, service, description, metrics, kpis, media, visibility, sortOrder } = req.body;
+    const { title, service, description, metrics, kpis, media, visibility, sortOrder, category } = req.body;
     const project = await Project.findById(req.params.id);
 
     if (project) {
@@ -76,6 +77,7 @@ router.put("/:id", protect, async (req, res) => {
       project.metrics = metrics || project.metrics;
       project.kpis = kpis || project.kpis;
       project.media = media || project.media;
+      if (category !== undefined) project.category = category;
       if (visibility !== undefined) project.visibility = visibility;
       if (sortOrder !== undefined) project.sortOrder = sortOrder;
 

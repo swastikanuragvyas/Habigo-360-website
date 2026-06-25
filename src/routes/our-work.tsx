@@ -80,19 +80,6 @@ function OurWorkPage() {
     },
   });
 
-  const { data: transformations, isLoading: isLoadingTrans } = useQuery({
-    queryKey: ["publicTransformations"],
-    queryFn: async () => {
-      const { data } = await api.get("/transformations");
-      return data.filter((t: any) => t.visibility !== false);
-    },
-  });
-
-  const caseStudies = projects?.filter((p: any) => !p.category || p.category === "Project") || [];
-  const carousels = projects?.filter((p: any) => p.category === "Carousel") || [];
-  const reels = projects?.filter((p: any) => p.category === "Reel") || [];
-  const stories = projects?.filter((p: any) => p.category === "Story") || [];
-
   return (
     <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-accent selection:text-emerald-deep overflow-x-hidden">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
@@ -108,8 +95,8 @@ function OurWorkPage() {
             </div>
           ) : (
             <div className="max-w-[1500px] mx-auto px-6 lg:px-10 space-y-32">
-              {caseStudies?.length > 0 ? (
-                caseStudies.map((work: ServiceWork, index: number) => (
+              {projects?.length > 0 ? (
+                projects.map((work: ServiceWork, index: number) => (
                   <WorkShowcase key={work._id} work={work} index={index} />
                 ))
               ) : (
@@ -121,10 +108,6 @@ function OurWorkPage() {
           )}
         </section>
 
-        {!isLoading && <MediaGallerySection title="Engaging Carousels" projects={carousels} type="Carousel" />}
-        {!isLoading && <MediaGallerySection title="Dynamic Reels" projects={reels} type="Reel" aspectClass="aspect-[9/16]" />}
-        {!isLoading && <MediaGallerySection title="Captivating Stories" projects={stories} type="Story" aspectClass="aspect-[9/16]" />}
-
         {/* Before/After Transformation Demo */}
         <section className="bg-ivory-warm py-24">
           <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
@@ -135,33 +118,16 @@ function OurWorkPage() {
               <p className="mt-4 text-foreground/70">See the impact of our visual branding before and after our touch.</p>
             </div>
             
-            <div className="space-y-24">
-              {transformations?.length > 0 ? transformations.map((trans: any, index: number) => (
-                <div key={trans._id} className="max-w-4xl mx-auto scroll-reveal">
-                  <h3 className="text-2xl font-medium text-emerald-deep text-center mb-8">{trans.title}</h3>
-                  <div className="animated-gradient-border p-1 rounded-lg shadow-2xl">
-                    <BeforeAfterSlider 
-                      beforeImage={trans.beforeImage} 
-                      afterImage={trans.afterImage} 
-                      beforeLabel={trans.beforeLabel} 
-                      afterLabel={trans.afterLabel}
-                      className="aspect-video"
-                    />
-                  </div>
-                </div>
-              )) : (
-                <div className="max-w-4xl mx-auto scroll-reveal">
-                  <div className="animated-gradient-border p-1 rounded-lg shadow-2xl">
-                    <BeforeAfterSlider 
-                      beforeImage={hero2} 
-                      afterImage={hero1} 
-                      beforeLabel="Raw Footage" 
-                      afterLabel="Final Graded Output"
-                      className="aspect-video"
-                    />
-                  </div>
-                </div>
-              )}
+            <div className="max-w-4xl mx-auto scroll-reveal">
+              <div className="animated-gradient-border p-1 rounded-lg shadow-2xl">
+                <BeforeAfterSlider 
+                  beforeImage={hero2} 
+                  afterImage={hero1} 
+                  beforeLabel="Raw Footage" 
+                  afterLabel="Final Graded Output"
+                  className="aspect-video"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -300,7 +266,7 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
   );
 }
 
-function MediaCard({ media, aspectClass = "aspect-[4/3] lg:aspect-[16/10]" }: { media: any, aspectClass?: string }) {
+function MediaCard({ media }: { media: any }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -309,7 +275,7 @@ function MediaCard({ media, aspectClass = "aspect-[4/3] lg:aspect-[16/10]" }: { 
       onClick={() => setIsExpanded(!isExpanded)}
     >
       <div
-        className={`relative transition-all duration-700 ${isExpanded ? "aspect-auto" : aspectClass}`}
+        className={`relative transition-all duration-700 ${isExpanded ? "aspect-auto" : "aspect-[4/3] lg:aspect-[16/10]"}`}
       >
         {media.type === "video" ? (
           <>
@@ -423,39 +389,6 @@ function InstagramSection({ projects }: { projects: ServiceWork[] }) {
           animation-play-state: paused;
         }
       `}</style>
-    </section>
-  );
-}
-
-function MediaGallerySection({ title, projects, type, aspectClass }: { title: string, projects: ServiceWork[], type: "Carousel" | "Reel" | "Story", aspectClass?: string }) {
-  if (!projects || projects.length === 0) return null;
-
-  return (
-    <section className="py-24 bg-background border-t border-emerald-deep/5">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <ScrollReveal>
-          <div className="mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
-              <span className="w-10 h-px bg-emerald-deep/40" /> OUR WORK ({type.toUpperCase()}S)
-            </span>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.95] text-emerald-deep font-light mt-6">
-              {title}
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        <div className={`grid gap-6 ${type === 'Reel' || type === 'Story' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
-          {projects.map((project, idx) => (
-            <div key={project._id} className="space-y-6">
-              {project.media?.map((media, mIdx) => (
-                <ScrollReveal key={mIdx} delay={0.1 * (idx % 3)} y={20}>
-                  <MediaCard media={media} aspectClass={aspectClass} />
-                </ScrollReveal>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
