@@ -17,10 +17,7 @@ export function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
-  const timeRef = useRef<number>(0);
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -29,23 +26,6 @@ export function BeforeAfterSlider({
     const percent = (x / rect.width) * 100;
     setSliderPosition(percent);
   };
-
-  useEffect(() => {
-    const animate = () => {
-      if (!isDragging && !isHovered) {
-        timeRef.current += 0.015;
-        // Sine wave between ~30% and ~70%
-        const pos = 50 + Math.sin(timeRef.current) * 20;
-        setSliderPosition(pos);
-      }
-      animationRef.current = requestAnimationFrame(animate);
-    };
-    
-    animationRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, [isDragging, isHovered]);
 
   useEffect(() => {
     const handleMouseUp = () => setIsDragging(false);
@@ -75,11 +55,6 @@ export function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={`relative w-full overflow-hidden select-none cursor-ew-resize rounded-md ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setIsDragging(false);
-      }}
       onMouseDown={(e) => {
         setIsDragging(true);
         handleMove(e.clientX);
