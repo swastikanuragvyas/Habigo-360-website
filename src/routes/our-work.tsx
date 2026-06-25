@@ -9,10 +9,8 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import OurWorkCarousels from "@/components/OurWorkCarousels";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { TransformationsCarousel } from "@/components/TransformationsCarousel";
 import { TextReveal } from "@/components/TextReveal";
-
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
 
 export interface ServiceWork {
   _id: string;
@@ -80,6 +78,14 @@ function OurWorkPage() {
     },
   });
 
+  const { data: transformations, isLoading: isTransformationsLoading } = useQuery({
+    queryKey: ["publicTransformations"],
+    queryFn: async () => {
+      const { data } = await api.get("/transformations");
+      return data.filter((t: any) => t.visibility !== false);
+    },
+  });
+
   return (
     <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-accent selection:text-emerald-deep overflow-x-hidden">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
@@ -118,16 +124,14 @@ function OurWorkPage() {
               <p className="mt-4 text-foreground/70">See the impact of our visual branding before and after our touch.</p>
             </div>
             
-            <div className="max-w-4xl mx-auto scroll-reveal">
-              <div className="animated-gradient-border p-1 rounded-lg shadow-2xl">
-                <BeforeAfterSlider 
-                  beforeImage={hero2} 
-                  afterImage={hero1} 
-                  beforeLabel="Raw Footage" 
-                  afterLabel="Final Graded Output"
-                  className="aspect-video"
-                />
-              </div>
+            <div className="scroll-reveal">
+              {isTransformationsLoading ? (
+                <div className="flex justify-center"><Loader2 className="animate-spin text-emerald-deep size-10" /></div>
+              ) : transformations && transformations.length > 0 ? (
+                <TransformationsCarousel transformations={transformations} />
+              ) : (
+                <div className="text-center text-muted-foreground">No transformations added yet.</div>
+              )}
             </div>
           </div>
         </section>

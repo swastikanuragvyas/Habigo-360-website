@@ -17,15 +17,34 @@ export function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMove = (clientX: number) => {
+    setHasInteracted(true);
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
     const percent = (x / rect.width) * 100;
     setSliderPosition(percent);
   };
+
+  useEffect(() => {
+    if (hasInteracted) return;
+
+    let animationFrame: number;
+    let startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = (Math.sin(elapsed / 1500) * 10) + 50; // oscillates between 40% and 60%
+      setSliderPosition(progress);
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [hasInteracted]);
 
   useEffect(() => {
     const handleMouseUp = () => setIsDragging(false);
@@ -64,17 +83,21 @@ export function BeforeAfterSlider({
         handleMove(e.touches[0].clientX);
       }}
     >
-      {/* After Image (Background) */}
-      <img
-        src={afterImage}
-        alt="After"
-        className="block w-full h-full object-cover"
-        draggable={false}
-      />
-      
-      {/* After Label */}
-      <div className="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm pointer-events-none">
-        {afterLabel}
+      {/* After Image (Clipped overlay on the right) */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
+      >
+        <img
+          src={afterImage}
+          alt="After"
+          className="absolute inset-0 w-full h-full object-cover bg-gray-900"
+          draggable={false}
+        />
+        {/* After Label */}
+        <div className="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm pointer-events-none">
+          {afterLabel}
+        </div>
       </div>
 
       {/* Before Image (Clipped overlay) */}
@@ -85,7 +108,7 @@ export function BeforeAfterSlider({
         <img
           src={beforeImage}
           alt="Before"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover bg-gray-900"
           draggable={false}
         />
         {/* Before Label */}
