@@ -1,59 +1,17 @@
 import { useReveal } from "@/routes/index";
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.jpg";
-import work4 from "@/assets/work-4.jpg";
-import work5 from "@/assets/work-5.jpg";
-import about from "@/assets/about.jpg";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { MagneticCard } from "./MagneticCard";
 import { Loader2 } from "lucide-react";
 
-const CAROUSELS_1 = [
-  { id: 1, title: "Experience Heritage\nat Kot Dunara", subtitle: "A 16th century castle near Jodhpur", img: work1, type: "tall" },
-  { id: 2, title: "Places to visit in\nJODHPUR", subtitle: "", img: work2, type: "square" },
-  { id: 3, title: "HIGH TEA", subtitle: "at Sajjanbagh", img: work3, type: "square" },
-  { id: 4, title: "Plan a perfect vacation\nat Naila Kothi", subtitle: "A Luxurious Mansion in Jaipur", img: work4, type: "tall" },
-  { id: 5, title: "Secret\nLAKES & STEPWELLS\nIN & AROUND JAIPUR", subtitle: "", img: work5, type: "square" },
-  { id: 6, title: "The Lake City's\nBest Sips", subtitle: "", img: about, type: "square" },
-];
+const CAROUSELS_1: any[] = [];
+const CAROUSELS_2: any[] = [];
+const REELS_1: any[] = [];
+const REELS_2: any[] = [];
+const STORIES: any[] = [];
 
-const CAROUSELS_2 = [
-  { id: 7, title: "Namli's Fresh Oasis\nin Nature", subtitle: "Ft. Villasita", img: work3, type: "square" },
-  { id: 8, title: "Just a few minutes from\nSajjan Bagh", subtitle: "Kumbhalgarh Fort", img: hero1, type: "tall" },
-  { id: 9, title: "Here's how a day unfolds at\nNamli Haus", subtitle: "", img: work2, type: "square" },
-  { id: 10, title: "Welcome To\nChanoud House, Jodhpur", subtitle: "The kind of place you never want to leave", img: hero2, type: "tall" },
-  { id: 11, title: "Mukam\nA stay that quietly connects with you", subtitle: "", img: work5, type: "square" },
-  { id: 12, title: "Into the\nWILD", subtitle: "", img: work4, type: "square" },
-];
 
-const REELS_1 = [
-  { id: 13, title: "Hello, I am", img: founder1 },
-  { id: 14, title: "Property Tour", img: hero3 },
-  { id: 15, title: "A living Shikarbadi experience", img: work1 },
-  { id: 16, title: "Masterpiece", img: hero1 },
-];
-
-const REELS_2 = [
-  { id: 17, title: "Experience Kumbhalgarh", img: hero2 },
-  { id: 18, title: "Mountain air, cozy vibes", img: work2 },
-  { id: 19, title: "Hum 6 creators", img: work3 },
-  { id: 20, title: "Maxus", img: hero3 },
-];
-
-const STORIES = [
-  { id: 21, title: "Where mornings feel like holidays", img: work4 },
-  { id: 22, title: "Crafting heritage", img: work5 },
-  { id: 23, title: "Peace, Luxury, and the Aravalli Hills", img: hero1 },
-  { id: 24, title: "Boutique, Bold, Beautiful", img: work2 },
-];
-
-import founder1 from "@/assets/founder-1.jpg";
 
 function SectionHeader({ title, type }: { title: string, type: string }) {
   const { ref, shown } = useReveal();
@@ -145,6 +103,14 @@ export default function OurWorkCarousels() {
     },
   });
 
+  const { data: projects, isLoading: isProjectsLoading } = useQuery({
+    queryKey: ["publicProjects"],
+    queryFn: async () => {
+      const { data } = await api.get("/projects");
+      return data.filter((p: any) => p.visibility !== false);
+    },
+  });
+
   const useLiveFeed = feedData && feedData.length > 0;
   const useLiveStories = storiesData && storiesData.length > 0;
 
@@ -175,42 +141,56 @@ export default function OurWorkCarousels() {
       }))
     : [];
 
+  const mapToFormat = (projectsList: any[]) => {
+    return projectsList.map((p: any, i: number) => ({
+      id: p._id,
+      title: p.title,
+      subtitle: p.service,
+      img: p.media?.[0]?.url || "",
+      type: i % 4 === 0 ? "tall" : "square",
+    }));
+  };
+
+  const carouselProjects = mapToFormat(projects?.filter((p: any) => p.category === "Carousel") || []);
+  const reelProjects = mapToFormat(projects?.filter((p: any) => p.category === "Reel") || []);
+  const storyProjects = mapToFormat(projects?.filter((p: any) => p.category === "Story") || []);
+
   return (
     <section className="bg-background py-28 lg:py-40">
       <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
         
         {/* Carousels 1 & 2 */}
         <SectionHeader title="Our Work" type="Carousels" />
-        {isFeedLoading ? (
+        {isFeedLoading || isProjectsLoading ? (
           <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
         ) : (
           <>
-            <MasonryGrid items={useLiveFeed ? liveCarousels.slice(0, 6) : CAROUSELS_1} />
+            <MasonryGrid items={useLiveFeed ? liveCarousels.slice(0, 6) : (carouselProjects.length > 0 ? carouselProjects.slice(0, 6) : CAROUSELS_1)} />
             <div className="mt-8">
-              <MasonryGrid items={useLiveFeed ? liveCarousels.slice(6, 12) : CAROUSELS_2} />
+              <MasonryGrid items={useLiveFeed ? liveCarousels.slice(6, 12) : (carouselProjects.length > 6 ? carouselProjects.slice(6, 12) : CAROUSELS_2)} />
             </div>
           </>
         )}
 
         {/* Reels 1 & 2 */}
         <SectionHeader title="Our Work" type="Reels" />
-        {isFeedLoading ? (
+        {isFeedLoading || isProjectsLoading ? (
           <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
         ) : (
           <>
-            <FourColumnGrid items={useLiveFeed ? liveReels.slice(0, 4) : REELS_1} />
+            <FourColumnGrid items={useLiveFeed ? liveReels.slice(0, 4) : (reelProjects.length > 0 ? reelProjects.slice(0, 4) : REELS_1)} />
             <div className="mt-8">
-              <FourColumnGrid items={useLiveFeed ? liveReels.slice(4, 8) : REELS_2} />
+              <FourColumnGrid items={useLiveFeed ? liveReels.slice(4, 8) : (reelProjects.length > 4 ? reelProjects.slice(4, 8) : REELS_2)} />
             </div>
           </>
         )}
 
         {/* Stories */}
         <SectionHeader title="Our Work" type="Stories" />
-        {isStoriesLoading ? (
+        {isStoriesLoading || isProjectsLoading ? (
           <div className="flex justify-center py-10"><Loader2 className="animate-spin text-emerald-deep size-8" /></div>
         ) : (
-          <FourColumnGrid items={useLiveStories ? liveStories : STORIES} />
+          <FourColumnGrid items={useLiveStories ? liveStories : (storyProjects.length > 0 ? storyProjects : STORIES)} />
         )}
 
       </div>

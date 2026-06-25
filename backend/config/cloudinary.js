@@ -12,7 +12,8 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "habigo360",
-    allowedFormats: ["jpg", "png", "jpeg", "webp", "mp4"],
+    allowedFormats: ["jpg", "png", "jpeg", "webp", "mp4", "mov", "avi", "webm", "mkv"],
+    resource_type: "auto",
   },
 });
 
