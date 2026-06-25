@@ -20,7 +20,6 @@ app.use("/api/settings", require("./routes/settings"));
 app.use("/api/admins", require("./routes/admins"));
 app.use("/api/testimonials", require("./routes/testimonials"));
 app.use("/api/case-studies", require("./routes/case-studies"));
-app.use("/api/transformations", require("./routes/transformations"));
 
 // Basic route for testing
 app.get("/", (req, res) => {

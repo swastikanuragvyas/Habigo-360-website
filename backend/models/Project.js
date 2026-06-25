@@ -10,11 +10,6 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: String,
-      enum: ["Project", "Carousel", "Reel", "Story"],
-      default: "Project",
-    },
     description: {
       type: String,
       required: true,
