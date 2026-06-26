@@ -240,10 +240,15 @@ function ProjectModal({ project, defaultCategory = "Project", onClose, onSuccess
 
             {/* Media Upload */}
             <div className="space-y-3">
-              <label className="text-sm font-semibold text-gray-700 block">Media Gallery</label>
+              <label className="text-sm font-semibold text-gray-700 block">
+                Media Gallery 
+                <span className="font-normal text-gray-500 ml-1">
+                  ({formData.category === "Reel" || formData.category === "Story" ? "9:16" : formData.category === "Carousel" ? "4:5" : "16:9"} ratio)
+                </span>
+              </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {formData.media.map((m: any, i: number) => (
-                  <div key={i} className="relative group aspect-video bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
+                  <div key={i} className={`relative group ${formData.category === "Reel" || formData.category === "Story" ? "aspect-[9/16]" : formData.category === "Carousel" ? "aspect-[4/5]" : "aspect-video"} bg-gray-100 rounded-xl overflow-hidden border border-gray-200`}>
                     {m.type === "video" ? (
                        <video src={m.url} className="w-full h-full object-cover" />
                     ) : (
@@ -256,7 +261,7 @@ function ProjectModal({ project, defaultCategory = "Project", onClose, onSuccess
                 ))}
                 
                 {/* Plus Icon Upload Card */}
-                <label className="cursor-pointer flex flex-col items-center justify-center aspect-video bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl hover:bg-gray-100 transition-colors group">
+                <label className={`cursor-pointer flex flex-col items-center justify-center ${formData.category === "Reel" || formData.category === "Story" ? "aspect-[9/16]" : formData.category === "Carousel" ? "aspect-[4/5]" : "aspect-video"} bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl hover:bg-gray-100 transition-colors group`}>
                   {uploadingImage ? (
                     <Loader2 className="size-6 text-gray-400 animate-spin" />
                   ) : (

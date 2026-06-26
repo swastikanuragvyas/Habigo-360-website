@@ -193,8 +193,8 @@ function TransformationModal({ trans, onClose, onSuccess }: { trans: any; onClos
 
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-3">
-                <label className="text-sm font-semibold text-gray-700">Before Image *</label>
-                <div className="relative group aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden border border-gray-200 flex items-center justify-center">
+                <label className="text-sm font-semibold text-gray-700">Before Image * <span className="font-normal text-gray-500 ml-1">(4:5 ratio)</span></label>
+                <div className="relative group aspect-[4/5] bg-gray-100 rounded-xl overflow-hidden border border-gray-200 flex items-center justify-center">
                   {formData.beforeImage ? (
                     <img src={formData.beforeImage} alt="before" className="w-full h-full object-cover" />
                   ) : (
@@ -208,8 +208,8 @@ function TransformationModal({ trans, onClose, onSuccess }: { trans: any; onClos
                 <input placeholder="Before Label (e.g. Raw Footage)" value={formData.beforeLabel} onChange={(e) => setFormData({...formData, beforeLabel: e.target.value})} className="w-full text-xs rounded-md border px-3 py-2" />
               </div>
               <div className="space-y-3">
-                <label className="text-sm font-semibold text-gray-700">After Image *</label>
-                <div className="relative group aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden border border-gray-200 flex items-center justify-center">
+                <label className="text-sm font-semibold text-gray-700">After Image * <span className="font-normal text-gray-500 ml-1">(4:5 ratio)</span></label>
+                <div className="relative group aspect-[4/5] bg-gray-100 rounded-xl overflow-hidden border border-gray-200 flex items-center justify-center">
                   {formData.afterImage ? (
                     <img src={formData.afterImage} alt="after" className="w-full h-full object-cover" />
                   ) : (

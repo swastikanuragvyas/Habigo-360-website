@@ -31,8 +31,8 @@ export function TransformationsCarousel({ transformations }: { transformations: 
   if (!transformations || transformations.length === 0) return null;
 
   return (
-    <div className="relative max-w-5xl mx-auto">
-      <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl">
+    <div className="relative max-w-2xl mx-auto">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
