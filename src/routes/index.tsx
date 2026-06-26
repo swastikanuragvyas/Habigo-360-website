@@ -942,7 +942,17 @@ export function Contact() {
   });
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
   const mutation = useMutation({
-    mutationFn: submitContact,
+    mutationFn: async (data: any) => {
+      const response = await fetch("https://habigo-360-website.onrender.com/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again or email us directly.");
+      }
+      return { success: true };
+    },
     onSuccess: (result) => {
       if (result.success) {
         setFormStatus("success");
@@ -1041,7 +1051,7 @@ export function Contact() {
                 service: (fd.get("service") as string) || "",
                 brief: (fd.get("brief") as string) || "",
               };
-              mutation.mutate({ data });
+              mutation.mutate(data);
             }}
             className="lg:col-span-7 bg-ivory text-foreground p-8 lg:p-12 rounded-sm space-y-6"
           >
@@ -1122,7 +1132,7 @@ export function Contact() {
                     d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                Something went wrong. Please email us directly at admin@habigo360.com
+                {mutation.data?.error || mutation.error?.message || "Something went wrong. Please email us directly at admin@habigo360.com"}
               </div>
             )}
             <button

@@ -1177,9 +1177,10 @@ export {
   RouterProvider as R,
   Scripts as S,
   createRootRouteWithContext as a,
-  createFileRoute as b,
+  useLocation as b,
   createRouter as c,
+  createFileRoute as d,
   lazyRouteComponent as l,
   renderRouterToStream as r,
-  useLocation as u
+  useRouter as u
 };
