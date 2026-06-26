@@ -11,6 +11,8 @@ import OurWorkCarousels from "@/components/OurWorkCarousels";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { TransformationsCarousel } from "@/components/TransformationsCarousel";
 import { TextReveal } from "@/components/TextReveal";
+import LivingPortfolio from "@/components/LivingPortfolio";
+import InstagramMockups from "@/components/InstagramMockups";
 
 export interface ServiceWork {
   _id: string;
@@ -93,6 +95,8 @@ function OurWorkPage() {
       <main className="relative">
         <HeroSection />
         <OurWorkCarousels />
+        <LivingPortfolio />
+        <InstagramMockups />
 
         <section className="py-24 lg:py-32 bg-background min-h-[40vh]">
           {isLoading ? (

@@ -31,8 +31,6 @@ import {
 
 import ImmersiveHero from "@/components/ImmersiveHero";
 import { TextReveal } from "@/components/TextReveal";
-import LivingPortfolio from "@/components/LivingPortfolio";
-import InstagramMockups from "@/components/InstagramMockups";
 import { ScrollProgress } from "@/components/AmbientStorytelling";
 import { useStaggerReveal, staggerItemStyle } from "@/hooks/useStaggerReveal";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -156,8 +154,6 @@ function HabiGoHome() {
       <ImpactCounters />
       <Clients />
       <WhyChooseUs />
-      <LivingPortfolio />
-      <InstagramMockups />
       <div className="defer-render">
         <Testimonials />
       </div>
