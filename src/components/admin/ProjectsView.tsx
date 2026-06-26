@@ -146,8 +146,40 @@ function ProjectModal({ project, defaultCategory = "Project", onClose, onSuccess
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return;
-    setUploadingImage(true);
     const file = e.target.files[0];
+
+    if (file.type.startsWith("image/")) {
+      const valid = await new Promise((resolve) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const ratio = img.width / img.height;
+          let expectedRatio = 16 / 9;
+          let expectedStr = "16:9";
+          if (formData.category === "Reel" || formData.category === "Story") {
+            expectedRatio = 9 / 16;
+            expectedStr = "9:16";
+          } else if (formData.category === "Carousel") {
+            expectedRatio = 4 / 5;
+            expectedStr = "4:5";
+          }
+          
+          if (Math.abs(ratio - expectedRatio) > 0.05) {
+            alert(`Please upload an image with the correct aspect ratio (${expectedStr}). Your image has a ratio of ${Math.round(ratio * 100) / 100} (${img.width}x${img.height}).`);
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        };
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+
+      if (!valid) return;
+    }
+
+    setUploadingImage(true);
     const uploadData = new FormData();
     uploadData.append("media", file);
 

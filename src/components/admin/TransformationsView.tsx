@@ -137,8 +137,32 @@ function TransformationModal({ trans, onClose, onSuccess }: { trans: any; onClos
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: "beforeImage" | "afterImage") => {
     if (!e.target.files?.[0]) return;
-    setUploadingImage(field);
     const file = e.target.files[0];
+
+    if (file.type.startsWith("image/")) {
+      const valid = await new Promise((resolve) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const ratio = img.width / img.height;
+          const expectedRatio = 4 / 5;
+          
+          if (Math.abs(ratio - expectedRatio) > 0.05) {
+            alert(`Please upload an image with the correct aspect ratio (4:5). Your image has a ratio of ${Math.round(ratio * 100) / 100} (${img.width}x${img.height}).`);
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        };
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+
+      if (!valid) return;
+    }
+
+    setUploadingImage(field);
     const uploadData = new FormData();
     uploadData.append("media", file);
 
