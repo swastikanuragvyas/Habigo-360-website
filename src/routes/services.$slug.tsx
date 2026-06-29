@@ -45,7 +45,7 @@ function ServiceDetailPage() {
       <div className="min-h-screen bg-background text-foreground">
         <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
         <div className="pt-40 lg:pt-52 pb-28 text-center max-w-2xl mx-auto px-6">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center justify-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center justify-center gap-3">
             <span className="w-10 h-px bg-emerald-deep/40" />
             404
             <span className="w-10 h-px bg-emerald-deep/40" />
@@ -163,7 +163,7 @@ function StatsBar({ stats }: { stats: { label: string; value: string }[] }) {
               <div className="font-display text-4xl lg:text-5xl text-emerald-deep leading-none">
                 {stat.value}
               </div>
-              <div className="mt-3 text-[10px] uppercase tracking-[0.22em] text-foreground/55 font-semibold">
+              <div className="mt-3 text-xs uppercase tracking-[0.22em] text-foreground/55 font-semibold">
                 {stat.label}
               </div>
             </div>
@@ -186,7 +186,7 @@ function Deliverables({ deliverables }: { deliverables: string[] }) {
         >
           {/* Section header */}
           <div className="max-w-2xl mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" />
               Services
             </span>
@@ -204,7 +204,7 @@ function Deliverables({ deliverables }: { deliverables: string[] }) {
               >
                 <div className="flex items-start justify-between gap-4">
                   <CheckCircle2 className="!size-6 text-emerald-deep group-hover:text-accent transition-colors shrink-0 mt-0.5" />
-                  <span className="text-[10px] font-mono text-foreground/40 group-hover:text-ivory/40">
+                  <span className="text-xs font-mono text-foreground/40 group-hover:text-ivory/40">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -238,7 +238,7 @@ function Approach({ approach, title }: { approach: string; title: string }) {
         >
           {/* Section header */}
           <div className="max-w-2xl mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
               <span className="w-10 h-px bg-ivory/30" />
               Methodology
             </span>
@@ -248,49 +248,15 @@ function Approach({ approach, title }: { approach: string; title: string }) {
           </div>
 
           {/* Approach content */}
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
-            <div className="lg:col-span-8 space-y-8">
-              {paragraphs.map((p, idx) => (
-                <div key={idx} className="flex gap-6">
-                  <div className="hidden md:block shrink-0 pt-1">
-                    <div className="w-8 h-px bg-accent/40 mt-3" />
-                  </div>
-                  <p className="text-ivory/75 text-base lg:text-[17px] leading-relaxed">{p}</p>
+          <div className="max-w-4xl space-y-8">
+            {paragraphs.map((p, idx) => (
+              <div key={idx} className="flex gap-6">
+                <div className="hidden md:block shrink-0 pt-1">
+                  <div className="w-8 h-px bg-accent/40 mt-3" />
                 </div>
-              ))}
-            </div>
-
-            <div className="lg:col-span-4">
-              <div className="sticky top-32 bg-ivory/5 border border-ivory/10 rounded-sm p-8">
-                <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-6">
-                  Why HabiGo 360
-                </div>
-                <div className="space-y-5">
-                  {[
-                    "Hospitality-trained team that understands service excellence",
-                    "Strategy & execution under one roof - no fragmented handoffs",
-                    "Data-driven decisions with transparent, honest reporting",
-                    "Premium craft that builds brand equity, not just metrics",
-                  ].map((point, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-3 text-sm text-ivory/65 leading-relaxed"
-                    >
-                      <span className="size-1.5 rounded-full bg-accent shrink-0 mt-2" />
-                      {point}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8 pt-6 border-t border-ivory/10">
-                  <a
-                    href="/#contact"
-                    className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-accent hover:text-ivory transition-colors"
-                  >
-                    Discuss {title} →
-                  </a>
-                </div>
+                <p className="text-ivory/75 text-base lg:text-[17px] leading-relaxed">{p}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

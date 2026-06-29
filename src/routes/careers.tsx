@@ -204,7 +204,7 @@ function CareersPage() {
                         <div className="border-t border-ivory/10 mt-2 pt-2">
                           <a
                             href="/services"
-                            className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
+                            className="block px-6 py-2.5 text-xs uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
                           >
                             View All Services →
                           </a>
@@ -294,7 +294,7 @@ function CareersPage() {
       <section className="py-12 lg:py-16 bg-ivory-warm">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> Open Roles
             </span>
             <h2 className="mt-6 font-display text-[clamp(2.2rem,4.5vw,4.8rem)] leading-[1.02] font-light">
@@ -318,7 +318,7 @@ function CareersPage() {
               >
                 <div className="flex flex-wrap items-start justify-between gap-5">
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55 group-hover:text-accent">
+                    <div className="text-xs uppercase tracking-[0.25em] text-emerald-deep/55 group-hover:text-accent">
                       {role.team}
                     </div>
                     <h3 className="mt-3 font-display text-2xl lg:text-3xl">{role.title}</h3>
@@ -364,7 +364,7 @@ function CareersPage() {
       <section className="bg-emerald-deep text-ivory py-12 lg:py-16 overflow-hidden">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
               <span className="w-10 h-px bg-ivory/30" /> Hiring Process
             </span>
             <h2 className="mt-6 font-display text-[clamp(2.2rem,4.5vw,4.8rem)] leading-[1.02] font-light">
@@ -407,7 +407,7 @@ function CareersPage() {
             <div className="absolute inset-0 bg-emerald-deep/35" />
           </div>
           <div className="lg:col-span-7 bg-background border border-emerald-deep/10 rounded-sm p-8 lg:p-12">
-            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">
+            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-emerald-deep/60">
               <Clock3 className="!size-4" /> Apply in 5 minutes
             </div>
             <h2 className="mt-6 font-display text-[clamp(2.2rem,4.5vw,4.6rem)] leading-[1.02] font-light">
@@ -462,7 +462,7 @@ function ApplicationDialog({
         <div className="relative w-full max-w-4xl rounded-sm bg-background text-foreground shadow-2xl">
           <div className="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-emerald-deep/10 bg-background px-6 py-5 lg:px-8">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
+              <div className="text-xs uppercase tracking-[0.25em] text-emerald-deep/55">
                 Apply for {role.team}
               </div>
               <h2 id="application-dialog-title" className="mt-2 font-display text-3xl lg:text-4xl">
@@ -482,7 +482,7 @@ function ApplicationDialog({
           {submitted ? (
             <div className="px-6 py-10 lg:px-8 lg:py-12">
               <div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-deep/55">
+                <div className="text-xs uppercase tracking-[0.25em] text-emerald-deep/55">
                   Demo Submitted
                 </div>
                 <h3 className="mt-4 font-display text-3xl lg:text-4xl">

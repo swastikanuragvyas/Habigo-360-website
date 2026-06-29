@@ -281,7 +281,7 @@ export default function ImmersiveHero() {
             <div className="flex items-center gap-3 mb-8 reveal">
               <span className="size-2 rounded-full bg-accent animate-pulse" />
               <span className="text-[11px] uppercase tracking-[0.3em] text-ivory/70">
-                Creative Growth Agency · Est. Hospitality DNA
+                Creative Growth Agency
               </span>
             </div>
 
@@ -297,16 +297,16 @@ export default function ImmersiveHero() {
         {/* Stats strip */}
         <div className="reveal reveal-delay-3 mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/15 border border-white/15 rounded-2xl overflow-hidden">
           {[
-            { v: 50, s: "+", l: "Brands Served" },
-            { v: 100, s: "+", l: "Projects Delivered" },
-            { v: 12, s: "M+", l: "Content Impressions" },
-            { v: 9, s: "+", l: "Industries Mastered" },
+            { v: 20, s: "+", l: "Brands Served" },
+            { v: 50, s: "+", l: "Projects Delivered" },
+            { v: 95, s: "%", l: "Success Rate" },
+            { v: 5, s: "+", l: "Industries Served" },
           ].map((m) => (
             <div key={m.l} className="bg-ivory-warm p-6 lg:p-8">
               <div className="font-display text-4xl lg:text-5xl text-emerald-deep">
                 <Counter to={m.v} suffix={m.s} />
               </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-foreground/60 font-semibold">
+              <div className="mt-2 text-xs uppercase tracking-[0.22em] text-foreground/60 font-semibold">
                 {m.l}
               </div>
             </div>

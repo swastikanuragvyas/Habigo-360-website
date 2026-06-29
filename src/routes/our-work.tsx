@@ -9,10 +9,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import OurWorkCarousels from "@/components/OurWorkCarousels";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
-import { TransformationsCarousel } from "@/components/TransformationsCarousel";
 import { TextReveal } from "@/components/TextReveal";
-import LivingPortfolio from "@/components/LivingPortfolio";
-import InstagramMockups from "@/components/InstagramMockups";
 
 export interface ServiceWork {
   _id: string;
@@ -80,13 +77,7 @@ function OurWorkPage() {
     },
   });
 
-  const { data: transformations, isLoading: isTransformationsLoading } = useQuery({
-    queryKey: ["publicTransformations"],
-    queryFn: async () => {
-      const { data } = await api.get("/transformations");
-      return data.filter((t: any) => t.visibility !== false);
-    },
-  });
+
 
   return (
     <div className="bg-background text-foreground min-h-screen font-sans antialiased selection:bg-accent selection:text-emerald-deep overflow-x-hidden">
@@ -95,8 +86,6 @@ function OurWorkPage() {
       <main className="relative">
         <HeroSection />
         <OurWorkCarousels />
-        <LivingPortfolio />
-        <InstagramMockups />
 
         <section className="py-12 lg:py-16 bg-background min-h-[40vh]">
           {isLoading ? (
@@ -116,31 +105,7 @@ function OurWorkPage() {
               )}
             </div>
           )}
-        </section>
-
-        {/* Before/After Transformation Demo */}
-        <section className="bg-ivory-warm py-12">
-          <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
-            <div className="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
-              <h2 className="font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light uppercase tracking-tight text-emerald-deep">
-                Transformations
-              </h2>
-              <p className="mt-4 text-foreground/70">See the impact of our visual branding before and after our touch.</p>
-            </div>
-            
-            <div className="scroll-reveal">
-              {isTransformationsLoading ? (
-                <div className="flex justify-center"><Loader2 className="animate-spin text-emerald-deep size-10" /></div>
-              ) : transformations && transformations.length > 0 ? (
-                <TransformationsCarousel transformations={transformations} />
-              ) : (
-                <div className="text-center text-muted-foreground">No transformations added yet.</div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {!isLoading && projects && <InstagramSection projects={projects} />}
+        </section>        {!isLoading && projects && <InstagramSection projects={projects} />}
       </main>
 
       <div className="defer-render">
@@ -171,7 +136,7 @@ function HeroSection() {
       >
         <ScrollReveal y={20} duration={1}>
           <div className="text-center mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">Our Work</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-ivory/50">Our Work</span>
             <h1 className="mt-6 font-display text-[clamp(3.5rem,10vw,10rem)] leading-[0.95] font-light">
               Where <span className="italic text-accent">Strategy</span> <br /> Meets Craft
             </h1>
@@ -218,7 +183,7 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
         <div className="lg:col-span-5 relative">
           <div className="lg:sticky lg:top-32 space-y-8">
             <ScrollReveal x={-30}>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+              <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
                 <span className="w-10 h-px bg-emerald-deep/40" /> {work.service}
               </span>
               <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-emerald-deep font-light">
@@ -240,7 +205,7 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
                         ) : kpi.trend === "down" ? (
                           <TrendingUp className="!size-4 text-emerald-deep rotate-180" />
                         ) : null}
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+                        <p className="text-xs uppercase tracking-[0.2em] text-foreground/50">
                           {kpi.label}
                         </p>
                       </div>
@@ -340,7 +305,7 @@ function InstagramSection({ projects }: { projects: ServiceWork[] }) {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-accent flex items-center gap-3 mb-6">
+              <span className="text-xs uppercase tracking-[0.3em] text-accent flex items-center gap-3 mb-6">
                 <Instagram className="!size-4" /> Social Proof
               </span>
               <h2 className="font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1.02] font-light">

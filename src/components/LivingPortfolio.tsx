@@ -146,7 +146,7 @@ export default function LivingPortfolio() {
           className={`flex items-end justify-between flex-wrap gap-6 mb-16 ${shown ? "reveal" : "opacity-0"}`}
         >
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
               <span className="w-10 h-px bg-ivory/30" /> Selected Work
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
@@ -167,7 +167,7 @@ export default function LivingPortfolio() {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`text-[10px] uppercase tracking-[0.22em] px-5 py-2.5 rounded-full border transition-all duration-300 ${
+              className={`text-xs uppercase tracking-[0.22em] px-5 py-2.5 rounded-full border transition-all duration-300 ${
                 filter === f.id
                   ? "bg-accent text-emerald-deep border-accent font-semibold"
                   : "border-ivory/20 text-ivory/60 hover:border-ivory/50 hover:text-ivory"
@@ -284,7 +284,7 @@ export default function LivingPortfolio() {
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/60 via-transparent to-transparent" />
               </div>
               <div className="md:col-span-2 p-8 lg:p-10 flex flex-col justify-center">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-accent font-semibold mb-3">
+                <div className="text-xs uppercase tracking-[0.25em] text-accent font-semibold mb-3">
                   {currentProject.tag}
                 </div>
                 <h3 className="font-display text-3xl lg:text-4xl">{currentProject.title}</h3>
@@ -292,7 +292,7 @@ export default function LivingPortfolio() {
                   {currentProject.description}
                 </p>
                 <div className="mt-6 space-y-3">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-foreground/50">
+                  <div className="text-xs uppercase tracking-[0.22em] text-foreground/50">
                     Key Results
                   </div>
                   {currentProject.results.map((r: string, i: number) => (

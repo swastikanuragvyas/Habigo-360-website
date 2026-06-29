@@ -12,7 +12,7 @@ async function processImage(imagePath) {
     console.log(`Processing ${imagePath}... Background color: rgb(${bgR}, ${bgG}, ${bgB})`);
 
     // A simple threshold to consider a pixel as 'background'
-    const threshold = 25; 
+    const threshold = 5; 
 
     // We will do a flood fill starting from the corners to avoid making
     // dark hair or clothes transparent if they are surrounded by non-black.

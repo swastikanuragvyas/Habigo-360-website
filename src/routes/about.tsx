@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Nav, Footer, Founders, StickyCTA } from "./index";
+import aboutImg from "@/assets/about.jpg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -44,14 +45,21 @@ function Hero() {
   return (
     <section className="bg-emerald-deep text-ivory pt-40 pb-28 lg:pt-52 lg:pb-40">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 text-center">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">About Us</span>
+        <span className="text-xs uppercase tracking-[0.3em] text-ivory/50">About Us</span>
         <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,6rem)] leading-[1.02] font-light">
           We build <em className="italic text-accent">enduring</em> brands.
         </h1>
-        <p className="mt-8 text-ivory/70 max-w-2xl mx-auto text-lg leading-relaxed">
-          HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through
-          marketing, content, branding, technology, and business strategy.
-        </p>
+        
+        <div className="mt-16 max-w-4xl mx-auto border-y border-ivory/15 py-10 relative text-left lg:text-center">
+          <p className="text-ivory/80 text-xl lg:text-2xl leading-relaxed font-light text-balance">
+            HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through
+            marketing, content, branding, technology, and business strategy.
+          </p>
+        </div>
+
+        <div className="mt-20 max-w-5xl mx-auto rounded-sm overflow-hidden border border-ivory/10">
+          <img src={aboutImg} alt="HabiGo 360" className="w-full h-auto max-h-[70vh] object-cover hover:scale-105 transition-transform duration-1000" />
+        </div>
       </div>
     </section>
   );
@@ -63,7 +71,7 @@ function VisionMission() {
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-20">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> Our Vision
             </span>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight text-balance">
@@ -78,7 +86,7 @@ function VisionMission() {
             </p>
           </div>
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> Our Mission
             </span>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight text-balance">

@@ -123,7 +123,7 @@ function PhoneMockup({ data }: { data: typeof MOCKUPS[0] }) {
                 <img src={data.avatar} className="w-full h-full object-cover opacity-50" />
               </div>
             </div>
-            <div className="text-[10px] text-black">Highlight</div>
+            <div className="text-xs text-black">Highlight</div>
           </div>
         ))}
       </div>
@@ -171,7 +171,7 @@ export default function InstagramMockups() {
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`text-center max-w-3xl mx-auto mb-16 ${shown ? "reveal" : "opacity-0"}`}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
             <span className="w-10 h-px bg-ivory/30" /> Social Presence <span className="w-10 h-px bg-ivory/30" />
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-ivory">

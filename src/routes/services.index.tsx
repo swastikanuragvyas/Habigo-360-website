@@ -51,7 +51,7 @@ function Hero() {
     <section className="bg-emerald-deep text-ivory pt-40 pb-28 lg:pt-52 lg:pb-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.12),_transparent_55%)]" />
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 text-center relative z-10">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">
+        <span className="text-xs uppercase tracking-[0.3em] text-ivory/50">
           Our Services
         </span>
         <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,6rem)] leading-[1.02] font-light">
@@ -93,7 +93,7 @@ function ClientsMarquee() {
   return (
     <section className="py-14 border-b border-border bg-background overflow-hidden">
       <div className="text-center mb-10">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">
+        <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60">
           Brands We've Worked With
         </span>
       </div>
@@ -137,7 +137,7 @@ function AllServices() {
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`mb-16 ${shown ? "reveal" : "opacity-0"}`}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
             <span className="w-10 h-px bg-emerald-deep/40" /> What We Do
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
@@ -154,7 +154,7 @@ function AllServices() {
             >
               <div className="flex items-start justify-between">
                 <s.i className="!size-7 text-emerald-deep group-hover:text-accent transition-colors" />
-                <span className="text-[10px] font-mono text-foreground/40 group-hover:text-ivory/40">
+                <span className="text-xs font-mono text-foreground/40 group-hover:text-ivory/40">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -218,7 +218,7 @@ function OurWork() {
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`mb-16 ${shown ? "reveal" : "opacity-0"}`}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
             <span className="w-10 h-px bg-ivory/30" /> Portfolio
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
@@ -252,7 +252,7 @@ function WorkCard({ project, idx }: WorkCardProps) {
       className={`group border border-ivory/10 p-8 hover:border-accent/40 transition-all duration-700 cursor-pointer ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       style={{ transitionDelay: `${idx * 120}ms` }}
     >
-      <div className="text-[10px] uppercase tracking-[0.22em] text-accent/70 mb-6">
+      <div className="text-xs uppercase tracking-[0.22em] text-accent/70 mb-6">
         {project.category}
       </div>
       <h3 className="font-display text-2xl lg:text-3xl mb-4 group-hover:text-accent transition-colors">
@@ -298,7 +298,7 @@ function Process() {
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`text-center mb-20 ${shown ? "reveal" : "opacity-0"}`}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60">
             Our Process
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">

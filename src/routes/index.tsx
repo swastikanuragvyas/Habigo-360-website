@@ -10,7 +10,6 @@ import {
   Play,
   Instagram,
   Linkedin,
-  Twitter,
   Sparkles,
   TrendingUp,
   Camera,
@@ -27,6 +26,7 @@ import {
   Moon,
   Plus,
   Minus,
+  Search,
 } from "lucide-react";
 
 import ImmersiveHero from "@/components/ImmersiveHero";
@@ -49,6 +49,7 @@ import work3 from "@/assets/work-3.jpg";
 import work4 from "@/assets/work-4.jpg";
 import work5 from "@/assets/work-5.jpg";
 import about from "@/assets/about.jpg";
+import homepageAbout from "@/assets/homepage-about.jpg";
 import arpitImg from "@/assets/arpit.jpg";
 import dipanshuImg from "@/assets/dipanshu.jpg";
 import logoImg from "@/assets/logo.png";
@@ -199,7 +200,7 @@ function WhyChooseUs() {
     <section id="why-choose-us" className="bg-background py-16 lg:py-24 border-t border-border">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-3xl">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
             <span className="w-10 h-px bg-emerald-deep/40" /> Why Choose Us
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
@@ -248,7 +249,7 @@ function FAQs() {
     <section id="faqs" className="bg-secondary/30 py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-16">
         <div className="lg:col-span-5">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
             <span className="w-10 h-px bg-emerald-deep/40" /> FAQs
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
@@ -377,7 +378,7 @@ export function Nav({
                       <div className="border-t border-ivory/10 mt-2 pt-2">
                         <a
                           href="/services"
-                          className="block px-6 py-2.5 text-[10px] uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
+                          className="block px-6 py-2.5 text-xs uppercase tracking-widest text-accent hover:bg-white/5 transition-colors"
                         >
                           View All Services →
                         </a>
@@ -459,7 +460,7 @@ function About() {
             ref={ref as React.RefObject<HTMLDivElement>}
             className={`lg:col-span-7 ${shown ? "reveal" : "opacity-0"}`}
           >
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> Who We Are
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
@@ -485,7 +486,7 @@ function About() {
                 { k: "Method", v: "Insight. Story. Distribution. Repeat." },
               ].map((x) => (
                 <div key={x.k} className="bg-background p-5">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-emerald-deep/60 mb-3">
+                  <div className="text-xs uppercase tracking-[0.22em] text-emerald-deep/60 mb-3">
                     {x.k}
                   </div>
                   <div className="text-sm text-foreground/80 leading-snug">{x.v}</div>
@@ -497,9 +498,9 @@ function About() {
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
               <img
-                src={about}
-                alt="HabiGo studio in production"
-                className="size-full object-cover"
+                src={homepageAbout}
+                alt="HabiGo 360 Studio"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-emerald-deep to-transparent">
@@ -511,13 +512,13 @@ function About() {
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div className="bg-emerald-deep text-ivory p-5 rounded-sm">
                 <div className="font-display text-4xl text-accent">07</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-ivory/60 mt-2">
+                <div className="text-xs uppercase tracking-[0.2em] text-ivory/60 mt-2">
                   Years of craft
                 </div>
               </div>
               <div className="bg-secondary p-5 rounded-sm">
                 <div className="font-display text-4xl text-emerald-deep">24</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-foreground/60 mt-2">
+                <div className="text-xs uppercase tracking-[0.2em] text-foreground/60 mt-2">
                   Specialists in-house
                 </div>
               </div>
@@ -564,7 +565,7 @@ export function Founders() {
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
         {/* Section header */}
         <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-24">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
             <span className="w-10 h-px bg-ivory/30" />
             The People
             <span className="w-10 h-px bg-ivory/30" />
@@ -585,7 +586,7 @@ export function Founders() {
               {/* Image with bottom fade */}
               <div className="relative mb-8">
                 <div
-                  className="relative aspect-[3/4] overflow-hidden rounded-sm bg-emerald-deep"
+                  className="relative aspect-[3/4] overflow-hidden rounded-sm"
                   style={{
                     maskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
                     WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
@@ -652,9 +653,24 @@ export const SERVICES = [
     d: "Paid media engineered for ROAS, not vanity metrics.",
   },
   {
+    i: Search,
+    t: "SEO Services",
+    d: "Own the search results. Own the category.",
+  },
+  {
     i: Camera,
     t: "Photography & Videography",
     d: "Cinematic capture for hospitality, lifestyle and brand films.",
+  },
+  {
+    i: Palette,
+    t: "Branding & Identity",
+    d: "Logo systems, visual language and brand books that age well.",
+  },
+  { 
+    i: Globe, 
+    t: "Website Development", 
+    d: "Fast, conversion-tuned websites with editorial soul." 
   },
   {
     i: Sparkles,
@@ -662,23 +678,30 @@ export const SERVICES = [
     d: "Curated talent partnerships that feel native to your category.",
   },
   {
-    i: Palette,
-    t: "Branding & Identity",
-    d: "Logo systems, visual language and brand books that age well.",
+    i: Play,
+    t: "Brand Films",
+    d: "Stories that command attention. Films that build legacy.",
   },
-  { i: MailIcon, t: "Email Marketing", d: "Lifecycle journeys that turn lists into revenue." },
   {
-    i: MessageCircle,
-    t: "WhatsApp Marketing",
-    d: "Conversational commerce that closes warm leads in hours.",
+    i: Users,
+    t: "Event Curation",
+    d: "Brand experiences that move audiences - and the algorithm.",
   },
-  { i: Globe, t: "Website Development", d: "Fast, conversion-tuned websites with editorial soul." },
+  { 
+    i: MailIcon, 
+    t: "Email & WhatsApp Marketing", 
+    d: "Lifecycle journeys and conversational commerce combined." 
+  },
+  { 
+    i: Hotel, 
+    t: "OTA Listings & Management", 
+    d: "Hospitality distribution done with discipline." 
+  },
   {
     i: Database,
     t: "CRM Services",
     d: "Set up, segment and automate so growth stops being manual.",
   },
-  { i: Hotel, t: "OTA Listings & Management", d: "Hospitality distribution done with discipline." },
   {
     i: Calendar,
     t: "Event Curation",
@@ -698,7 +721,7 @@ function Services() {
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-10 mb-16 items-end">
           <div className="lg:col-span-7">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" /> Services
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
@@ -728,7 +751,7 @@ function Services() {
             >
               <div className="flex items-start justify-between">
                 <s.i className="!size-7 text-emerald-deep group-hover:text-accent transition-colors" />
-                <span className="text-[10px] font-mono text-foreground/40 group-hover:text-ivory/40">
+                <span className="text-xs font-mono text-foreground/40 group-hover:text-ivory/40">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -750,10 +773,10 @@ function Services() {
 
 function ImpactCounters() {
   const stats = [
-    { v: 100, s: "+", l: "Projects Delivered" },
-    { v: 50, s: "+", l: "Brands Served" },
-    { v: 12, s: "M+", l: "Content Reach" },
-    { v: 9, s: "+", l: "Industries Served" },
+    { v: 20, s: "+", l: "Brands Served" },
+    { v: 50, s: "+", l: "Projects Delivered" },
+    { v: 95, s: "%", l: "Success Rate" },
+    { v: 5, s: "+", l: "Industries Served" },
   ];
   return (
     <section className="bg-accent text-emerald-deep py-12 lg:py-16">
@@ -764,7 +787,7 @@ function ImpactCounters() {
               <div className="font-display text-6xl lg:text-8xl font-light leading-none">
                 <Counter to={s.v} suffix={s.s} />
               </div>
-              <div className="text-[10px] uppercase tracking-[0.25em] mt-4 text-emerald-deep/70">
+              <div className="text-xs uppercase tracking-[0.25em] mt-4 text-emerald-deep/70">
                 {s.l}
               </div>
             </div>
@@ -806,12 +829,12 @@ function Clients() {
     >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 mb-14">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">Clients</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-ivory/50">Clients</span>
           <h2 className="mt-6 font-display text-[clamp(1.75rem,3.5vw,3.5rem)] leading-[1.05] font-light">
             Trusted by brands we're proud to call <em className="italic text-accent">friends.</em>
           </h2>
           <p className="mt-4 text-sm text-ivory/55">
-            50+ brands · 9 industries · across hospitality, lifestyle, F&B, fashion, real estate
+            50+ brands · 9 industries · across hospitality, lifestyle, F&B, fitness & sports, real estate
           </p>
         </div>
       </div>
@@ -896,7 +919,7 @@ function Testimonials() {
     <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-2xl">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
+          <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
             <span className="w-10 h-px bg-emerald-deep/40" /> Testimonials
           </span>
           <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
@@ -943,12 +966,27 @@ export function Contact() {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
   const mutation = useMutation({
     mutationFn: async (data: any) => {
-      const response = await fetch("https://habigo-360-website.onrender.com/api/contact", {
+      const renderPromise = fetch("https://habigo-360-website.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      });
-      if (!response.ok) {
+      }).catch(() => ({ ok: false }));
+
+      const web3Data = {
+        access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
+        ...data,
+      };
+      const web3Promise = fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(web3Data),
+      }).catch(() => ({ ok: false }));
+
+      const [res1, res2] = await Promise.all([renderPromise, web3Promise]);
+      if (!res1.ok && !res2.ok) {
         throw new Error("Failed to send message. Please try again or email us directly.");
       }
       return { success: true };
@@ -982,21 +1020,21 @@ export function Contact() {
       className="bg-emerald-deep text-ivory py-16 lg:py-24 relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15),_transparent_55%)]" />
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
-        <div className="grid lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-              <span className="w-10 h-px bg-ivory/30" /> Contact
+      <div className="max-w-[1000px] mx-auto px-6 lg:px-10 relative">
+        <div className="flex flex-col gap-12">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center justify-center gap-3">
+              <span className="w-10 h-px bg-ivory/30" /> Contact <span className="w-10 h-px bg-ivory/30" />
             </span>
             <h2 className="mt-6 font-display text-[clamp(2.25rem,5vw,5rem)] leading-[1] font-light">
               Let's build something <em className="italic text-accent">remarkable.</em>
             </h2>
-            <p className="mt-6 text-ivory/65 max-w-md">
+            <p className="mt-6 text-ivory/65 mx-auto">
               Tell us about your brand. We'll respond within one working day with a perspective -
               not a pitch deck.
             </p>
 
-            <div className="mt-12 space-y-6">
+            <div className="mt-10 flex flex-wrap justify-center gap-8">
               {[
                 {
                   i: MessageCircle,
@@ -1020,16 +1058,16 @@ export function Contact() {
                     href={x.href ?? undefined}
                     target={x.href?.startsWith("http") ? "_blank" : undefined}
                     rel={x.href?.startsWith("http") ? "noreferrer" : undefined}
-                    className="flex items-center gap-5 group"
+                    className="flex flex-col items-center gap-3 group"
                   >
                     <div className="size-12 rounded-full bg-ivory/5 border border-ivory/10 grid place-items-center group-hover:bg-accent group-hover:border-accent transition-colors">
                       <x.i className="!size-5 text-accent group-hover:text-emerald-deep" />
                     </div>
-                    <div>
-                      <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45">
+                    <div className="text-center">
+                      <div className="text-xs uppercase tracking-[0.22em] text-ivory/45">
                         {x.l}
                       </div>
-                      <div className="text-base">{x.v}</div>
+                      <div className="text-sm mt-1">{x.v}</div>
                     </div>
                   </Tag>
                 );
@@ -1062,9 +1100,9 @@ export function Contact() {
               <Field label="Phone" placeholder="+91 ..." name="phone" />
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <Field label="Industry" placeholder="Hospitality, F&B, Fashion..." name="industry" />
+              <Field label="Industry" placeholder="Hospitality, F&B, Fitness & Sports..." name="industry" />
               <div>
-                <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
+                <label className="text-xs uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                   Services Required
                 </label>
                 <select
@@ -1087,7 +1125,7 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
+              <label className="text-xs uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
                 Project Brief
               </label>
               <textarea
@@ -1167,7 +1205,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
+      <label className="text-xs uppercase tracking-[0.22em] font-semibold mb-2 block text-foreground/60">
         {label}
       </label>
       <input
@@ -1185,29 +1223,34 @@ export function Footer() {
   return (
     <footer className="bg-emerald-deep text-ivory border-t border-ivory/10">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-16 grid lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-6">
           <div className="flex items-center">
-            <img src={logoImg} alt="HabiGo 360" className="h-48 w-auto" />
+            <img src={logoImg} alt="HabiGo 360" className="h-48 w-auto object-contain" />
           </div>
           <p className="mt-6 text-ivory/55 text-sm max-w-sm leading-relaxed">
             A creative growth agency for ambitious brands. Marketing, content, branding, technology
             and business strategy - under one roof.
           </p>
           <div className="flex gap-3 mt-8">
-            {[Instagram, Linkedin, Twitter].map((I, i) => (
+            {[
+              { Icon: Instagram, link: "https://www.instagram.com/habigo360?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+              { Icon: Linkedin, link: "https://www.linkedin.com/company/habigo360/" }
+            ].map((social, i) => (
               <a
                 key={i}
-                href="https://www.instagram.com/habigo360?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="size-10 rounded-full border border-ivory/15 grid place-items-center hover:bg-accent hover:border-accent hover:text-emerald-deep transition-colors"
               >
-                <I className="!size-4" />
+                <social.Icon className="!size-4" />
               </a>
             ))}
           </div>
         </div>
 
-        <div className="lg:col-span-2">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Explore</div>
+        <div className="lg:col-span-3">
+          <div className="text-xs uppercase tracking-[0.22em] text-ivory/45 mb-5">Explore</div>
           <ul className="space-y-3 text-sm">
             {NAV.map((n) => (
               <li key={n.id}>
@@ -1231,18 +1274,7 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-3">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Services</div>
-          <ul className="space-y-3 text-sm">
-            {SERVICES.slice(0, 6).map((s) => (
-              <li key={s.t} className="text-ivory/75">
-                {s.t}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="lg:col-span-2">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Contact</div>
+          <div className="text-xs uppercase tracking-[0.22em] text-ivory/45 mb-5">Contact</div>
           <ul className="space-y-3 text-sm text-ivory/75">
             <li>admin@habigo360.com</li>
             <li>+91 8766666625</li>
@@ -1267,9 +1299,7 @@ export function Footer() {
 export function StickyCTA() {
   return (
     <a
-      href="https://wa.me/918766666625"
-      target="_blank"
-      rel="noreferrer"
+      href="/#contact"
       className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-accent text-emerald-deep px-5 py-3 rounded-full shadow-2xl shadow-emerald-deep/30 font-semibold text-[11px] uppercase tracking-[0.2em] hover:bg-ivory transition-colors"
     >
       <MessageCircle className="!size-4" />
