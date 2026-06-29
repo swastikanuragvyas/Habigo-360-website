@@ -59,7 +59,7 @@ function Hero() {
 
 function VisionMission() {
   return (
-    <section className="bg-background py-28 lg:py-40">
+    <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-20">
           <div>

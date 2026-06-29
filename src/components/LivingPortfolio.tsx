@@ -139,7 +139,7 @@ export default function LivingPortfolio() {
   const progressPct = maxScroll > 0 ? (scrollPos / maxScroll) * 100 : 0;
 
   return (
-    <section id="work" className="bg-emerald-deep text-ivory py-28 lg:py-40">
+    <section id="work" className="bg-emerald-deep text-ivory py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -215,7 +215,7 @@ export default function LivingPortfolio() {
                     </div>
                   </div>
                 </div>
-                <p className="mt-4 text-sm text-ivory/60 leading-relaxed line-clamp-2">
+                <p className="mt-4 text-sm text-ivory/60 leading-relaxed">
                   {project.description}
                 </p>
               </article>

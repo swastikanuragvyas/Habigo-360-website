@@ -98,7 +98,7 @@ function OurWorkPage() {
         <LivingPortfolio />
         <InstagramMockups />
 
-        <section className="py-24 lg:py-32 bg-background min-h-[40vh]">
+        <section className="py-12 lg:py-16 bg-background min-h-[40vh]">
           {isLoading ? (
             <div className="flex justify-center items-center h-full">
               <Loader2 className="animate-spin size-10 text-emerald-deep" />
@@ -119,7 +119,7 @@ function OurWorkPage() {
         </section>
 
         {/* Before/After Transformation Demo */}
-        <section className="bg-ivory-warm py-24">
+        <section className="bg-ivory-warm py-12">
           <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
             <div className="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
               <h2 className="font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light uppercase tracking-tight text-emerald-deep">
@@ -176,7 +176,7 @@ function HeroSection() {
               Where <span className="italic text-accent">Strategy</span> <br /> Meets Craft
             </h1>
             <p className="mt-8 text-ivory/70 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed">
-              We don't just create campaigns—we build growth engines. See how our integrated
+              We don't just create campaigns - we build growth engines. See how our integrated
               approach delivers measurable outcomes across every discipline.
             </p>
           </div>
@@ -335,7 +335,7 @@ function InstagramSection({ projects }: { projects: ServiceWork[] }) {
   if (posts.length === 0) return null;
 
   return (
-    <section className="bg-emerald-deep py-24 lg:py-32 overflow-hidden text-ivory">
+    <section className="bg-emerald-deep py-12 lg:py-16 overflow-hidden text-ivory">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 mb-16">
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -373,7 +373,7 @@ function InstagramSection({ projects }: { projects: ServiceWork[] }) {
                 />
                 <div className="absolute inset-0 bg-emerald-deep/60 opacity-0 group-hover/post:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 text-center text-ivory whitespace-normal">
                   <Instagram className="!size-8 mb-4 text-accent" />
-                  <p className="text-sm line-clamp-3 mb-4">{post.caption}</p>
+                  <p className="text-sm mb-4">{post.caption}</p>
                   <div className="flex gap-4 text-xs font-medium tracking-wider">
                     <span>{post.likes?.toLocaleString()} LIKES</span>
                     <span>{post.comments?.toLocaleString()} CMTS</span>

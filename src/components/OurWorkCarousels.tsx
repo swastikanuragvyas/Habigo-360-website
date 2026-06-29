@@ -156,7 +156,7 @@ export default function OurWorkCarousels() {
   const storyProjects = mapToFormat(projects?.filter((p: any) => p.category === "Story") || []);
 
   return (
-    <section className="bg-background py-28 lg:py-40">
+    <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
         
         {/* Carousels 1 & 2 */}

@@ -165,7 +165,7 @@ export default function InstagramMockups() {
   const { ref, shown } = useReveal();
 
   return (
-    <section className="bg-emerald-deep py-28 lg:py-40 border-t border-ivory/10 overflow-hidden">
+    <section className="bg-emerald-deep py-16 lg:py-24 border-t border-ivory/10 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-8 lg:px-20">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/services/$slug")({
     return {
       meta: [
         {
-          title: service ? `${service.title} — HabiGo 360` : "Service Not Found — HabiGo 360",
+          title: service ? `${service.title} - HabiGo 360` : "Service Not Found - HabiGo 360",
         },
         {
           name: "description",
@@ -178,7 +178,7 @@ function StatsBar({ stats }: { stats: { label: string; value: string }[] }) {
 function Deliverables({ deliverables }: { deliverables: string[] }) {
   const reveal = useReveal();
   return (
-    <section className="bg-background py-28 lg:py-40">
+    <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div
           ref={reveal.ref as React.RefObject<HTMLDivElement>}
@@ -188,7 +188,7 @@ function Deliverables({ deliverables }: { deliverables: string[] }) {
           <div className="max-w-2xl mb-16">
             <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
               <span className="w-10 h-px bg-emerald-deep/40" />
-              Capabilities
+              Services
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light">
               What we <em className="italic text-emerald-deep">deliver.</em>
@@ -226,7 +226,7 @@ function Approach({ approach, title }: { approach: string; title: string }) {
   const paragraphs = approach.split("\n\n");
 
   return (
-    <section className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
+    <section className="bg-emerald-deep text-ivory py-16 lg:py-24 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,_rgba(212,175,55,0.07),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,_rgba(212,175,55,0.05),_transparent_50%)]" />
@@ -268,7 +268,7 @@ function Approach({ approach, title }: { approach: string; title: string }) {
                 <div className="space-y-5">
                   {[
                     "Hospitality-trained team that understands service excellence",
-                    "Strategy & execution under one roof — no fragmented handoffs",
+                    "Strategy & execution under one roof - no fragmented handoffs",
                     "Data-driven decisions with transparent, honest reporting",
                     "Premium craft that builds brand equity, not just metrics",
                   ].map((point, idx) => (
@@ -302,7 +302,7 @@ function Approach({ approach, title }: { approach: string; title: string }) {
 function ServiceCTA({ title }: { title: string }) {
   const reveal = useReveal();
   return (
-    <section className="bg-accent text-emerald-deep py-24 lg:py-32">
+    <section className="bg-accent text-emerald-deep py-12 lg:py-16">
       <div
         ref={reveal.ref as React.RefObject<HTMLDivElement>}
         className={`max-w-[1500px] mx-auto px-6 lg:px-10 text-center transition-all duration-1000 ${reveal.shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -311,7 +311,7 @@ function ServiceCTA({ title }: { title: string }) {
           Ready to transform your <em className="italic">{title.toLowerCase()}?</em>
         </h2>
         <p className="mt-6 text-emerald-deep/70 text-[15px] max-w-lg mx-auto leading-relaxed">
-          Tell us about your brand. We'll respond within one working day with a perspective — not a
+          Tell us about your brand. We'll respond within one working day with a perspective - not a
           pitch deck.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 mt-10">

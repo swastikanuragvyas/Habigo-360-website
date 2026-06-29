@@ -291,7 +291,7 @@ function CareersPage() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 bg-ivory-warm">
+      <section className="py-12 lg:py-16 bg-ivory-warm">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
             <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
@@ -344,7 +344,7 @@ function CareersPage() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 bg-background">
+      <section className="py-12 lg:py-16 bg-background">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-3 gap-px bg-emerald-deep/10 border border-emerald-deep/10">
             {perks.map((perk) => {
@@ -361,7 +361,7 @@ function CareersPage() {
         </div>
       </section>
 
-      <section className="bg-emerald-deep text-ivory py-24 lg:py-32 overflow-hidden">
+      <section className="bg-emerald-deep text-ivory py-12 lg:py-16 overflow-hidden">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
@@ -400,7 +400,7 @@ function CareersPage() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 bg-ivory-warm">
+      <section className="py-12 lg:py-16 bg-ivory-warm">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 items-stretch">
           <div className="lg:col-span-5 relative min-h-[360px] overflow-hidden rounded-sm bg-emerald-soft">
             <img src={work2} alt="" className="absolute inset-0 size-full object-cover" />

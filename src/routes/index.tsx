@@ -55,13 +55,13 @@ import logoImg from "@/assets/logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HabiGo 360 — Creative Growth Agency" },
+      { title: "HabiGo 360 - Creative Growth Agency" },
       {
         name: "description",
         content:
           "We help ambitious brands become seen, remembered and trusted through marketing, content, branding, technology and business strategy.",
       },
-      { property: "og:title", content: "HabiGo 360 — Creative Growth Agency" },
+      { property: "og:title", content: "HabiGo 360 - Creative Growth Agency" },
       {
         property: "og:description",
         content:
@@ -196,7 +196,7 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section id="why-choose-us" className="bg-background py-28 lg:py-40 border-t border-border">
+    <section id="why-choose-us" className="bg-background py-16 lg:py-24 border-t border-border">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-3xl">
           <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
@@ -245,7 +245,7 @@ function FAQs() {
   ];
 
   return (
-    <section id="faqs" className="bg-secondary/30 py-28 lg:py-40">
+    <section id="faqs" className="bg-secondary/30 py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-16">
         <div className="lg:col-span-5">
           <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
@@ -276,7 +276,7 @@ function FAQs() {
               </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  open === idx ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  open === idx ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
                 <div className="p-6 lg:p-8 pt-0 text-foreground/70 leading-relaxed">{faq.a}</div>
@@ -452,7 +452,7 @@ export function Nav({
 function About() {
   const { ref, shown } = useReveal();
   return (
-    <section id="about" className="bg-background text-foreground py-28 lg:py-40">
+    <section id="about" className="bg-background text-foreground py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div
@@ -545,7 +545,7 @@ export function Founders() {
       name: "Anushka Mittal",
       role: "Founder & CEO",
       bio: "Leads strategy, brand vision and client growth. Hospitality-trained, obsessed with the details others miss.",
-      quote: "We don't sell creativity. We sell outcomes — wrapped in beautiful work.",
+      quote: "We don't sell creativity. We sell outcomes - wrapped in beautiful work.",
     },
     {
       img: getImg("founder2", founder2),
@@ -556,7 +556,7 @@ export function Founders() {
     },
   ];
   return (
-    <section className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden">
+    <section className="bg-emerald-deep text-ivory py-16 lg:py-24 relative overflow-hidden">
       {/* Background glow accents */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,_rgba(212,175,55,0.07),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,_rgba(212,175,55,0.05),_transparent_50%)]" />
@@ -573,12 +573,12 @@ export function Founders() {
             Built by operators, <em className="italic text-accent">not observers.</em>
           </h2>
           <p className="mt-6 text-ivory/50 text-[15px] max-w-lg mx-auto leading-relaxed">
-            Two people who believe that brand and growth are the same discipline — and that great
+            Two people who believe that brand and growth are the same discipline - and that great
             agencies prove it every quarter.
           </p>
         </div>
 
-        {/* Founders grid — same row, equal weight */}
+        {/* Founders grid - same row, equal weight */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-14 max-w-6xl mx-auto">
           {f.map((p, idx) => (
             <article key={p.name} className="group text-center">
@@ -632,7 +632,7 @@ export function Founders() {
         {/* Bottom agency tagline */}
         <div className="mt-20 lg:mt-28 pt-10 border-t border-ivory/10 text-center">
           <p className="text-[11px] uppercase tracking-[0.35em] text-ivory/35">
-            Strategy · Creativity · Distribution · Growth — One team, one outcome.
+            Strategy · Creativity · Distribution · Growth - One team, one outcome.
           </p>
         </div>
       </div>
@@ -694,12 +694,12 @@ export const SERVICES = [
 function Services() {
   const { shown, containerRef } = useStaggerReveal({ staggerMs: 80 });
   return (
-    <section id="services" className="bg-background py-28 lg:py-40">
+    <section id="services" className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-10 mb-16 items-end">
           <div className="lg:col-span-7">
             <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
-              <span className="w-10 h-px bg-emerald-deep/40" /> Capabilities
+              <span className="w-10 h-px bg-emerald-deep/40" /> Services
             </span>
             <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
               <TextReveal text="Twelve disciplines." />
@@ -710,7 +710,7 @@ function Services() {
             </h2>
           </div>
           <p className="lg:col-span-5 text-foreground/65 max-w-md text-[15px] leading-relaxed">
-            Brand, content, performance and technology — orchestrated by a single team that owns the
+            Brand, content, performance and technology - orchestrated by a single team that owns the
             outcome, not just the deliverable.
           </p>
         </div>
@@ -756,7 +756,7 @@ function ImpactCounters() {
     { v: 9, s: "+", l: "Industries Served" },
   ];
   return (
-    <section className="bg-accent text-emerald-deep py-24 lg:py-32">
+    <section className="bg-accent text-emerald-deep py-12 lg:py-16">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-6">
           {stats.map((s) => (
@@ -802,7 +802,7 @@ function Clients() {
   return (
     <section
       id="clients"
-      className="bg-emerald-deep text-ivory py-24 lg:py-32 border-t border-ivory/5 overflow-hidden"
+      className="bg-emerald-deep text-ivory py-12 lg:py-16 border-t border-ivory/5 overflow-hidden"
     >
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 mb-14">
         <div className="text-center max-w-3xl mx-auto">
@@ -866,12 +866,12 @@ function Testimonials() {
 
   const staticTestimonials = [
     {
-      q: "HabiGo didn't just market our resort — they rebuilt how we present ourselves. Direct bookings up 312% in two quarters.",
+      q: "HabiGo didn't just market our resort - they rebuilt how we present ourselves. Direct bookings up 312% in two quarters.",
       n: "Rohan Kapoor",
       r: "Owner, Maison Lumière",
     },
     {
-      q: "They are the rare partner that thinks like an owner. Strategy, content, performance — all under one roof, all aligned.",
+      q: "They are the rare partner that thinks like an owner. Strategy, content, performance - all under one roof, all aligned.",
       n: "Priya Shah",
       r: "Founder, Atelier Noir",
     },
@@ -893,7 +893,7 @@ function Testimonials() {
   const t = [...dynamicTestimonials, ...staticTestimonials].slice(0, 6);
 
   return (
-    <section className="bg-background py-28 lg:py-40">
+    <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-2xl">
           <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
@@ -979,7 +979,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="bg-emerald-deep text-ivory py-28 lg:py-40 relative overflow-hidden"
+      className="bg-emerald-deep text-ivory py-16 lg:py-24 relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15),_transparent_55%)]" />
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 relative">
@@ -992,7 +992,7 @@ export function Contact() {
               Let's build something <em className="italic text-accent">remarkable.</em>
             </h2>
             <p className="mt-6 text-ivory/65 max-w-md">
-              Tell us about your brand. We'll respond within one working day with a perspective —
+              Tell us about your brand. We'll respond within one working day with a perspective -
               not a pitch deck.
             </p>
 
@@ -1191,7 +1191,7 @@ export function Footer() {
           </div>
           <p className="mt-6 text-ivory/55 text-sm max-w-sm leading-relaxed">
             A creative growth agency for ambitious brands. Marketing, content, branding, technology
-            and business strategy — under one roof.
+            and business strategy - under one roof.
           </p>
           <div className="flex gap-3 mt-8">
             {[Instagram, Linkedin, Twitter].map((I, i) => (

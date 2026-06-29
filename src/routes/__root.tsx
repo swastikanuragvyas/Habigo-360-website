@@ -80,14 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HabiGo 360 — Seen. Remembered. Trusted." },
+      { title: "HabiGo 360 - Seen. Remembered. Trusted." },
       {
         name: "description",
         content:
           "HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through marketing, content, branding, technology and business strategy.",
       },
       { name: "author", content: "HabiGo 360" },
-      { property: "og:title", content: "HabiGo 360 — Seen. Remembered. Trusted." },
+      { property: "og:title", content: "HabiGo 360 - Seen. Remembered. Trusted." },
       {
         property: "og:description",
         content:
@@ -95,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "HabiGo 360 — Seen. Remembered. Trusted." },
+      { name: "twitter:title", content: "HabiGo 360 - Seen. Remembered. Trusted." },
       {
         name: "description",
         content:

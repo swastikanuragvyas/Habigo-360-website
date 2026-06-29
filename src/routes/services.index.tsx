@@ -7,7 +7,7 @@ export const Route = createFileRoute("/services/")({
   component: ServicesPage,
   head: () => ({
     meta: [
-      { title: "Services & Capabilities | HabiGo 360" },
+      { title: "Services | HabiGo 360" },
       { name: "description", content: "From performance marketing to brand films, explore our twelve core disciplines designed to build your growth engine." }
     ]
   })
@@ -52,7 +52,7 @@ function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.12),_transparent_55%)]" />
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10 text-center relative z-10">
         <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/50">
-          Our Capabilities
+          Our Services
         </span>
         <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,6rem)] leading-[1.02] font-light">
           Everything you need to <em className="italic text-accent">grow.</em>
@@ -131,7 +131,7 @@ function AllServices() {
   const { ref, shown } = useReveal();
 
   return (
-    <section id="all-services" className="bg-background py-28 lg:py-40">
+    <section id="all-services" className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -212,7 +212,7 @@ function OurWork() {
   ];
 
   return (
-    <section className="bg-emerald-deep text-ivory py-28 lg:py-40">
+    <section className="bg-emerald-deep text-ivory py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -292,7 +292,7 @@ function Process() {
   ];
 
   return (
-    <section className="bg-background py-28 lg:py-40">
+    <section className="bg-background py-16 lg:py-24">
       <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
