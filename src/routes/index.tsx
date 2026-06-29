@@ -479,19 +479,19 @@ function About() {
               </p>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-px bg-border max-w-2xl">
-              {[
-                { k: "Mission", v: "Become the unfair advantage for ambitious brands." },
-                { k: "Vision", v: "A studio where strategy and craft are inseparable." },
-                { k: "Method", v: "Insight. Story. Distribution. Repeat." },
-              ].map((x) => (
-                <div key={x.k} className="bg-background p-5">
-                  <div className="text-xs uppercase tracking-[0.22em] text-emerald-deep/60 mb-3">
-                    {x.k}
-                  </div>
-                  <div className="text-sm text-foreground/80 leading-snug">{x.v}</div>
+            <div className="mt-12 grid grid-cols-2 gap-4 max-w-sm">
+              <div className="bg-emerald-deep text-ivory p-6 rounded-sm">
+                <div className="font-display text-4xl text-accent">1.5</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-ivory/60 mt-2">
+                  Years of craft
                 </div>
-              ))}
+              </div>
+              <div className="bg-secondary p-6 rounded-sm">
+                <div className="font-display text-4xl text-emerald-deep">10</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-foreground/60 mt-2">
+                  Specialists in-house
+                </div>
+              </div>
             </div>
           </div>
 
@@ -506,20 +506,6 @@ function About() {
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-emerald-deep to-transparent">
                 <div className="font-display italic text-ivory text-2xl">
                   "Strategy that performs. Craft that lasts."
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <div className="bg-emerald-deep text-ivory p-5 rounded-sm">
-                <div className="font-display text-4xl text-accent">07</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-ivory/60 mt-2">
-                  Years of craft
-                </div>
-              </div>
-              <div className="bg-secondary p-5 rounded-sm">
-                <div className="font-display text-4xl text-emerald-deep">24</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-foreground/60 mt-2">
-                  Specialists in-house
                 </div>
               </div>
             </div>
