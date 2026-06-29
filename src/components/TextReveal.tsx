@@ -36,7 +36,7 @@ export function TextReveal({ text, className = "", delay = 0 }: TextRevealProps)
   return (
     <span ref={ref} className={`inline-block ${className}`}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-1 mr-[0.25em]">
+        <span key={i} className="inline-block overflow-hidden pb-[0.2em] -mb-[0.2em] mr-[0.25em]">
           <span
             className="inline-block transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1)"
             style={{

@@ -41,8 +41,8 @@ import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 
-import founder1 from "@/assets/founder-1.jpg";
-import founder2 from "@/assets/founder-2.jpg";
+import founder1 from "@/assets/founder-1.png";
+import founder2 from "@/assets/founder-2.png";
 import work1 from "@/assets/work-1.jpg";
 import work2 from "@/assets/work-2.jpg";
 import work3 from "@/assets/work-3.jpg";
@@ -585,7 +585,7 @@ export function Founders() {
               {/* Image with bottom fade */}
               <div className="relative mb-8">
                 <div
-                  className="relative aspect-[3/4] overflow-hidden rounded-sm"
+                  className="relative aspect-[3/4] overflow-hidden rounded-sm bg-emerald-deep"
                   style={{
                     maskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
                     WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
@@ -1001,8 +1001,8 @@ export function Contact() {
                 {
                   i: MessageCircle,
                   l: "WhatsApp",
-                  v: "+91 89638 58888",
-                  href: "https://wa.me/918963858888",
+                  v: "+91 8766666625",
+                  href: "https://wa.me/918766666625",
                 },
                 {
                   i: MailIcon,
@@ -1010,7 +1010,7 @@ export function Contact() {
                   v: "admin@habigo360.com",
                   href: "mailto:admin@habigo360.com",
                 },
-                { i: Phone, l: "Phone", v: "+91 89638 58888", href: "tel:+918963858888" },
+                { i: Phone, l: "Phone", v: "+91 8766666625", href: "tel:+918766666625" },
                 { i: MapPin, l: "Studio", v: "Jaipur", href: undefined },
               ].map((x) => {
                 const Tag = x.href ? "a" : "div";
@@ -1245,7 +1245,7 @@ export function Footer() {
           <div className="text-[10px] uppercase tracking-[0.22em] text-ivory/45 mb-5">Contact</div>
           <ul className="space-y-3 text-sm text-ivory/75">
             <li>admin@habigo360.com</li>
-            <li>+91 89638 58888</li>
+            <li>+91 8766666625</li>
             <li>Jaipur</li>
           </ul>
         </div>
@@ -1267,7 +1267,7 @@ export function Footer() {
 export function StickyCTA() {
   return (
     <a
-      href="https://wa.me/918963858888"
+      href="https://wa.me/918766666625"
       target="_blank"
       rel="noreferrer"
       className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-accent text-emerald-deep px-5 py-3 rounded-full shadow-2xl shadow-emerald-deep/30 font-semibold text-[11px] uppercase tracking-[0.2em] hover:bg-ivory transition-colors"

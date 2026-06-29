@@ -209,6 +209,12 @@ export default function ImmersiveHero() {
   const slides = [hero1, hero3, hero2];
   const [activeSlide, setActiveSlide] = useState(0);
 
+  const phraseSets = [
+    ["seen,", "remembered", "& trusted."],
+    ["iconic,", "loved", "& unforgettable."],
+    ["bold,", "distinct", "& timeless."]
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
@@ -282,7 +288,7 @@ export default function ImmersiveHero() {
             <h1 className="font-display text-[clamp(2.75rem,7.5vw,7.5rem)] leading-[0.95] font-light text-balance reveal reveal-delay-1">
               Helping great brands become{" "}
               <span className="text-accent block mt-2 lg:mt-0 lg:inline">
-                <StaggeredTypewriter phrases={["seen,", "remembered", "& trusted."]} />
+                <StaggeredTypewriter phrases={phraseSets[activeSlide]} />
               </span>
             </h1>
           </div>

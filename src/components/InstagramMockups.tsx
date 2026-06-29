@@ -1,6 +1,6 @@
 import { useReveal } from "@/routes/index";
 import { Heart, MessageCircle, Send, Bookmark, Grid, UserSquare, PlaySquare, Home, Search, PlusSquare, User, CheckCircle2 } from "lucide-react";
-import founder1 from "@/assets/founder-1.jpg";
+import founder1 from "@/assets/founder-1.png";
 import work1 from "@/assets/work-1.jpg";
 import work2 from "@/assets/work-2.jpg";
 import work3 from "@/assets/work-3.jpg";
