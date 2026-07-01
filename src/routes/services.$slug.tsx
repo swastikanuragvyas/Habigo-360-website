@@ -73,7 +73,6 @@ function ServiceDetailPage() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav scrolled={scrolled} navOpen={navOpen} setNavOpen={setNavOpen} />
       <ServiceHero service={service} />
-      <StatsBar stats={service.stats} />
       <Deliverables deliverables={service.deliverables} />
       <Approach approach={service.approach} title={service.title} />
       <ServiceCTA title={service.title} />
@@ -148,31 +147,7 @@ function ServiceHero({ service }: { service: (typeof SERVICE_PAGES)[string] }) {
   );
 }
 
-/* ─── Stats Bar ─── */
-function StatsBar({ stats }: { stats: { label: string; value: string }[] }) {
-  const reveal = useReveal();
-  return (
-    <section className="bg-background border-b border-border">
-      <div
-        ref={reveal.ref as React.RefObject<HTMLDivElement>}
-        className={`max-w-[1500px] mx-auto px-6 lg:px-10 transition-all duration-1000 delay-200 ${reveal.shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border -mx-px">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-background p-8 lg:p-10 text-center">
-              <div className="font-display text-4xl lg:text-5xl text-emerald-deep leading-none">
-                {stat.value}
-              </div>
-              <div className="mt-3 text-xs uppercase tracking-[0.22em] text-foreground/55 font-semibold">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 /* ─── What We Deliver ─── */
 function Deliverables({ deliverables }: { deliverables: string[] }) {

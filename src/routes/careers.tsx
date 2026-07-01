@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 
-import about from "@/assets/about.jpg";
+import about from "@/assets/careers_workspace.png";
 import hero2 from "@/assets/hero-2.jpg";
 import work2 from "@/assets/work-2.jpg";
 import logoImg from "@/assets/logo.png";

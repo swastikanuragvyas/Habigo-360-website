@@ -663,16 +663,6 @@ export const SERVICES = [
     t: "Influencer Marketing",
     d: "Curated talent partnerships that feel native to your category.",
   },
-  {
-    i: Play,
-    t: "Brand Films",
-    d: "Stories that command attention. Films that build legacy.",
-  },
-  {
-    i: Users,
-    t: "Event Curation",
-    d: "Brand experiences that move audiences - and the algorithm.",
-  },
   { 
     i: MailIcon, 
     t: "Email & WhatsApp Marketing", 
@@ -687,6 +677,16 @@ export const SERVICES = [
     i: Database,
     t: "CRM Services",
     d: "Set up, segment and automate so growth stops being manual.",
+  },
+  {
+    i: Play,
+    t: "Brand Films",
+    d: "Stories that command attention. Films that build legacy.",
+  },
+  {
+    i: Users,
+    t: "Event Curation",
+    d: "Brand experiences that move audiences - and the algorithm.",
   },
 ];
 

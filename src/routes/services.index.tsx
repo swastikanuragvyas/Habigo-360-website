@@ -33,7 +33,6 @@ function ServicesPage() {
         <Hero />
         <ClientsMarquee />
         <AllServices />
-        <OurWork />
         <Process />
         <Contact />
       </main>
@@ -76,18 +75,22 @@ function Hero() {
 
 function ClientsMarquee() {
   const clients = [
-    "Hyatt",
-    "Marriott",
-    "Radisson",
-    "Taj",
-    "Oberoi",
-    "ITC Hotels",
-    "Leela",
-    "Hilton",
-    "Accor",
-    "Four Seasons",
-    "JW Marriott",
-    "Westin",
+    "Bhanpur Haveli",
+    "Namli Hospitality",
+    "Sajjanbagh",
+    "Indian Kitchen",
+    "Dolce Vita",
+    "Prestige Group",
+    "The Gypsy Adventures",
+    "Maxus Builder",
+    "Anvaya",
+    "The Times of India",
+    "Vicinity",
+    "SMR Holdings",
+    "Nakoda Jewellers",
+    "Rare Rabbit",
+    "Burger Farm",
+    "IIM Mumbai",
   ];
 
   return (
@@ -173,96 +176,7 @@ function AllServices() {
   );
 }
 
-/* ─── Our Work ────────────────────────────────────────────────────────── */
 
-function OurWork() {
-  const { ref, shown } = useReveal();
-
-  const projects = [
-    {
-      title: "Radisson Blu Rebrand",
-      category: "Branding & Identity",
-      desc: "Complete brand overhaul driving 42% increase in direct bookings.",
-    },
-    {
-      title: "Taj Social Launch",
-      category: "Social Media Marketing",
-      desc: "0 to 150K followers in 6 months with a retention-first strategy.",
-    },
-    {
-      title: "Oberoi Campaign Film",
-      category: "Brand Films",
-      desc: "Cinematic brand film that earned 2.4M views organically.",
-    },
-    {
-      title: "Leela Performance Overhaul",
-      category: "Performance Marketing",
-      desc: "Slashed CPA by 58% while scaling spend 3x.",
-    },
-    {
-      title: "ITC Website Redesign",
-      category: "Website Development",
-      desc: "Editorial design with 94 Lighthouse score and 3.2x conversion lift.",
-    },
-    {
-      title: "Hyatt Event Series",
-      category: "Event Curation",
-      desc: "Quarterly thought-leadership dinners generating $2.1M in pipeline.",
-    },
-  ];
-
-  return (
-    <section className="bg-emerald-deep text-ivory py-16 lg:py-24">
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className={`mb-16 ${shown ? "reveal" : "opacity-0"}`}
-        >
-          <span className="text-xs uppercase tracking-[0.3em] text-ivory/50 flex items-center gap-3">
-            <span className="w-10 h-px bg-ivory/30" /> Portfolio
-          </span>
-          <h2 className="mt-6 font-display text-[clamp(2rem,4.5vw,4.5rem)] leading-[1.02] font-light text-balance">
-            Selected <em className="italic text-accent">work.</em>
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p, idx) => (
-            <WorkCard key={p.title} project={p} idx={idx} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-interface WorkCardProps {
-  project: {
-    category: string;
-    title: string;
-    desc: string;
-  };
-  idx: number;
-}
-
-function WorkCard({ project, idx }: WorkCardProps) {
-  const { ref, shown } = useReveal();
-  return (
-    <article
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={`group border border-ivory/10 p-8 hover:border-accent/40 transition-all duration-700 cursor-pointer ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      style={{ transitionDelay: `${idx * 120}ms` }}
-    >
-      <div className="text-xs uppercase tracking-[0.22em] text-accent/70 mb-6">
-        {project.category}
-      </div>
-      <h3 className="font-display text-2xl lg:text-3xl mb-4 group-hover:text-accent transition-colors">
-        {project.title}
-      </h3>
-      <p className="text-ivory/60 text-sm leading-relaxed">{project.desc}</p>
-      <ArrowUpRight className="mt-8 !size-5 text-ivory/30 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-    </article>
-  );
-}
 
 /* ─── Process ─────────────────────────────────────────────────────────── */
 
