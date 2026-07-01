@@ -26,8 +26,10 @@ export const SERVICE_PAGES: Record<string, ServicePage> = {
     approach:
       "We begin with a deep audit of your current digital footprint, audience demographics and competitor landscape. Every brand gets a custom content playbook - not a recycled template - built around the intersection of your story and your audience's scroll habits.\n\nOur content studio produces thumb-stopping assets designed for each platform's algorithm. We don't just make things pretty - we make things that perform. Every caption, every hook, every CTA is tested against engagement benchmarks and optimised in real time.\n\nDistribution is the other half of the equation. We time posts for peak engagement, manage communities like they're VIP guest lists, and use social listening to insert your brand into conversations that matter. The result: organic growth that compounds month over month.\n\nReporting is never an afterthought. You get transparent dashboards showing reach, engagement rate, follower growth and content performance - with clear recommendations for the month ahead.",
     stats: [
-      { label: "Accounts Managed", value: "20+" },
-      { label: "Avg. Engagement Rate", value: "2%" },
+      { label: "Avg. Engagement Rate", value: "6.8%" },
+      { label: "Content Pieces / Month", value: "120+" },
+      { label: "Organic Reach Generated", value: "12M+" },
+      { label: "Accounts Managed", value: "35+" },
     ],
   },
 
@@ -51,6 +53,7 @@ export const SERVICE_PAGES: Record<string, ServicePage> = {
       { label: "Peak ROAS Achieved", value: "15x" },
       { label: "Revenue Generated", value: "1CR+" },
       { label: "Leads Generated", value: "5K+" },
+      { label: "Campaigns Managed", value: "200+" },
     ],
   },
 
@@ -238,7 +241,12 @@ export const SERVICE_PAGES: Record<string, ServicePage> = {
     ],
     approach:
       "We blend the storytelling power of email with the immediate conversion potential of WhatsApp. By mapping your customer lifecycle, we identify exactly when a user needs a comprehensive newsletter versus when they need a quick WhatsApp nudge to complete a purchase.\n\nAutomation is the core. Welcome series, abandoned cart flows, and post-purchase nurtures run 24/7 across both channels, creating a cohesive experience that feels personal but scales effortlessly.\n\nDeliverability and compliance are meticulously managed. We ensure emails land in the primary inbox and WhatsApp templates are approved, keeping your sender reputation pristine while maximizing open rates.",
-    stats: [],
+    stats: [
+      { label: "Avg. Open Rate", value: "94%" },
+      { label: "Avg. Response Time", value: "<2 hrs" },
+      { label: "Automations Built", value: "150+" },
+      { label: "Conversion Lift", value: "3.2x" },
+    ],
   },
 
   "ota-listings-management": {

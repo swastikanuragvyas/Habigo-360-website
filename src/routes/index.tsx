@@ -570,7 +570,7 @@ export function Founders() {
           {f.map((p, idx) => (
             <article key={p.name} className="group text-center">
               {/* Image with bottom fade */}
-              <div className="relative mb-8">
+              <div className="relative mb-8 max-w-[90%] mx-auto">
                 <div
                   className="relative aspect-[3/4] overflow-hidden rounded-sm"
                   style={{
@@ -687,16 +687,6 @@ export const SERVICES = [
     i: Database,
     t: "CRM Services",
     d: "Set up, segment and automate so growth stops being manual.",
-  },
-  {
-    i: Calendar,
-    t: "Event Curation",
-    d: "Brand experiences that move audiences and the algorithm.",
-  },
-  {
-    i: Play,
-    t: "Brand Films",
-    d: "High-end visual storytelling that commands attention and emotion.",
   },
 ];
 

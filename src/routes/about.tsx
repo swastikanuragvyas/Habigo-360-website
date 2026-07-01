@@ -50,8 +50,8 @@ function Hero() {
           We build <em className="italic text-accent">enduring</em> brands.
         </h1>
         
-        <div className="mt-16 max-w-4xl mx-auto border-y border-ivory/15 py-10 relative text-left lg:text-center">
-          <p className="text-ivory/80 text-xl lg:text-2xl leading-relaxed font-light text-balance">
+        <div className="mt-16 max-w-5xl mx-auto border-y border-ivory/15 py-10 relative text-left lg:text-center">
+          <p className="text-ivory/80 text-xl lg:text-2xl leading-relaxed font-light text-pretty">
             HabiGo 360 is a creative growth agency helping ambitious brands lead their markets through
             marketing, content, branding, technology, and business strategy.
           </p>

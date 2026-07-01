@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
-import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight, Loader2, Image as ImageIcon } from "lucide-react";
+import { Users, TrendingUp, Globe, Megaphone, Play, Instagram, ArrowUpRight, Loader2, Image as ImageIcon, Sparkles } from "lucide-react";
 import { Nav, Footer, StickyCTA } from "./index";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -140,7 +140,7 @@ function HeroSection() {
             <h1 className="mt-6 font-display text-[clamp(3.5rem,10vw,10rem)] leading-[0.95] font-light">
               Where <span className="italic text-accent">Strategy</span> <br /> Meets Craft
             </h1>
-            <p className="mt-8 text-ivory/70 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed">
+            <p className="mt-8 text-ivory/60 max-w-4xl mx-auto text-lg lg:text-xl leading-relaxed text-pretty">
               We don't just create campaigns - we build growth engines. See how our integrated
               approach delivers measurable outcomes across every discipline.
             </p>
@@ -149,10 +149,10 @@ function HeroSection() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-24">
           {[
-            { label: "Brands Served", value: 50, suffix: "+", icon: Users },
-            { label: "Projects Delivered", value: 100, suffix: "+", icon: TrendingUp },
-            { label: "Industries Served", value: 9, suffix: "+", icon: Globe },
-            { label: "Content Reach (M)", value: 12, suffix: "+", icon: Megaphone },
+            { label: "Brands Served", value: 20, suffix: "+", icon: Users },
+            { label: "Projects Delivered", value: 50, suffix: "+", icon: TrendingUp },
+            { label: "Success Rate", value: 95, suffix: "%", icon: Sparkles },
+            { label: "Industries Served", value: 5, suffix: "+", icon: Globe },
           ].map((stat, idx) => (
             <ScrollReveal key={idx} delay={idx * 0.1 + 0.5} y={20}>
               <div className="bg-ivory/5 backdrop-blur-sm p-6 lg:p-8 rounded-2xl border border-ivory/10 hover:bg-ivory/10 transition-all duration-300 group">
@@ -186,32 +186,43 @@ function WorkShowcase({ work, index }: { work: ServiceWork; index: number }) {
               <span className="text-xs uppercase tracking-[0.3em] text-emerald-deep/60 flex items-center gap-3">
                 <span className="w-10 h-px bg-emerald-deep/40" /> {work.service}
               </span>
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-emerald-deep font-light">
-            <TextReveal text="A Collection of" />
-            <br />
-            <em className="text-foreground/80 italic font-serif">
-              <TextReveal text="Our Finest Work" delay={300} />
-            </em>
-          </h1>  </ScrollReveal>
+              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-light text-emerald-deep">
+                <TextReveal text={work.title} />
+              </h2>
+              <p className="mt-6 text-foreground/70 text-base leading-relaxed">{work.description}</p>
+            </ScrollReveal>
 
-            {work.kpis && work.kpis.length > 0 && (
+            {((work.kpis && work.kpis.length > 0) || (work.metrics && work.metrics.length > 0)) && (
               <ScrollReveal x={-30} delay={0.2}>
                 <div className="grid grid-cols-2 gap-4 pt-8 border-t border-emerald-deep/10">
-                  {work.kpis.map((kpi, idx) => (
-                    <div key={idx} className="space-y-1">
+                  {work.kpis && work.kpis.map((kpi, idx) => (
+                    <div key={`kpi-${idx}`} className="space-y-1">
                       <div className="flex items-center gap-2">
                         {kpi.trend === "up" ? (
                           <TrendingUp className="!size-4 text-accent" />
                         ) : kpi.trend === "down" ? (
                           <TrendingUp className="!size-4 text-emerald-deep rotate-180" />
                         ) : null}
-                        <p className="text-xs uppercase tracking-[0.2em] text-foreground/50">
+                        <p className="text-xs uppercase tracking-[0.2em] text-foreground/55">
                           {kpi.label}
                         </p>
                       </div>
                       <p className="font-display text-3xl font-light text-emerald-deep">
                         <AnimatedNumber value={kpi.value} />
                         {kpi.suffix}
+                      </p>
+                    </div>
+                  ))}
+                  {work.metrics && work.metrics.map((metric, idx) => (
+                    <div key={`metric-${idx}`} className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs uppercase tracking-[0.2em] text-foreground/55">
+                          {metric.label}
+                        </p>
+                      </div>
+                      <p className="font-display text-3xl font-light text-emerald-deep">
+                        {metric.value}
+                        {metric.suffix || ""}
                       </p>
                     </div>
                   ))}
