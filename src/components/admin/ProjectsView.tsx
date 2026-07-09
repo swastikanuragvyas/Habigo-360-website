@@ -255,8 +255,8 @@ function ProjectModal({ project, defaultCategory = "Project", onClose, onSuccess
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold text-gray-700">Description *</label>
-              <textarea required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
+              <label className="text-sm font-semibold text-gray-700">Description</label>
+              <textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows={3} className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-gray-900 bg-gray-50/50" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
