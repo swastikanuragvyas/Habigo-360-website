@@ -8,7 +8,7 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   nitro: {
-    preset: "static",
+    preset: process.env.VERCEL ? "vercel" : "static",
   },
   tanstackStart: {
     server: { entry: "server" },
@@ -16,6 +16,15 @@ export default defineConfig({
   vite: {
     server: {
       allowedHosts: true,
+    },
+    environments: {
+      nitro: {
+        build: {
+          rollupOptions: {
+            input: "src/server.ts",
+          },
+        },
+      },
     },
   },
 });
