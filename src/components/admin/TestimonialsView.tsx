@@ -125,8 +125,8 @@ function TestimonialModal({ item, onClose, onSuccess }: { item: any, onClose: ()
             </div>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider ml-1">Review *</label>
-            <textarea required rows={4} value={formData.review} onChange={e => setFormData({...formData, review: e.target.value})} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm leading-relaxed" />
+            <label className="text-xs font-semibold text-gray-700 uppercase tracking-wider ml-1">Review</label>
+            <textarea rows={4} value={formData.review} onChange={e => setFormData({...formData, review: e.target.value})} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-sm leading-relaxed" />
           </div>
           <div className="flex justify-end gap-3 pt-6 border-t border-gray-100">
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors">Cancel</button>

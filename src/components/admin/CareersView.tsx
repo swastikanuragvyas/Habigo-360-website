@@ -115,7 +115,7 @@ function CareerModal({ career, onClose }: { career: any; onClose: () => void }) 
             <div><label className="block text-sm font-medium mb-1">Type</label><input required className="w-full rounded-md border p-2 bg-transparent" value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})} /></div>
             <div><label className="block text-sm font-medium mb-1">Location</label><input required className="w-full rounded-md border p-2 bg-transparent" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} /></div>
           </div>
-          <div><label className="block text-sm font-medium mb-1">Summary</label><textarea required className="w-full rounded-md border p-2 h-24 bg-transparent" value={formData.summary} onChange={e => setFormData({...formData, summary: e.target.value})} /></div>
+          <div><label className="block text-sm font-medium mb-1">Summary</label><textarea className="w-full rounded-md border p-2 h-24 bg-transparent" value={formData.summary} onChange={e => setFormData({...formData, summary: e.target.value})} /></div>
           
           <div>
             <label className="block text-sm font-medium mb-1">Questions</label>

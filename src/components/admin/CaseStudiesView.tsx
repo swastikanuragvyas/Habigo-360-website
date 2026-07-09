@@ -221,8 +221,8 @@ function CaseStudyModal({ item, onClose, onSuccess }: { item: any, onClose: () =
             <input type="text" required value={formData.clientName} onChange={e => setFormData({...formData, clientName: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium" />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Short Description *</label>
-            <textarea required rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium leading-relaxed" />
+            <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Short Description</label>
+            <textarea rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium leading-relaxed" />
           </div>
 
           <div className="space-y-2 border border-gray-200 p-5 rounded-xl bg-gray-50">
@@ -241,8 +241,8 @@ function CaseStudyModal({ item, onClose, onSuccess }: { item: any, onClose: () =
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Full Content *</label>
-            <textarea required rows={5} value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all font-mono leading-relaxed" />
+            <label className="text-xs font-bold text-gray-700 uppercase tracking-wider ml-1">Full Content</label>
+            <textarea rows={5} value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all font-mono leading-relaxed" />
           </div>
 
           <div className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl bg-gray-50">
