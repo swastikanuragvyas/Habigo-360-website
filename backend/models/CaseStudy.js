@@ -12,7 +12,6 @@ const caseStudySchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
     },
     metrics: {
       type: [String], // e.g. ["+300% Traffic", "2.5x ROI"]
