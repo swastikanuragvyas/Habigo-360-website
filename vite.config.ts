@@ -8,7 +8,7 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   nitro: {
-    preset: "vercel" // <-- Explicitly set to Vercel
+    preset: "static",
   },
   tanstackStart: {
     server: { entry: "server" },
